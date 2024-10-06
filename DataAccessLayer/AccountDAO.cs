@@ -16,5 +16,15 @@ namespace DataAccessLayer
             if (account == null) return null;
             return account;
         }
+
+        public async Task<List<Account>> GetAllAccounts()
+        {
+            return await _context.Accounts.ToListAsync();
+        }
+
+        public async Task<Account> GetAccountById(int accountID)
+        {
+            return await _context.Accounts.FirstOrDefaultAsync(x => x.AccountId == accountID);
+        }
     }
 }

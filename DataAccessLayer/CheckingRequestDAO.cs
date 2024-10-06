@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    internal class CheckingRequestDAO
+    public class CheckingRequestDAO : SingletonBase<CheckingRequestDAO>
     {
     }
 }
