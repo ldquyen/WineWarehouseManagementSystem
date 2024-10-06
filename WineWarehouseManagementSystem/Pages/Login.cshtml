@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div style="background-image: url('/images/ruou.jpg'); background-size: cover; background-position: center; height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); width: 300px;">
+        <h1 class="display-4">Login</h1>
+
+        @if(TempData["Message"] != null)
+        {
+            <h3>@TempData["Message"]</h3>
+        }
+
+        <form method="post">
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 1.2em;">Username:</label><br/>
+                <input name="userName" type="text" style="width: 100%; padding: 10px; font-size: 1.2em; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;" />
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 1.2em;">Password:</label><br/>
+                <input name="password" type="password" style="width: 100%; padding: 10px; font-size: 1.2em; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;" />
+            </div>
+            <input type="submit" value="Login" style="padding: 10px 20px; font-size: 1.2em; background-color: #5cb85c; color: white; border: none; border-radius: 5px; cursor: pointer;" />
+        </form>
+    </div>
+</div>
+ 
