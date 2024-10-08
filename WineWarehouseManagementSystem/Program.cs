@@ -8,6 +8,8 @@ builder.Services.AddRazorPages();
 
 //DI
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 
 //Session
 builder.Services.AddSession();
