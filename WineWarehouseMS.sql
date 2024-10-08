@@ -119,3 +119,18 @@ CREATE TABLE Report (
     FOREIGN KEY (ProductLineID) REFERENCES ProductLine(ProductLineID),
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 );
+
+-- Thêm tài kho?n Staff
+INSERT INTO Account (AccountID, AccountName, Username, UserPassword, AccountRole)
+VALUES  (1 ,'staff name', 'staff', 'wwms1234', 0),
+		(2, 'manager name', 'manager', 'wwms1234', 1),
+		(3, 'admin name', 'admin', 'wwms1234', 2);
+
+INSERT INTO Category (CategoryID, CategoryName)
+VALUES (1, 'Red Wine'),
+       (2, 'White Wine'),
+       (3, 'Sparkling Wine'),
+       (4, 'Rose Wine'),
+       (5, 'Dessert Wine'),
+       (6, 'Fortified Wine');
+
