@@ -9,6 +9,7 @@ builder.Services.AddRazorPages();
 //DI
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
 //Session

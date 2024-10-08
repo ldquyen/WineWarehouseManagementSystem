@@ -2,7 +2,7 @@ create database WineWarehouseMS
 use WineWarehouseMS
 -- Table for User Account
 CREATE TABLE Account (
-    AccountID INT PRIMARY KEY,
+    AccountID INT PRIMARY KEY IDENTITY(1,1),
     AccountName NVARCHAR(50),
     Username VARCHAR(50),
     UserPassword VARCHAR(50),
@@ -11,7 +11,7 @@ CREATE TABLE Account (
 
 -- Table for Brewing Room
 CREATE TABLE BrewingRoom (
-    BrewingRoomID INT PRIMARY KEY,
+    BrewingRoomID INT PRIMARY KEY IDENTITY(1,1),
     RoomName NVARCHAR(50),
     Temperature INT, -- Range 7-18 for general, 5-12 for white wine, 12-19 for red wine
     Humidity INT,    -- Range 50-70%, ideal at 60%
@@ -20,7 +20,7 @@ CREATE TABLE BrewingRoom (
 
 -- Table for Shelf
 CREATE TABLE Shelf (
-    ShelfID INT PRIMARY KEY,
+    ShelfID INT PRIMARY KEY IDENTITY(1,1),
     BrewingRoomID INT,
     ShelfName NVARCHAR(50),
     MaxQuantity INT,
@@ -30,13 +30,13 @@ CREATE TABLE Shelf (
 
 -- Table for Category
 CREATE TABLE Category (
-    CategoryID INT PRIMARY KEY,
+    CategoryID INT PRIMARY KEY IDENTITY(1,1),
     CategoryName NVARCHAR(50)
 );
 
 -- Table for Product
 CREATE TABLE Product (
-    ProductID INT PRIMARY KEY,
+    ProductID INT PRIMARY KEY IDENTITY(1,1),
     ProductName NVARCHAR(50),
     ProductDescription NVARCHAR(MAX),
     Origin VARCHAR(50),
@@ -46,7 +46,7 @@ CREATE TABLE Product (
 
 -- Table for ProductLine
 CREATE TABLE ProductLine (
-    ProductLineID INT PRIMARY KEY,
+    ProductLineID INT PRIMARY KEY IDENTITY(1,1),
     ProductID INT,
     ProductYear INT,
     ProductAlcohol INT,
@@ -60,7 +60,7 @@ CREATE TABLE ProductLine (
 
 -- Table for Import
 CREATE TABLE Import (
-    ImportID INT PRIMARY KEY,
+    ImportID INT PRIMARY KEY IDENTITY(1,1),
     ImportDate DATE,
     AccountID INT,
     Note NVARCHAR(MAX),
@@ -69,7 +69,7 @@ CREATE TABLE Import (
 
 -- Table for ImportDetail
 CREATE TABLE ImportDetail (
-	ImportDetailID INT PRIMARY KEY,
+	ImportDetailID INT PRIMARY KEY IDENTITY(1,1),
     ImportID INT,
     ProductLineID INT,
     Quantity INT,
@@ -79,7 +79,7 @@ CREATE TABLE ImportDetail (
 
 -- Table for Export
 CREATE TABLE Export (
-    ExportID INT PRIMARY KEY,
+    ExportID INT PRIMARY KEY IDENTITY(1,1),
     ExportDate DATE,
     AccountID INT,
     Note NVARCHAR(MAX),
@@ -88,7 +88,7 @@ CREATE TABLE Export (
 
 -- Table for ExportDetail
 CREATE TABLE ExportDetail (
-	ExportDetailID INT PRIMARY KEY,
+	ExportDetailID INT PRIMARY KEY IDENTITY(1,1),
     ExportID INT,
     ProductLineID INT,
     Quantity INT,
@@ -98,7 +98,7 @@ CREATE TABLE ExportDetail (
 
 -- Table for CheckingRequest
 CREATE TABLE CheckingRequest (
-    CheckingRequestID INT PRIMARY KEY,
+    CheckingRequestID INT PRIMARY KEY IDENTITY(1,1),
     AccountID INT,
     ProductID INT,
     CheckDateRequest DATETIME,
@@ -109,7 +109,7 @@ CREATE TABLE CheckingRequest (
 
 -- Table for Report
 CREATE TABLE Report (
-    ReportID INT PRIMARY KEY,
+    ReportID INT PRIMARY KEY IDENTITY(1,1),
     ProductLineID INT,
     StockQuantity INT,
     CheckedQuantity INT,
@@ -120,17 +120,17 @@ CREATE TABLE Report (
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 );
 
--- Thêm tài kho?n Staff
-INSERT INTO Account (AccountID, AccountName, Username, UserPassword, AccountRole)
-VALUES  (1 ,'staff name', 'staff', 'wwms1234', 0),
-		(2, 'manager name', 'manager', 'wwms1234', 1),
-		(3, 'admin name', 'admin', 'wwms1234', 2);
+INSERT INTO Account ( AccountName, Username, UserPassword, AccountRole)
+VALUES  ('staff name', 'staff', 'wwms1234', 1),
+		('manager name', 'manager', 'wwms1234', 2),
+		('admin name', 'admin', 'wwms1234', 3);
 
-INSERT INTO Category (CategoryID, CategoryName)
-VALUES (1, 'Red Wine'),
-       (2, 'White Wine'),
-       (3, 'Sparkling Wine'),
-       (4, 'Rose Wine'),
-       (5, 'Dessert Wine'),
-       (6, 'Fortified Wine');
+INSERT INTO Category ( CategoryName)
+VALUES ('Red Wine'),
+       ('White Wine'),
+       ('Sparkling Wine'),
+       ('Rose Wine'),
+       ('Dessert Wine'),
+       ('Fortified Wine');
 
+SELECT * FROM Product

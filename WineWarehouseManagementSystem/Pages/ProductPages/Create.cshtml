@@ -1,4 +1,32 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ProductPages.CreateModel
 @{
+    Layout = "_ManagerLayout";
 }
+<h2>Create Product</h2>
+@if (TempData["CreateProduct"] != null)
+{
+    <h3>@TempData["CreateProduct"]</h3>
+}
+<form method="post">
+    <div>
+        <label asp-for="Product.ProductName"></label>
+        <input asp-for="Product.ProductName" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="Product.ProductDescription"></label>
+        <input asp-for="Product.ProductDescription" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="Product.Origin"></label>
+        <input asp-for="Product.Origin" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="Product.CategoryId"></label>
+        <select asp-for="Product.CategoryId" asp-items="Model.CategoryList">
+
+        </select>
+    </div>
+    <button type="submit">Create product</button>
+</form>
+
