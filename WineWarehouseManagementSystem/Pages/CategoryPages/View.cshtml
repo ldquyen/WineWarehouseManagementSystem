@@ -6,24 +6,29 @@
 <h2>View category</h2>
 <div>
     <form method="get" asp-page="" asp-page-handler="SearchByName">
-        <input type="text" name="name" placeholder="Enter name to search" required/>
+        <input type="text" name="name" placeholder="Enter name to search" required />
         <button type="submit">Search</button>
     </form>
 </div>
 <table>
     <thead>
         <tr>
-            <th>Category ID</th>
-            <th>Category name</th>
-            
+            <th>Category ID </th>
+            <th>Category name </th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var cate in Model.CategoriesList)
+         @foreach(var cate in Model.CategoriesList)
         {
             <tr>
                 <td>@cate.CategoryId</td>
                 <td>@cate.CategoryName</td>
+                <td>
+                    <form method="get" asp-page="/CategoryPages/Update">
+                        <input type="hidden" name="cateid" value="@cate.CategoryId" />
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
