@@ -19,7 +19,7 @@ namespace Repositories.Repository
         }
         public async Task CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            await _productDAO.AddProduct(product);
         }
     }
 }
