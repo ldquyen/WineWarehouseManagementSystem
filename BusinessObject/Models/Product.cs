@@ -15,8 +15,6 @@ public partial class Product
 
     public int? CategoryId { get; set; }
 
-    public string? ProductDetailId { get; set; }
-
     public virtual Category? Category { get; set; }
 
     public virtual ICollection<CheckingRequest> CheckingRequests { get; set; } = new List<CheckingRequest>();

@@ -41,7 +41,6 @@ CREATE TABLE Product (
     ProductDescription NVARCHAR(MAX),
     Origin VARCHAR(50),
     CategoryID INT,
-    ProductDetailId VARCHAR(50),
     FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
 );
 
