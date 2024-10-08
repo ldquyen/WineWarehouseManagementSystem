@@ -120,7 +120,6 @@ CREATE TABLE Report (
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 );
 
--- Thêm tài kho?n Staff
 INSERT INTO Account (AccountID, AccountName, Username, UserPassword, AccountRole)
 VALUES  (1 ,'staff name', 'staff', 'wwms1234', 0),
 		(2, 'manager name', 'manager', 'wwms1234', 1),

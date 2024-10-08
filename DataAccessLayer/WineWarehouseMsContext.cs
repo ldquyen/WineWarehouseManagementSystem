@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using BusinessObject.Models;
 
-namespace BusinessObject.Models;
+namespace DataAccessLayer;
 
 public partial class WineWarehouseMsContext : DbContext
 {
