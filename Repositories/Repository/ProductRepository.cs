@@ -21,5 +21,15 @@ namespace Repositories.Repository
         {
             await _productDAO.AddProduct(product);
         }
+
+        public async Task<List<Product>> GetAll()
+        {
+            return await _productDAO.GetAllProduct();
+        }
+
+        public async Task<List<Product>> GetProductByName(string name)
+        {
+            return await _productDAO.GetProductByName(name);
+        }
     }
 }
