@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,16 @@ namespace DataAccessLayer
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Product>> GetAllProduct()
+        {
+            return await _context.Products.ToListAsync();
+        }
+
+        public async Task<List<Product>> GetProductByName(string name)
+        {
+            return await _context.Products.Where(x => x.ProductName.Contains(name)).ToListAsync();
         }
     }
 }

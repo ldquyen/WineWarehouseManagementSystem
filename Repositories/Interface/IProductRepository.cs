@@ -10,5 +10,7 @@ namespace Repositories.Interface
     public interface IProductRepository
     {
         Task CreateProduct(Product product);
+        Task<List<Product>> GetAll();
+        Task<List<Product>> GetProductByName(string name);
     }
 }
