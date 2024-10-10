@@ -1,4 +1,49 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ProductPages.CreateProductLineModel
 @{
+    Layout = "_ManagerLayout";
 }
+
+<h1>Create productline :@Model.ImportId</h1>
+@if (TempData["Create"] != null)
+{
+    <h2>@TempData["Create"]</h2>
+}
+<form method="post">
+   <div>
+        <label asp-for="productLine.ProductId"></label>
+        <select asp-for="productLine.ProductId" asp-items="Model.ProductList"></select>
+   </div>
+
+   <div>
+       <label asp-for="productLine.ProductYear"></label>
+       <input asp-for="productLine.ProductYear" required/>
+   </div>
+
+    <div>
+        <label asp-for="productLine.ProductAlcohol"></label>
+        <input asp-for="productLine.ProductAlcohol" required />
+    </div>
+
+    <div>
+        <label asp-for="productLine.Capacity"></label>
+        <input asp-for="productLine.Capacity" required />
+    </div>
+
+    <div>
+        <label asp-for="productLine.Price"></label>
+        <input asp-for="productLine.Price" required />
+    </div>
+
+    <div>
+        <label asp-for="productLine.Quantity"></label>
+        <input asp-for="productLine.Quantity" required />
+    </div>
+
+    <div>
+        <label asp-for="productLine.ShelfId"></label>
+        <select asp-for="productLine.ShelfId" asp-items="Model.ShelfList" ></select>
+    </div>
+
+    <button type="submit"> Create product line and import detail</button>
+</form>

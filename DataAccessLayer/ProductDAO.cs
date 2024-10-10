@@ -24,12 +24,12 @@ namespace DataAccessLayer
 
         public async Task<List<Product>> GetAllProduct()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Include(x => x.Category).ToListAsync();
         }
 
         public async Task<List<Product>> GetProductByName(string name)
         {
-            return await _context.Products.Where(x => x.ProductName.Contains(name)).ToListAsync();
+            return await _context.Products.Where(x => x.ProductName.Contains(name)).Include(x => x.Category).ToListAsync();
         }
     }
 }
