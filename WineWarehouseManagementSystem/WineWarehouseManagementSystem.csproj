@@ -21,4 +21,12 @@
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\ImportPages\CreateProductLine.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\ImportPages\CreateProductLine.cshtml" />
+  </ItemGroup>
+
 </Project>

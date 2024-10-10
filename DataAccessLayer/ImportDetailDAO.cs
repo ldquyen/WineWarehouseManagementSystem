@@ -9,9 +9,9 @@ namespace DataAccessLayer
 {
     public class ImportDetailDAO : SingletonBase<ImportDetailDAO>
     {
-        public async Task AddImportDetail(List<ImportDetail> importDetails)
+        public async Task AddImportDetail(ImportDetail importDetails)
         {
-            await _context.ImportDetails.AddRangeAsync(importDetails);
+            await _context.ImportDetails.AddAsync(importDetails);
             await _context.SaveChangesAsync();
         }
     }

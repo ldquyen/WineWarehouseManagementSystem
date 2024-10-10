@@ -9,7 +9,7 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
     public class ViewModel : PageModel
     {
         private readonly IProductRepository _productRepository;
-        public List<Product> ProductList { get; set; }
+        public List<Product> ProductList { get; set; } = new List<Product>();
         public ViewModel(IProductRepository productRepository)
         {
             _productRepository = productRepository;

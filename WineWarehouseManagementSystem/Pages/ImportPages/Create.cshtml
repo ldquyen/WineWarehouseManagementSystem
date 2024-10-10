@@ -1,4 +1,23 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ImportPages.CreateImportModel
 @{
+    Layout = "_ManagerLayout";
 }
+
+<form method="post">
+    <div>
+        <label asp-for="Import.ImportDate"></label>
+        <input asp-for="Import.ImportDate" readonly />
+    </div>
+
+    <div>
+        <label asp-for="Import.AccountId"></label>
+        <input asp-for="Import.AccountId" readonly />
+    </div>
+
+    <div>
+        <label asp-for="Import.Note"></label>
+        <input asp-for="Import.Note" required/>
+    </div>
+    <button type="submit">Create Import</button>
+</form>

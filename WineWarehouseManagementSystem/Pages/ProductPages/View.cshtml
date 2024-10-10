@@ -13,25 +13,25 @@
 
 @if (Model.ProductList != null && Model.ProductList.Any())
 {
-    <table>
+    <table style="border: 1px solid black ">
         <thead>
             <tr>
-                <th>Product ID</th>
-                <th>Product name</th>
-                <th>Product Description</th>
-                <th>Origin</th>
-                <th>Category name</th>
+                <th style="border: 1px solid black ">Product ID</th>
+                <th style="border: 1px solid black ">Product name</th>
+                <th style="border: 1px solid black ">Product Description</th>
+                <th style="border: 1px solid black ">Origin</th>
+                <th style="border: 1px solid black ">Category name</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model.ProductList)
             {
                 <tr>
-                    <td>@product.ProductId</td>
-                    <td>@product.ProductName</td>
-                    <td>@product.ProductDescription</td>
-                    <td>@product.Origin</td>
-                    <td>@(product.Category != null ? product.Category.CategoryName : "N/A")</td>
+                    <td style="border: 1px solid black ">@product.ProductId</td>
+                    <td style="border: 1px solid black ">@product.ProductName</td>
+                    <td style="border: 1px solid black ">@product.ProductDescription</td>
+                    <td style="border: 1px solid black ">@product.Origin</td>
+                    <td style="border: 1px solid black ">@(product.Category != null ? product.Category.CategoryName : "N/A")</td>
                 </tr>
             }
         </tbody>
