@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using BusinessObject.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer;
 
@@ -42,8 +43,13 @@ public partial class WineWarehouseMsContext : DbContext
     public virtual DbSet<Shelf> Shelves { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server=DESKTOP-BF8E3QB\\SQLEXPRESS;database=WineWarehouseMS;uid=sa;pwd=12345;TrustServerCertificate=true");
+    {
+        var builder = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", true, true);
+        IConfigurationRoot configuration = builder.Build();
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
