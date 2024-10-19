@@ -19,7 +19,6 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
         [BindProperty(SupportsGet = true)]
         public CheckingRequest CheckingRequest { get; set; }
         public SelectList ProductList { get; set; }
-
         public async Task<IActionResult> OnGet()
         {
             CheckingRequest = new CheckingRequest
@@ -32,6 +31,7 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
         }
         public async Task<IActionResult> OnPost()
         {
+            await OnGet();
             if (!ModelState.IsValid)
             {
                 CheckingRequest = new CheckingRequest
@@ -40,9 +40,10 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
                     AccountId = HttpContext.Session.GetInt32("accountId")
                 };
                 return Page();
-            }
+            }           
             await _checkingRequestRepository.AddChecking(CheckingRequest);
             TempData["Message"] = "Ban da lam kho nhan vien cua ban thanh cong!";
+            await LoadData();
             return Page();
         }
         private async Task LoadData()
