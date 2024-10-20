@@ -29,4 +29,8 @@
     <_ContentIncludedByDefault Remove="Pages\ImportPages\CreateProductLine.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\ExportPageStyle.css" />
+  </ItemGroup>
+
 </Project>

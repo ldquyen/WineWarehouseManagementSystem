@@ -1,4 +1,23 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ExportPages.CreateModel
 @{
+    Layout = "_ManagerLayout";
 }
+
+<form method="post">
+    <div>
+        <label asp-for="Export.ExportDate"></label>
+        <input asp-for="Export.ExportDate" readonly />
+    </div>
+
+    <div>
+        <label asp-for="Export.AccountId"></label>
+        <input asp-for="Export.AccountId" readonly />
+    </div>
+
+    <div>
+        <label asp-for="Export.Note"></label>
+        <input asp-for="Export.Note" required/>
+    </div>
+    <button type="submit">Create Export</button>
+</form>
