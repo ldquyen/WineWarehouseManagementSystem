@@ -1,4 +1,31 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.CheckingPages.CreateModel
 @{
+
 }
+@if (TempData["Message"] != null)
+{
+    <h2>@TempData["Message"]</h2>
+}
+<form method="post">
+    <div>
+        <label asp-for="CheckingRequest.AccountId"></label>
+        <input asp-for="CheckingRequest.AccountId" readonly />
+    </div>
+
+    <div>
+        <label asp-for="CheckingRequest.CheckDateRequest"></label>
+        <input asp-for="CheckingRequest.CheckDateRequest" readonly />
+    </div>
+    <div>
+        <label asp-for="CheckingRequest.ProductId"></label>
+        <select asp-for="CheckingRequest.ProductId" asp-items="Model.ProductList"></select>
+    </div>
+
+    <div>
+        <label asp-for="CheckingRequest.Reason"></label>
+        <input asp-for="CheckingRequest.Reason" required />
+    </div>
+
+    <button type="submit">Create Checking Request</button>
+</form>

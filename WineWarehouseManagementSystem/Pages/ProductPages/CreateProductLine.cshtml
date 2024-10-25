@@ -7,43 +7,57 @@
 <h1>Create productline :@Model.ImportId</h1>
 @if (TempData["Create"] != null)
 {
-    <h2>@TempData["Create"]</h2>
+    <h2 style="text-align: center; color: green;">@TempData["Create"]</h2>
 }
-<form method="post">
-   <div>
-        <label asp-for="productLine.ProductId"></label>
-        <select asp-for="productLine.ProductId" asp-items="Model.ProductList"></select>
-   </div>
-
-   <div>
-       <label asp-for="productLine.ProductYear"></label>
-       <input asp-for="productLine.ProductYear" required/>
-   </div>
-
-    <div>
-        <label asp-for="productLine.ProductAlcohol"></label>
-        <input asp-for="productLine.ProductAlcohol" required />
+<form method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.ProductId" style="margin-bottom: 5px; font-weight: bold;">Product</label>
+        <select asp-for="productLine.ProductId" asp-items="Model.ProductList"
+                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
     </div>
 
-    <div>
-        <label asp-for="productLine.Capacity"></label>
-        <input asp-for="productLine.Capacity" required />
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.ProductYear" style="margin-bottom: 5px; font-weight: bold;">Year</label>
+        <input asp-for="productLine.ProductYear" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <div>
-        <label asp-for="productLine.Price"></label>
-        <input asp-for="productLine.Price" required />
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.ProductAlcohol" style="margin-bottom: 5px; font-weight: bold;">Alcohol Content</label>
+        <input asp-for="productLine.ProductAlcohol" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <div>
-        <label asp-for="productLine.Quantity"></label>
-        <input asp-for="productLine.Quantity" required />
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.Capacity" style="margin-bottom: 5px; font-weight: bold;">Capacity</label>
+        <input asp-for="productLine.Capacity" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <div>
-        <label asp-for="productLine.ShelfId"></label>
-        <select asp-for="productLine.ShelfId" asp-items="Model.ShelfList" ></select>
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.Price" style="margin-bottom: 5px; font-weight: bold;">Price</label>
+        <input asp-for="productLine.Price" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <button type="submit"> Create product line and import detail</button>
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.Quantity" style="margin-bottom: 5px; font-weight: bold;">Quantity</label>
+        <input asp-for="productLine.Quantity" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf</label>
+        <select asp-for="productLine.ShelfId" asp-items="Model.ShelfList"
+                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit"
+                style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+            Create product line and import detail
+        </button>
+    </div>
 </form>
