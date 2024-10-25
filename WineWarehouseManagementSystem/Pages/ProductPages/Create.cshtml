@@ -3,30 +3,41 @@
 @{
     Layout = "_ManagerLayout";
 }
-<h2>Create Product</h2>
-@if (TempData["CreateProduct"] != null)
-{
-    <h3>@TempData["CreateProduct"]</h3>
-}
-<form method="post">
-    <div>
-        <label asp-for="Product.ProductName"></label>
-        <input asp-for="Product.ProductName" class="form-control" />
-    </div>
-    <div>
-        <label asp-for="Product.ProductDescription"></label>
-        <input asp-for="Product.ProductDescription" class="form-control" />
-    </div>
-    <div>
-        <label asp-for="Product.Origin"></label>
-        <input asp-for="Product.Origin" class="form-control" />
-    </div>
-    <div>
-        <label asp-for="Product.CategoryId"></label>
-        <select asp-for="Product.CategoryId" asp-items="Model.CategoryList">
+<h2 style="text-align: center;">Create Product</h2>
 
-        </select>
-    </div>
-    <button type="submit">Create product</button>
-</form>
+@if (TempData["CreateProduct"] != null) 
+{     
+    <h3 style="color: green; text-align: center;">@TempData["CreateProduct"]</h3> 
+}
+
+<div style="display: flex; justify-content: center;">
+    <form method="post" style="width: 50%; max-width: 600px; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+        <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+            <label asp-for="Product.ProductName" class="form-label"></label>
+            <input asp-for="Product.ProductName" class="form-control" />
+        </div>
+
+        <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+            <label asp-for="Product.ProductDescription" class="form-label"></label>
+            <input asp-for="Product.ProductDescription" class="form-control" />
+        </div>
+
+        <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+            <label asp-for="Product.Origin" class="form-label"></label>
+            <input asp-for="Product.Origin" class="form-control" />
+        </div>
+
+        <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+            <label asp-for="Product.CategoryId" class="form-label"></label>
+            <select asp-for="Product.CategoryId" asp-items="Model.CategoryList" class="form-select"></select>
+        </div>
+
+        <div style="text-align: center;">
+            <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                Create product
+            </button>
+        </div>
+    </form>
+</div>
+
 
