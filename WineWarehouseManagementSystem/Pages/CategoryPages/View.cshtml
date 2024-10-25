@@ -1,32 +1,40 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.CategoryPages.ViewCategoryModel
 @{
+    Layout = "_ManagerLayout";
 }
 
 <h2>View category</h2>
-<div>
-    <form method="get" asp-page="" asp-page-handler="SearchByName">
-        <input type="text" name="name" placeholder="Enter name to search" />
-        <button type="submit">Search</button>
+<div style="max-width: 500px; margin: 20px auto;">
+    <form method="get" asp-page="" asp-page-handler="SearchByName" style="display: flex; gap: 10px;">
+        <input type="text" name="name" placeholder="Enter name to search"
+               style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <button type="submit" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Search
+        </button>
     </form>
 </div>
-<table>
+
+<table style="width: 80%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
-        <tr>
-            <th>Category ID </th>
-            <th>Category name </th>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Category ID</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Category Name</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Actions</th>
         </tr>
     </thead>
     <tbody>
-         @foreach(var cate in Model.CategoriesList)
+        @foreach (var cate in Model.CategoriesList)
         {
             <tr>
-                <td>@cate.CategoryId</td>
-                <td>@cate.CategoryName</td>
-                <td>
-                    <form method="get" asp-page="/CategoryPages/Update">
+                <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryId</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryName</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">
+                    <form method="get" asp-page="/CategoryPages/Update" style="margin: 0;">
                         <input type="hidden" name="cateid" value="@cate.CategoryId" />
-                        <button type="submit">Update</button>
+                        <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            Update
+                        </button>
                     </form>
                 </td>
             </tr>
