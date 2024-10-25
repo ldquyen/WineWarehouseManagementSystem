@@ -7,6 +7,7 @@ namespace WineWarehouseManagementSystem.Pages
     {
         public void OnGet()
         {
+
         }
     }
 }
