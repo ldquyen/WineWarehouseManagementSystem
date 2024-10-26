@@ -3,3 +3,65 @@
 @{
     Layout = "_ManagerLayout";
 }
+
+<form method="post" style="max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+    <label style="display: block; font-size: 1.2em; font-weight: bold; text-align: center; margin-bottom: 15px;">Enter date to find import</label>
+
+    <div style="margin-bottom: 15px;">
+        <label asp-for="StartDate" style="display: block; font-weight: bold; margin-bottom: 5px;"></label>
+        <input asp-for="StartDate" type="date" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label asp-for="EndDate" style="display: block; font-weight: bold; margin-bottom: 5px;"></label>
+        <input asp-for="EndDate" type="date" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer;">
+            Submit
+        </button>
+    </div>
+</form>
+
+<div style="max-width: 800px; margin: 30px auto; font-family: Arial, sans-serif;">
+    @if (Model.Imports != null && Model.Imports.Any())
+    {
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 10px; border-bottom: 1px solid #ddd;">Date</th>
+                    <th style="padding: 10px; border-bottom: 1px solid #ddd;">Account</th>
+                    <th style="padding: 10px; border-bottom: 1px solid #ddd;">Note</th>
+                    <th style="padding: 10px; border-bottom: 1px solid #ddd;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var imp in Model.Imports)
+                {
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">@imp.ImportDate</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">@imp.Account.AccountName</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">@imp.Note</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                            <form method="get" asp-page="/ImportPages/ViewDetail" style="display: inline;">
+                                <input type="hidden" id="id" value="@imp.ImportId" />
+                                <button type="submit" style="padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; font-size: 0.9em; cursor: pointer;">
+                                    View detail
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="text-align: center; font-size: 1.1em; color: #888;">There is no import available</p>
+    }
+</div>
+
+
+
+

@@ -4,6 +4,34 @@
     Layout = "_ManagerLayout";
 }
 
+<form method="post" style="max-width: 500px; margin: 20px auto; font-family: Arial, sans-serif;">
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Export.ExportDate" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <input asp-for="Export.ExportDate" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Export.AccountId" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <input asp-for="Export.AccountId" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Export.Note" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <input asp-for="Export.Note" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer;">
+        Create Export
+    </button>
+</form>
+
+
+
+
+
+
+<!--
+
 <form method="post">
     <div>
         <label asp-for="Export.ExportDate"></label>
@@ -21,3 +49,4 @@
     </div>
     <button type="submit">Create Export</button>
 </form>
+-->

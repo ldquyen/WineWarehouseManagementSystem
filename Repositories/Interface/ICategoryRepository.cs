@@ -12,5 +12,6 @@ namespace Repositories.Interface
         Task CreateCategory(Category category);
         Task<List<Category>> GetAlls();
         Task<List<Category>> GetCategoryByName(string name);
+        Task<bool> CheckCategoryName(string categoryName);
     }
 }

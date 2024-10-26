@@ -31,5 +31,10 @@ namespace Repositories.Repository
         {
             return await _categoryDAO.GetCategoryByName(name);
         }
+
+        public async Task<bool> CheckCategoryName(string categoryName)
+        {
+            return await _categoryDAO.CheckCategoryName(categoryName);
+        }
     }
 }
