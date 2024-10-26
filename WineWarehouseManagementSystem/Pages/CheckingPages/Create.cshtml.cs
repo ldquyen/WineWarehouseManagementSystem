@@ -16,7 +16,7 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
             _checkingRequestRepository = checkingRequestRepository;
             _productRepository = productRepository;
         }
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public CheckingRequest CheckingRequest { get; set; }
         public SelectList ProductList { get; set; }
         public async Task<IActionResult> OnGet()
@@ -31,13 +31,12 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
         }
         public async Task<IActionResult> OnPost()
         {
-            await OnGet();
             if (!ModelState.IsValid)
             {
                 CheckingRequest = new CheckingRequest
                 {
                     CheckDateRequest = DateTime.Now,
-                    AccountId = HttpContext.Session.GetInt32("accountId")
+                    AccountId = HttpContext.Session.GetInt32("accountId"),
                 };
                 return Page();
             }           

@@ -35,7 +35,7 @@ namespace WineWarehouseManagementSystem.Pages.ImportPages
                 Import = new Import
                 {
                     ImportDate = DateOnly.FromDateTime(DateTime.Now),
-                    AccountId = HttpContext.Session.GetInt32("accountId")
+                    AccountId = HttpContext.Session.GetInt32("accountId"),
                 };
                 return Page(); 
             }

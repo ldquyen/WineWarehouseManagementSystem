@@ -5,27 +5,33 @@
 }
 @if (TempData["Message"] != null)
 {
-    <h2>@TempData["Message"]</h2>
+    <h2 style="text-align: center; color: #4CAF50; font-size: 1.5em; margin: 20px 0;">
+        @TempData["Message"]
+    </h2>
 }
-<form method="post">
-    <div>
-        <label asp-for="CheckingRequest.AccountId"></label>
-        <input asp-for="CheckingRequest.AccountId" readonly />
+<form method="post" style="max-width: 500px; margin: 20px auto; font-family: Arial, sans-serif;">
+    <div style="margin-bottom: 15px;">
+        <label asp-for="CheckingRequest.AccountId" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <input asp-for="CheckingRequest.AccountId" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <div>
-        <label asp-for="CheckingRequest.CheckDateRequest"></label>
-        <input asp-for="CheckingRequest.CheckDateRequest" readonly />
-    </div>
-    <div>
-        <label asp-for="CheckingRequest.ProductId"></label>
-        <select asp-for="CheckingRequest.ProductId" asp-items="Model.ProductList"></select>
+    <div style="margin-bottom: 15px;">
+        <label asp-for="CheckingRequest.CheckDateRequest" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <input asp-for="CheckingRequest.CheckDateRequest" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <div>
-        <label asp-for="CheckingRequest.Reason"></label>
-        <input asp-for="CheckingRequest.Reason" required />
+    <div style="margin-bottom: 15px;">
+        <label asp-for="CheckingRequest.ProductId" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <select asp-for="CheckingRequest.ProductId" asp-items="Model.ProductList" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
     </div>
 
-    <button type="submit">Create Checking Request</button>
+    <div style="margin-bottom: 15px;">
+        <label asp-for="CheckingRequest.Reason" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <input asp-for="CheckingRequest.Reason" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer;">
+        Create Checking Request
+    </button>
 </form>
