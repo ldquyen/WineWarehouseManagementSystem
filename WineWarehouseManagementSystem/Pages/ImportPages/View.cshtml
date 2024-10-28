@@ -44,8 +44,8 @@
                         <td style="padding: 8px; border-bottom: 1px solid #ddd;">@imp.Account.AccountName</td>
                         <td style="padding: 8px; border-bottom: 1px solid #ddd;">@imp.Note</td>
                         <td style="padding: 8px; border-bottom: 1px solid #ddd;">
-                            <form method="get" asp-page="/ImportPages/ViewDetail" style="display: inline;">
-                                <input type="hidden" id="id" value="@imp.ImportId" />
+                            <form method="get" asp-page="/ImportPages/ViewImportDetail" style="display: inline;">
+                                <input type="hidden" name="id" value="@imp.ImportId" />
                                 <button type="submit" style="padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; font-size: 0.9em; cursor: pointer;">
                                     View detail
                                 </button>

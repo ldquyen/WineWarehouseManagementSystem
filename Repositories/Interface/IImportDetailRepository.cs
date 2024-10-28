@@ -10,5 +10,6 @@ namespace Repositories.Interface
     public interface IImportDetailRepository
     {
         Task CreateImportDetail(ImportDetail importDetail);
+        Task<List<ImportDetail>> GetImportDetailByImportId(int importId);
     }
 }

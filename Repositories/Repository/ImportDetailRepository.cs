@@ -21,5 +21,11 @@ namespace Repositories.Repository
         {
             await _importDetailDAO.AddImportDetail(importDetail);
         }
+
+        public async Task<List<ImportDetail>> GetImportDetailByImportId(int importId)
+        {
+            var list = await _importDetailDAO.GetImportDetailsByImportId(importId);
+            return list;
+        }
     }
 }
