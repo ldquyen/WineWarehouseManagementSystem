@@ -20,5 +20,10 @@ namespace Repositories.Repository
         {
             await _importDAO.AddImport(import);
         }
+
+        public async Task<List<Import>> GetImportList(DateOnly? StartDate, DateOnly? EndDate)
+        {
+            return await _importDAO.GetImportList(StartDate, EndDate);
+        }
     }
 }

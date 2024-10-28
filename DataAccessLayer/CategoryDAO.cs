@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class CategoryDAO :SingletonBase<CategoryDAO>
+    public class CategoryDAO : SingletonBase<CategoryDAO>
     {
         public async Task AddCategory(Category category)
         {
@@ -25,7 +25,6 @@ namespace DataAccessLayer
         {
             return await _context.Categories.Where(x => x.CategoryName.Contains(name)).ToListAsync();
         }
-
 
         public async Task<bool> CheckCategoryName(string categoryName)
         {

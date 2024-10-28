@@ -1,4 +1,53 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ExportPages.ViewModel
 @{
+    Layout = "_ManagerLayout";
+    <link rel="stylesheet" href="/css/ExportPageStyle.css">
+}
+
+<div class="search-box">
+    <form method="get" asp-page="" asp-page-handler="SearchByExportDate">
+        <input type="text" name="exportDate" placeholder="Please enter export date to search" />
+        <button type="submit" class="btnSearch">Search</button>
+        <a class="btnCreateExport " href="/ExportPages/Create">Create New Export</a>
+    </form>
+</div>
+@if (Model.ExportList != null && Model.ExportList.Any())
+{
+    <table style="border: 1px solid black ">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black ">Export ID</th>
+                <th style="border: 1px solid black ">Export Date</th>
+                <th style="border: 1px solid black ">AccountName</th>
+                <th style="border: 1px solid black ">Note</th>
+                <th style="border: 1px solid black">Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var export in Model.ExportList)
+            {
+                <tr>
+                    <td style="border: 1px solid black ">@export.ExportId</td>
+                    <td style="border: 1px solid black ">@export.ExportDate</td>
+                    <td style="border: 1px solid black ">@export.AccountId</td>
+                    <td style="border: 1px solid black ">@export.Note</td>
+                    <td style="border: 1px solid black ">
+                        <ul id="nav" style="list-style:none">
+                            <li>
+                                <a href="/ExportPages/Edit">Edit</a>
+                            </li>
+                            <li>
+                                <a href="/ExportPages/Delete">Delete</a>
+                            </li>
+                        </ul>
+                    </td>
+        </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No Export available.</p>
 }

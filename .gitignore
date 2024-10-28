@@ -397,3 +397,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+WineWarehouseManagementSystem/appsettings.json
+WineWarehouseManagementSystem/appsettings.json

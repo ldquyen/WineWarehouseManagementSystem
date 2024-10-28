@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WineWarehouseManagementSystem.Pages
+namespace WineWarehouseManagementSystem.Pages.AccountPages
 {
-    public class AdminPageModel : PageModel
+    public class ViewAllStaffModel : PageModel
     {
         public void OnGet()
         {
-
         }
     }
 }

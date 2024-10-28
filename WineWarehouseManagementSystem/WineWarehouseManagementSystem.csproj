@@ -29,4 +29,13 @@
     <_ContentIncludedByDefault Remove="Pages\ImportPages\CreateProductLine.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\ExportPageStyle.css" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
+  </ItemGroup>
+
 </Project>

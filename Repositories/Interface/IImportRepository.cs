@@ -9,7 +9,7 @@ namespace Repositories.Interface
 {
     public interface IImportRepository
     {
-
         Task CreateImport(Import import);
+        Task<List<Import>> GetImportList(DateOnly? StartDate, DateOnly? EndDate);
     }
 }

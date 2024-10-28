@@ -35,7 +35,6 @@ namespace WineWarehouseManagementSystem.Pages.CategoryPages
                 TempData["Message"] = "Create category successful";
                 return Page();
             }
-
         }
     }
 }

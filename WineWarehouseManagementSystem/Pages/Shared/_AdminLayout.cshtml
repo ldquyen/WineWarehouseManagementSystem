@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - WineWarehouseManagementSystem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .sidebar {
+            background-color: lightgray;
+            color: black;
+            padding: 15px;
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-right: 2px solid black;
+        }
+
+        .menu-item {
+            margin: 15px 0;
+        }
+
+            .menu-item a {
+                color: #5cb85c;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+        .submenu {
+            display: none;
+            list-style-type: none;
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+
+            .submenu li a {
+                color: white;
+                text-decoration: none;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <ul style="list-style-type: none; padding: 0;">
+            <li class="menu-item">
+                <a href="#" onclick="toggleSubmenu('checking-submenu')">Checking Request</a>
+                <ul id="checking-submenu" class="submenu">
+                    <li><a href="/CheckingPages/View">View</a></li>
+                    <li><a href="/CheckingPages/Create">Create</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="#" onclick="toggleSubmenu('report-submenu')">Report</a>
+                <ul id="report-submenu" class="submenu">
+                    <li><a href="/ReportPages/View">View</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div style="margin-left: 220px; padding: 20px;">
+        @RenderBody()
+    </div>
+
+    <script>
+        function toggleSubmenu(id) {
+            var submenu = document.getElementById(id);
+            if (submenu.style.display === "block") {
+                submenu.style.display = "none";
+            } else {
+
+                var submenus = document.getElementsByClassName("submenu");
+                for (var i = 0; i < submenus.length; i++) {
+                    submenus[i].style.display = "none";
+                }
+                submenu.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
