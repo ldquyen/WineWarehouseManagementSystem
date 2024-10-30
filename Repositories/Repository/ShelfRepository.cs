@@ -26,5 +26,7 @@ namespace Repositories.Repository
         {
             return await _shelfDAO.AddShelfQuantity(shelfid, quantity);
         }
+        public async Task<bool> ReduceShelfQuantity(int? shelfId, int? quantity) => await _shelfDAO.ReduceShelfQuantity(shelfId, quantity);
+        public async Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId) => await _shelfDAO.GetShelfsOfProductLineByProductId(productId);
     }
 }

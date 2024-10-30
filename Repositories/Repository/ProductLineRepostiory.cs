@@ -21,5 +21,7 @@ namespace Repositories.Repository
         {
             await _productLineDAO.CreateProductLine(productLine);
         }
+        public async Task<bool> ReduceProductLine(int productLineId, int quantity) => await _productLineDAO.ReduceProductLine(productLineId, quantity);
+        public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId) => await _productLineDAO.GetListManufacturingYearOfProduct(productId);
     }
 }

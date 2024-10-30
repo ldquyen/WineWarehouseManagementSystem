@@ -16,8 +16,10 @@ namespace DataAccessLayer
         }
         public async Task<List<ExportDetail>> GetExportDetailsByExportId(int exportId)
         {
-            return await _context.ExportDetails.Where(e => e.ExportId == exportId).ToListAsync();
+            return await _context.ExportDetails.Where(x => x.ExportDetailId == exportId).Include(x => x.ProductLine)
+                .ThenInclude(x => x.Product).Include(x => x.ProductLine).ThenInclude(x => x.Shelf).ToListAsync();
         }
+
         public async Task AddExportDetail(List<ExportDetail> exportDetails)
         {
             try

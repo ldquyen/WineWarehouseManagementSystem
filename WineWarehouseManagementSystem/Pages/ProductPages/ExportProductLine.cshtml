@@ -1,0 +1,42 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.ProductPages.ExportProductLineModel
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>Export productline :@Model.ExportId</h1>
+<h1> Product: @Model.ProductName</h1>
+@if (TempData["Export"] != null)
+{
+    <h2 style="text-align: center; color: green;">@TempData["Export"]</h2>
+}
+<form method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.ProductYear" style="margin-bottom: 5px; font-weight: bold;">Year</label>
+        <select asp-for="productLine.ProductYear" asp-items="Model.ManufacturingYearListOfProduct"
+                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
+    </div>
+
+
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.Quantity" style="margin-bottom: 5px; font-weight: bold;">Quantity</label>
+        <input asp-for="productLine.Quantity" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="productLine.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf</label>
+        <select asp-for="productLine.ShelfId" asp-items="Model.ShelfList"
+                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit"
+                style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+            Update product line and export detail
+        </button>
+    </div>
+</form>
+
