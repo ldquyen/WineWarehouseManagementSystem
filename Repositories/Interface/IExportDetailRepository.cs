@@ -9,7 +9,7 @@ namespace Repositories.Interface
 {
     public interface IExportDetailRepository
     {
-        public Task CreateExportDetailsAsync(List<ExportDetail> exportDetails);
+        public Task<dynamic> CreateExportDetailsAsync(ExportDetail exportDetails);
         public Task<dynamic> UpdateExportDetailsAsync(int exportDetailId);
         public Task DeleteExportDetailAsync(int exportDetailId);
         public Task<List<ExportDetail>> GetExportDetailsByExportId(int exportId);
