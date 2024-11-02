@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repositories.Interface;
+using Repositories.Repository;
 
 namespace WineWarehouseManagementSystem.Pages.ProductPages
 {
@@ -12,22 +13,20 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         private readonly IShelfRepository _shelfRepository;
         private readonly IProductLineRepostiory _productLineRepostiory;
         private readonly IImportDetailRepository _importDetailRepository;
-
-        public ExportProductLineModel(IProductRepository productRepository, IShelfRepository shelfRepository, IProductLineRepostiory productLineRepostiory, IImportDetailRepository importDetailRepository)
+        private readonly IExportDetailRepository _exportDetailRepository;
+        public ExportProductLineModel(IProductRepository productRepository, IShelfRepository shelfRepository, IProductLineRepostiory productLineRepostiory, IImportDetailRepository importDetailRepository, IExportDetailRepository exportDetailRepository)
         {
             _productRepository = productRepository;
             _shelfRepository = shelfRepository;
             _productLineRepostiory = productLineRepostiory;
             _importDetailRepository = importDetailRepository;
+            _exportDetailRepository = exportDetailRepository;
         }
         [BindProperty(SupportsGet = true)]
         public int ExportId { get; set; }
-        public int ProductName { get; set; }
-        public int ProductId { get; set; }
         [BindProperty]
-        public ProductLine productLine { get; set; }
-        public SelectList ManufacturingYearListOfProduct { get; set; }
-        public SelectList ShelfList { get; set; }
+        public ProductLine ProductLine { get; set; }
+        public SelectList ProductList { get; set; }
         public int Quantity { get; set; }
 
         public async Task<IActionResult> OnGet()
@@ -37,12 +36,21 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         }
         public async Task<IActionResult> OnPost()
         {
-            if (await _shelfRepository.ReduceShelfQuantity(productLine.ShelfId, productLine.Quantity))
+            var productLine = await _productLineRepostiory.GetProductIdByInfor(ProductLine.ProductId, ProductLine.ProductYear, ProductLine.ShelfId);
+            // Remove duplicates and assign to ManufacturingYearListOfProduct
+            if (await _shelfRepository.ReduceShelfQuantity(ProductLine.ShelfId, ProductLine.Quantity))
             {
-                await _productLineRepostiory.ReduceProductLine(productLine.ProductLineId, Quantity);
+                await _productLineRepostiory.ReduceProductLine(productLine.ProductLineId, ProductLine.Quantity);
+                ExportDetail exportDetail = new ExportDetail
+                {
+                    ExportId = ExportId,
+                    ProductLineId = productLine.ProductLineId,
+                    Quantity = ProductLine.Quantity,
+                };
+                await _exportDetailRepository.CreateExportDetailsAsync(exportDetail);
                 TempData["Create"] = "Create export successfull";
                 await LoadData();
-                return Page();
+                return RedirectToPage("/ProductPages/ExportPages/View");
             }
             else
             {
@@ -54,11 +62,10 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
 
         private async Task LoadData()
         {
+            var products = await _productRepository.GetListOfProduct();
+            ProductList = new SelectList(products, "ProductId", "ProductName");
 
-            var shelfs = await _shelfRepository.GetShelfsOfProductLineByProductId(ProductId);
-            ShelfList = new SelectList(shelfs, "ShelfId", "ShelfName");
-            var years = await _productLineRepostiory.GetListManufacturingYearOfProduct(ProductId);
-            ManufacturingYearListOfProduct = new SelectList(years ,"ProductYear");
+
         }
     }
 }

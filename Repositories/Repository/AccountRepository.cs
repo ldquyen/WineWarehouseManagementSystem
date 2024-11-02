@@ -27,6 +27,7 @@ namespace Repositories.Repository
         {
             return await _accountDAO.GetManagerList();
         }
+        public async Task<List<Account>> GetStaffList() => await _accountDAO.GetStaffList();
         public async Task CreateAccount(Account account)
         {
             await _accountDAO.CreateAccount(account);

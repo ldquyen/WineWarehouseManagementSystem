@@ -17,15 +17,21 @@ namespace Repositories.Repository
         {
             _productLineDAO = ProductLineDAO.instance;
         }
+
+        public async Task<ProductLine> GetProductIdByInfor(int? productId, int? year, int? shelfId) => await _productLineDAO.GetProductIdByInfor(productId, year, shelfId);
+
         public async Task CreateProductLine(ProductLine productLine)
         {
             await _productLineDAO.CreateProductLine(productLine);
         }
-        public async Task<bool> ReduceProductLine(int productLineId, int quantity) => await _productLineDAO.ReduceProductLine(productLineId, quantity);
+        public async Task<bool> ReduceProductLine(int productLineId, int? quantity) => await _productLineDAO.ReduceProductLine(productLineId, quantity);
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId) => await _productLineDAO.GetListManufacturingYearOfProduct(productId);
+
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId) => await _productLineDAO.GetProductLineListByProductId(productId);
         public async Task<List<ProductLine>> GetProductLineListByProductId(int productId)
         {
             return await _productLineDAO.GetProductLineListByProductId(productId);
         }
+        public async Task<ProductLine> GetProductLineByProductLineId(int? productLineId) => await _productLineDAO.GetProductLineByProductLineId(productLineId);
     }
 }

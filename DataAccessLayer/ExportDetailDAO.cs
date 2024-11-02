@@ -20,12 +20,12 @@ namespace DataAccessLayer
                 .ThenInclude(x => x.Product).Include(x => x.ProductLine).ThenInclude(x => x.Shelf).ToListAsync();
         }
 
-        public async Task AddExportDetail(List<ExportDetail> exportDetails)
+        public async Task<dynamic> AddExportDetail(ExportDetail exportDetails)
         {
             try
             {
                 await _context.ExportDetails.AddRangeAsync(exportDetails);
-                await _context.SaveChangesAsync();
+                return await _context.SaveChangesAsync();
             } catch(Exception ex)
             {
                 throw new Exception($"Error at ExportDetailDAO: {ex.Message}");

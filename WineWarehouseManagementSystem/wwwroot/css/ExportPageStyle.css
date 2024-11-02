@@ -1,7 +1,7 @@
 ﻿* {
     /* Emmet */
     padding: 0;
-    margin: 0;
+    margin: 6px 0 8px 0;
     box-sizing: border-box;
 }
 
@@ -97,4 +97,74 @@ html {
     .btnCreateExport:active, .btnSearch:active {
         box-shadow: #D6D6E7 0 3px 7px inset;
         transform: translateY(2px);
+    }
+
+
+/*for edit + delete button*/
+
+.btnViewDetail {
+    all: unset;
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    position: relative;
+    color: #f0f0f0;
+    cursor: pointer;
+    z-index: 1;
+    padding: 9px 15px 9px 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+    .btnViewDetail::after,
+    .btnViewDetail::before {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: -18px;
+        z-index: -99999;
+        transition: all .4s;
+    }
+
+    .btnViewDetail::before {
+        transform: translate(0%, 0%);
+        width: 90%;
+        height: 86%;
+        background: #6b1a1a;
+        border-radius: 10px;
+    }
+
+    .btnViewDetail::after {
+        transform: translate(10px, 10px);
+        width: 35px;
+        height: 35px;
+        background: #ffa9a915;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border-radius: 50px;
+    }
+
+    .btnViewDetail:hover::before {
+        transform: translate(5%, 20%);
+        width: 110%;
+        height: 110%;
+    }
+
+    .btnViewDetail:hover::after {
+        border-radius: 10px;
+        transform: translate(0, 0);
+        width: 100%;
+        height: 100%;
+    }
+
+    .btnViewDetail:active::after {
+        transition: 0s;
+        transform: translate(0, 5%);
     }

@@ -1,0 +1,58 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.ExportPages.ViewExportDetailModel
+@{
+    Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
+}
+
+<h2 style="text-align: center; font-size: 24px; color: #333;">View Export Detail</h2>
+
+@if (Model.exportDetails == null || !Model.exportDetails.Any())
+{
+    <p style="text-align: center; font-size: 18px; color: #888;">No Export details available.</p>
+}
+else
+{
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;">
+        <thead>
+            <tr style="background-color: #4CAF50; color: white;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Line Id</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Product</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Year</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Alcohol</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Capacity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Shelf</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var impDetail in Model.exportDetails)
+            {
+                <tr style="text-align: center;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLineId</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLine?.Product?.ProductName</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLine?.ProductYear</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLine?.ProductAlcohol</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLine?.Capacity</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLine?.Price</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.ProductLine?.Shelf?.ShelfName</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@impDetail.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<form method="get" asp-page="/ExportPages/View" style="text-align: center; margin-top: 20px;">
+    <button type="submit"
+            style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        View All Exports
+    </button>
+</form>

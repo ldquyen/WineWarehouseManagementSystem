@@ -12,24 +12,37 @@
     <link rel="stylesheet" href="/css/ExportPageStyle.css">
 }
 
-<div class="search-box">
-    <form method="get" asp-page="" asp-page-handler="SearchByExportDate">
-        <input type="text" name="exportDate" placeholder="Please enter export date to search" />
-        <button type="submit" class="btnSearch">Search</button>
+<div style="max-width: 500px; margin: 20px auto;">
+    <form method="get" asp-page="" asp-page-handler="SearchByExportDate" style="display: flex; gap: 10px;">
+        <input type="date" id="exportDate" name="exportDate" placeholder="Please enter export date to search"
+               style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <button type="submit" class="btnSearch">
+            Search
+        </button>
         <a class="btnCreateExport " href="/ExportPages/Create">Create New Export</a>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const dateInput = document.getElementById('exportDate');
+        const today = new Date();
+        const formattedDate = today.toISOString().slice(0, 10).replace(/-/g, '/'); // Format as yyyy/mm/dd
+        dateInput.value = formattedDate;
+    });
+</script>
+
 @if (Model.ExportList != null && Model.ExportList.Any())
 {
-    <table style="border: 1px solid black ">
+    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
         <thead>
-            <tr>
+            <tr style="background-color: #f2f2f2;">
                 <th style="border: 1px solid black ">Export ID</th>
                 <th style="border: 1px solid black ">Export Date</th>
                 <th style="border: 1px solid black ">AccountName</th>
                 <th style="border: 1px solid black ">Note</th>
                 <th style="border: 1px solid black">Operations</th>
-        </tr>
+            </tr>
         </thead>
         <tbody>
             @foreach (var export in Model.ExportList)
@@ -40,16 +53,9 @@
                     <td style="border: 1px solid black ">@export.AccountId</td>
                     <td style="border: 1px solid black ">@export.Note</td>
                     <td style="border: 1px solid black ">
-                        <ul id="nav" style="list-style:none">
-                            <li>
-                                <a href="/ExportPages/Edit">Edit</a>
-                            </li>
-                            <li>
-                                <a href="/ExportPages/Delete">Delete</a>
-                            </li>
-                        </ul>
+                        <a class="btnViewDetail" href="/ExportPages/ViewExportDetail">Detail</a>
                     </td>
-        </tr>
+                </tr>
             }
         </tbody>
     </table>
@@ -58,3 +64,5 @@ else
 {
     <p>No Export available.</p>
 }
+
+

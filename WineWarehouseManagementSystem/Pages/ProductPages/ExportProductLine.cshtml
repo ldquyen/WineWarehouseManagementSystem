@@ -10,33 +10,37 @@
         Response.Redirect("/Error");
     }
 }
-<h1>Export productline :@Model.ExportId</h1>
-<h1> Product: @Model.ProductName</h1>
+<h1>Export ProductLine :@Model.ExportId</h1>
 @if (TempData["Export"] != null)
 {
     <h2 style="text-align: center; color: green;">@TempData["Export"]</h2>
 }
 <form method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="ProductLine.ProductId" style="margin-bottom: 5px; font-weight: bold;">Product</label>
+        <select asp-for="ProductLine.ProductId" asp-items="Model.ProductList"
+                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
+    </div>
 
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="productLine.ProductYear" style="margin-bottom: 5px; font-weight: bold;">Year</label>
-        <select asp-for="productLine.ProductYear" asp-items="Model.ManufacturingYearListOfProduct"
-                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        <label asp-for="ProductLine.ProductYear" style="margin-bottom: 5px; font-weight: bold;">Year</label>
+        <input asp-for="ProductLine.ProductYear" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
         </select>
     </div>
 
 
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="productLine.Quantity" style="margin-bottom: 5px; font-weight: bold;">Quantity</label>
-        <input asp-for="productLine.Quantity" required
+        <label asp-for="ProductLine.Quantity" style="margin-bottom: 5px; font-weight: bold;">Quantity</label>
+        <input asp-for="ProductLine.Quantity" required
                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="productLine.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf</label>
-        <select asp-for="productLine.ShelfId" asp-items="Model.ShelfList"
-                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-        </select>
+        <label asp-for="ProductLine.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf</label>
+        <input asp-for="ProductLine.ShelfId" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
     <div style="text-align: center;">
