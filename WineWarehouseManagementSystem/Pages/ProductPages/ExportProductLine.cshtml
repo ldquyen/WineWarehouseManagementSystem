@@ -10,10 +10,10 @@
         Response.Redirect("/Error");
     }
 }
-<h1>Export ProductLine :@Model.ExportId</h1>
-@if (TempData["Export"] != null)
+<h1>Export ProductLine for Export Id :@Model.ExportId</h1>
+@if (TempData["Message"] != null)
 {
-    <h2 style="text-align: center; color: green;">@TempData["Export"]</h2>
+    <h2 style="text-align: center; color: green;">@TempData["Message"]</h2>
 }
 <form method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
@@ -32,14 +32,8 @@
 
 
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="ProductLine.Quantity" style="margin-bottom: 5px; font-weight: bold;">Quantity</label>
-        <input asp-for="ProductLine.Quantity" required
-               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
-    </div>
-
-    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="ProductLine.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf</label>
-        <input asp-for="ProductLine.ShelfId" required
+        <label asp-for="Quantity" style="margin-bottom: 5px; font-weight: bold;">Quantity</label>
+        <input asp-for="Quantity" required
                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 

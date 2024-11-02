@@ -11,10 +11,10 @@
     }
 }
 
-<h1>Create productline :@Model.ImportId</h1>
-@if (TempData["Create"] != null)
+<h1>Create productline for import ID :@Model.ImportId</h1>
+@if (TempData["Message"] != null)
 {
-    <h2 style="text-align: center; color: green;">@TempData["Create"]</h2>
+    <h2 style="text-align: center; color: green;">@TempData["Message"]</h2>
 }
 <form method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">

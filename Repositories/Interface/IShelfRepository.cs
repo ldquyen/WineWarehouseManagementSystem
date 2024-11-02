@@ -11,8 +11,8 @@ namespace Repositories.Interface
     {
         Task<List<Shelf>> GetAllShelf();
         Task<bool> AddShelfQuantity(int? shelfid, int? quantity);
-        public Task<bool> ReduceShelfQuantity(int? shelfId, int? quantity);
-        public Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId);
-        public Task<Shelf> GetShelfByShelfId(int? shelfId);
+        Task<bool> ReduceShelfQuantity(int? shelfId, int? quantity);
+        Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId);
+        Task<Shelf> GetShelfByShelfId(int? shelfId);
     }
 }

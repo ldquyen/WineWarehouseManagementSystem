@@ -23,7 +23,7 @@ namespace WineWarehouseManagementSystem.Pages.ExportPages
 
         private async Task<IActionResult> LoadData(int exportId)
         {
-            exportDetails = new List<ExportDetail>();
+            //exportDetails = new List<ExportDetail>();
             exportDetails = await _repository.GetExportDetailsByExportId(exportId);
             return Page();
         }

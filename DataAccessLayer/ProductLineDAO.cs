@@ -67,6 +67,22 @@ namespace DataAccessLayer
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.ProductYear).ToListAsync();
         }
 
+        public async Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear)
+        {
+            return await _context.ProductLines.Where(x => x.ProductId == productId && x.ProductYear == productYear).ToListAsync();
+        }
+
+        public async Task<int> CountQuantityForExport(int? productId, int? productYear)
+        {
+            return await _context.ProductLines.Where(x => x.ProductId == productId && x.ProductYear == productYear).SumAsync(x => x.Quantity ?? 0);
+        }
+        public async Task<bool> UpdateAsync(ProductLine productLine)
+        {
+            _context.ProductLines.Update(productLine);
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
     }
 }
 
