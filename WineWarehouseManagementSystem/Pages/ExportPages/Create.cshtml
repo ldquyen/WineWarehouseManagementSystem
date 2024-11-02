@@ -2,21 +2,34 @@
 @model WineWarehouseManagementSystem.Pages.ExportPages.CreateModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
 
 <form method="post" style="max-width: 500px; margin: 20px auto; font-family: Arial, sans-serif;">
     <div style="margin-bottom: 15px;">
-        <label asp-for="Export.ExportDate" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <label asp-for="Export.ExportDate" style="display: block; margin-bottom: 5px; font-weight: bold;">Export Date</label>
         <input asp-for="Export.ExportDate" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
     <div style="margin-bottom: 15px;">
-        <label asp-for="Export.AccountId" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <label asp-for="Export.AccountId" style="display: block; margin-bottom: 5px; font-weight: bold;">AccountId</label>
         <input asp-for="Export.AccountId" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="product.ProductId" style="margin-bottom: 5px; font-weight: bold;">Product</label>
+        <select asp-for="product.ProductId" asp-items="Model.ProductList"
+                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </select>
+    </div>
     <div style="margin-bottom: 15px;">
-        <label asp-for="Export.Note" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
+        <label asp-for="Export.Note" style="display: block; margin-bottom: 5px; font-weight: bold;">Note</label>
         <input asp-for="Export.Note" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
@@ -28,25 +41,3 @@
 
 
 
-
-
-<!--
-
-<form method="post">
-    <div>
-        <label asp-for="Export.ExportDate"></label>
-        <input asp-for="Export.ExportDate" readonly />
-    </div>
-
-    <div>
-        <label asp-for="Export.AccountId"></label>
-        <input asp-for="Export.AccountId" readonly />
-    </div>
-
-    <div>
-        <label asp-for="Export.Note"></label>
-        <input asp-for="Export.Note" required/>
-    </div>
-    <button type="submit">Create Export</button>
-</form>
--->

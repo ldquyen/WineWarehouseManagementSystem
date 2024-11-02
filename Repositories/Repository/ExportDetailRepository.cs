@@ -38,5 +38,7 @@ namespace Repositories.Repository
         {
             await _detailDAO.DeleteExportDetails(exportDetailId);
         }
+
+        public async Task<List<ExportDetail>> GetExportDetailsByExportId(int exportId) => await _detailDAO.GetExportDetailsByExportId(exportId);
     }
 }

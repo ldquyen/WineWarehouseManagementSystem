@@ -2,6 +2,13 @@
 @model WineWarehouseManagementSystem.Pages.ProductPages.ViewModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
 
 <div style="display: flex; justify-content: center; margin-bottom: 20px;">
@@ -35,6 +42,16 @@
                     <td style="border: 1px solid #ddd; padding: 8px;">@product.ProductDescription</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">@product.Origin</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">@(product.Category != null ? product.Category.CategoryName : "N/A")</td>
+                    <td>
+                        <form method="get" asp-page="/ProductPages/ViewProductLine">
+                            <input type="hidden" name="id" value="@product.ProductId" />
+                            <button type="submit"
+                                    style="padding: 8px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                                View Product Line
+                            </button>
+                        </form>
+                    </td>
+
                 </tr>
             }
         </tbody>

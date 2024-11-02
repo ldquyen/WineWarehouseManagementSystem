@@ -1,4 +1,12 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ReportPages.ViewModel
 @{
+
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 3)
+    {
+        TempData["ErrorMessage"] = "This function is for admin only";
+        Response.Redirect("/Error");
+    }
 }

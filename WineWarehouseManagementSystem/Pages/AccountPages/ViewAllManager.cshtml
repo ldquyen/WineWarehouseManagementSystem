@@ -1,0 +1,47 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.AccountPages.ViewAllManagerModel
+@{
+    Layout = "_AdminLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 3)
+    {
+        TempData["ErrorMessage"] = "This function is for admin only";
+        Response.Redirect("/Error");
+    }
+}
+
+@if (Model.accounts != null && Model.accounts.Any())
+{
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 12px; border: 1px solid #ddd;">Name</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">Username</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">Password</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var acc in Model.accounts)
+            {
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">@acc.AccountName</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">@acc.Username</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">@acc.UserPassword</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">
+                        <form method="get" asp-page="/AccountPages/UpdateManager" style="display: inline;">
+                            <input type="hidden" name="id" value="@acc.AccountId" />
+                            <button type="submit" style="padding: 8px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2 style="text-align: center; color: gray;">There is no valid manager account</h2>
+}

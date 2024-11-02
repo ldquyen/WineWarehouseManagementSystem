@@ -26,5 +26,37 @@ namespace DataAccessLayer
         {
             return await _context.Accounts.FirstOrDefaultAsync(x => x.AccountId == accountID);
         }
+
+        public async Task<List<Account>> GetManagerList()
+        {
+            return await _context.Accounts.Where(x => x.AccountRole == 2).ToListAsync();
+        }
+
+        public async Task CreateAccount(Account account)
+        {
+            await _context.Accounts.AddAsync(account);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> CheckName(string accountName)
+        {
+            return await _context.Accounts.AnyAsync(x => x.AccountName == accountName);
+        }
+        public async Task<bool> CheckUsername(string userName)
+        {
+            return await _context.Accounts.AnyAsync(x => x.Username == userName);
+        }
+
+        public async Task UpdataAccount(Account account)
+        {
+            var acc = await _context.Accounts.FindAsync(account.AccountId);
+            if (acc != null)
+            {
+                acc.AccountName = account.AccountName;
+                acc.UserPassword = account.UserPassword;
+                _context.Accounts.Update(acc);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
