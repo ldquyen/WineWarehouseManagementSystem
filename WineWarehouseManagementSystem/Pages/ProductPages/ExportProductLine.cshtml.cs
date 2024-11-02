@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repositories.Interface;
+using Repositories.Repository;
 
 namespace WineWarehouseManagementSystem.Pages.ProductPages
 {
@@ -22,10 +23,9 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         }
         [BindProperty(SupportsGet = true)]
         public int ExportId { get; set; }
-        public int ProductName { get; set; }
-        public int ProductId { get; set; }
         [BindProperty]
         public ProductLine productLine { get; set; }
+        public SelectList ProductList { get; set; }
         public SelectList ManufacturingYearListOfProduct { get; set; }
         public SelectList ShelfList { get; set; }
         public int Quantity { get; set; }
@@ -54,11 +54,25 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
 
         private async Task LoadData()
         {
+            var products = await _productRepository.GetListOfProduct();
+            ProductList = new SelectList(products, "ProductId", "ProductName");
+            List<int> allYears = new List<int>(); // Collect all manufacturing years
 
-            var shelfs = await _shelfRepository.GetShelfsOfProductLineByProductId(ProductId);
+            foreach (var product in products)
+            {
+                var productLines = await _productLineRepostiory.GetProductLineListByProductId(product.ProductId);
+                if (productLines.Count > 0)
+                {
+                    var years = await _productLineRepostiory.GetListManufacturingYearOfProduct(product.ProductId);
+                    allYears.AddRange(years.Select(y => y.ProductYear)); // Add each year
+                }
+            }
+
+            // Remove duplicates and assign to ManufacturingYearListOfProduct
+            ManufacturingYearListOfProduct = new SelectList(allYears.Distinct(), "ProductYear");
+            var shelfs = await _shelfRepository.GetShelfsOfProductLineByProductId(productLine.ProductId);
             ShelfList = new SelectList(shelfs, "ShelfId", "ShelfName");
-            var years = await _productLineRepostiory.GetListManufacturingYearOfProduct(ProductId);
-            ManufacturingYearListOfProduct = new SelectList(years ,"ProductYear");
+
         }
     }
 }

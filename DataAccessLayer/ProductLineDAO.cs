@@ -29,15 +29,16 @@ namespace DataAccessLayer
             }
             else return false;
         }
-        public async Task GetProductLineListByProductId(int productId)
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
         {
-            await _context.ProductLines.Where(pl => pl.ProductId == productId).ToListAsync();
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).ToListAsync();
         }
 
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId)
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.ProductYear).ToListAsync();
         }
+
     }
 }
 
