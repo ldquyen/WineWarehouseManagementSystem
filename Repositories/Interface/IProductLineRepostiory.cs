@@ -13,5 +13,6 @@ namespace Repositories.Interface
         public Task<bool> ReduceProductLine(int productLineId, int quantity);
         public Task<List<int?>> GetListManufacturingYearOfProduct(int? productId);
         public Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
+        Task<List<ProductLine>> GetProductLineListByProductId(int productId);
     }
 }

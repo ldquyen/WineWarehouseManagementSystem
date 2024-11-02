@@ -2,6 +2,13 @@
 @model WineWarehouseManagementSystem.Pages.ImportPages.CreateImportModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if(accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
 
 <form method="post" style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">

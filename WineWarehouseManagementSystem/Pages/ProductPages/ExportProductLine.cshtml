@@ -2,6 +2,13 @@
 @model WineWarehouseManagementSystem.Pages.ProductPages.ExportProductLineModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
 <h1>Export productline :@Model.ExportId</h1>
 @if (TempData["Export"] != null)

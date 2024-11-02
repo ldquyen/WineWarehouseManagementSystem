@@ -25,5 +25,9 @@ namespace Repositories.Repository
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId) => await _productLineDAO.GetListManufacturingYearOfProduct(productId);
 
         public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId) => await _productLineDAO.GetProductLineListByProductId(productId);
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int productId)
+        {
+            return await _productLineDAO.GetProductLineListByProductId(productId);
+        }
     }
 }

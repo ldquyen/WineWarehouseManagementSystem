@@ -12,7 +12,7 @@ namespace DataAccessLayer
     {
         public async Task CreateProductLine(ProductLine productLine)
         {
-            await _context.AddAsync(productLine);   
+            await _context.AddAsync(productLine);
             await _context.SaveChangesAsync();
         }
 
@@ -32,6 +32,9 @@ namespace DataAccessLayer
         public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).ToListAsync();
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int productId)
+        {
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
         }
 
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId)

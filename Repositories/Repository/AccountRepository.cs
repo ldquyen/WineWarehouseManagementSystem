@@ -23,6 +23,31 @@ namespace Repositories.Repository
             account = await _accountDAO.Login(username, password);
             return account;
         }
+        public async Task<List<Account>> GetManagerAccount()
+        {
+            return await _accountDAO.GetManagerList();
+        }
+        public async Task CreateAccount(Account account)
+        {
+            await _accountDAO.CreateAccount(account);
+        }
+        public async Task UpdateAccount(Account account)
+        {
+            await _accountDAO.UpdataAccount(account);
+        }
 
+        public async Task<Account> GetAccountById(int accountID)
+        {
+            return await _accountDAO.GetAccountById(accountID);
+        }
+
+        public async Task<bool> CheckName(string accountName)
+        {
+            return await _accountDAO.CheckName(accountName);
+        }
+        public async Task<bool> CheckUsername(string username)
+        {
+            return await _accountDAO.CheckUsername(username);
+        }
     }
 }
