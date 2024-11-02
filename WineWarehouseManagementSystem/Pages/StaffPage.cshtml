@@ -1,4 +1,14 @@
 ﻿@page
 @model StaffPageModel
 @{
+    Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 1)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
+
+<h1>Staff Page</h1>
