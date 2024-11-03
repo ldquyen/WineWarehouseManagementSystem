@@ -23,7 +23,7 @@ namespace DataAccessLayer
 
         public async Task<List<Export>> GetExportByExportDate(DateOnly exportDate)
         {
-            return await _context.Exports.Include(e => e.Account).Where(e => e.ExportDate == exportDate).ToListAsync();
+            return await _context.Exports.Include(e => e.Account).Where(e => e.ExportDate == exportDate).OrderByDescending(x => x.ExportDate).ToListAsync();
         }
         public async Task<List<Export>> GetAllExports()
         {

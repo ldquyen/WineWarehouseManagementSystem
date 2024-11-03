@@ -34,12 +34,12 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
             {
                 var categories = await _categoryRepository.GetAlls();
                 CategoryList = new SelectList(categories, "CategoryId", "CategoryName");
-                TempData["CreateProduct"] = "Create product fail";
+                TempData["Message"] = "Create product fail";
                 return Page();
             }
                 
             await _productRepository.CreateProduct(Product);
-            TempData["CreateProduct"] = "Create product successful";
+            TempData["Message"] = "Create product successful";
             return Page();
         }
     }

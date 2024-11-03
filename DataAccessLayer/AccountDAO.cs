@@ -31,6 +31,10 @@ namespace DataAccessLayer
         {
             return await _context.Accounts.Where(x => x.AccountRole == 2).ToListAsync();
         }
+        public async Task<List<Account>> GetStaffList()
+        {
+            return await _context.Accounts.Where(x => x.AccountRole == 1).ToListAsync();
+        }
 
         public async Task CreateAccount(Account account)
         {

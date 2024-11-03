@@ -47,13 +47,13 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
                     Quantity = productLine.Quantity,
                 };
                 await _importDetailRepository.CreateImportDetail(importDetail);
-                TempData["Create"] = "Create import successfull";
+                TempData["Message"] = "Create import successfull";
                 await LoadData();
                 return Page();
             }
             else
             {
-                TempData["Create"] = "Create import fail because quantiy at shelf is max";
+                TempData["Message"] = "Create import fail because quantiy at shelf is max";
                 await LoadData();
                 return Page();
             }

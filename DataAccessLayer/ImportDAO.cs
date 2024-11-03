@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,14 @@ namespace DataAccessLayer
             {
                 return await _context.Imports.Include(x => x.ImportDetails).Include(x => x.Account).OrderByDescending(x => x.ImportDate).ToListAsync();
             }
+        }
+
+
+        //report
+        public async Task<int> ReportNumForImport(DateOnly? StartDate, DateOnly? EndDate)
+        {
+            var list = await _context.Imports.Where(x => x.ImportDate >= StartDate && x.ImportDate <= EndDate).ToListAsync();
+            return list.Count();
         }
     }
 }

@@ -21,7 +21,6 @@ namespace DataAccessLayer
             return await _context.Shelves.ToListAsync();
         }
 
-
         public async Task<bool> AddShelfQuantity(int? shelfid ,int? quantity)
         {
             var shelf = await _context.Shelves.FirstOrDefaultAsync(x => x.ShelfId == shelfid);
@@ -49,10 +48,11 @@ namespace DataAccessLayer
             }
             else return false;
         }
-        public async Task<Shelf> GetShelfByShelfId(int shelfId)
+        public async Task<Shelf> GetShelfByShelfId(int? shelfId)
         {
             return await _context.Shelves.FirstOrDefaultAsync(s => s.ShelfId == shelfId);
         }
+
 
         public async Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId)
         {

@@ -16,16 +16,16 @@ namespace DataAccessLayer
         }
         public async Task<List<ExportDetail>> GetExportDetailsByExportId(int exportId)
         {
-            return await _context.ExportDetails.Where(x => x.ExportDetailId == exportId).Include(x => x.ProductLine)
+            return await _context.ExportDetails.Where(x => x.ExportId == exportId).Include(x => x.ProductLine)
                 .ThenInclude(x => x.Product).Include(x => x.ProductLine).ThenInclude(x => x.Shelf).ToListAsync();
         }
 
-        public async Task AddExportDetail(List<ExportDetail> exportDetails)
+        public async Task<dynamic> AddExportDetail(ExportDetail exportDetails)
         {
             try
             {
                 await _context.ExportDetails.AddRangeAsync(exportDetails);
-                await _context.SaveChangesAsync();
+                return await _context.SaveChangesAsync();
             } catch(Exception ex)
             {
                 throw new Exception($"Error at ExportDetailDAO: {ex.Message}");

@@ -1,13 +1,26 @@
 ﻿@page
 @model StaffPageModel
 @{
+<<<<<<< HEAD
     Layout = "_StaffLayout";
+=======
+    Layout = "_ManagerLayout";
+>>>>>>> 9c2004ea2fd3bbccf5f75dbc8f7f318b6a4391b0
     int? accountId = HttpContext.Session.GetInt32("accountId");
     int? roleId = HttpContext.Session.GetInt32("roleId");
     if (accountId == null || roleId != 1)
     {
+<<<<<<< HEAD
         TempData["ErrorMessage"] = "This function is for staff only";
         Response.Redirect("/Error");
     }
 }
 <h1>Staff page ne</h1>
+=======
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
+}
+
+<h1>Staff Page</h1>
+>>>>>>> 9c2004ea2fd3bbccf5f75dbc8f7f318b6a4391b0

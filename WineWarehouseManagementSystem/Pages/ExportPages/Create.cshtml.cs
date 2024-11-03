@@ -19,18 +19,15 @@ namespace WineWarehouseManagementSystem.Pages.ExportPages
 
         [BindProperty]
         public Export Export { get; set; }
-        public Product product { get; set; }
-        public SelectList ProductList { get; set; }
 
-        public async Task<IActionResult> OnGet()
+        public async Task OnGet()
         {
             Export = new Export
             {
                 ExportDate = DateOnly.FromDateTime(DateTime.Now),
                 AccountId = HttpContext.Session.GetInt32("accountId")
             };
-            await LoadData();
-            return Page();
+
         }
 
         public async Task<IActionResult> OnPost()
@@ -46,20 +43,9 @@ namespace WineWarehouseManagementSystem.Pages.ExportPages
             }
             await _export.CreateExportAsync(Export);
             int newExportId = Export.ExportId;
-            int productId = product.ProductId;
-            string? productName = product.ProductName;  
-            return RedirectToPage("/ProductPages/ExportProductLine", new
-            {
-                ExportId = newExportId,
-                ProductName = productName,
-                ProductId = productId,
-            });
+            return RedirectToPage("/ExportPages/View");
 
         }
-        private async Task LoadData()
-        {
-            var products = await _productRepository.GetListOfProduct();
-            ProductList = new SelectList(products, "ProductId", "ProductName");
-        }
+
     }
 }

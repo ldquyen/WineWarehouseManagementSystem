@@ -18,7 +18,7 @@ namespace WineWarehouseManagementSystem.Pages.ExportPages
         public List<Export> ExportList { get; set; }  = new List<Export>();
         public async Task OnGet(DateOnly exportDate)
         {
-            if (!string.IsNullOrEmpty(exportDate.ToString()))
+            if (exportDate == DateOnly.MinValue)
             {
                 ExportList = await _export.GetAllExportAsync();
             }
