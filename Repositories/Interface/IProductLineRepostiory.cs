@@ -17,5 +17,9 @@ namespace Repositories.Interface
         public Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
         Task<List<ProductLine>> GetProductLineListByProductId(int productId);
         public Task<ProductLine> GetProductLineByProductLineId(int? productLineId);
+
+        Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear);
+        Task<int> CountQuantityForExport(int? productId, int? productYear);
+        Task<bool> UpdateAsync(ProductLine productLine);
     }
 }

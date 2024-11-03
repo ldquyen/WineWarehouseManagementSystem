@@ -33,5 +33,20 @@ namespace Repositories.Repository
             return await _productLineDAO.GetProductLineListByProductId(productId);
         }
         public async Task<ProductLine> GetProductLineByProductLineId(int? productLineId) => await _productLineDAO.GetProductLineByProductLineId(productLineId);
+
+
+        public async Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear)
+        {
+            return await _productLineDAO.GetProductLineForExport(productId, productYear);
+        }
+        public async Task<int> CountQuantityForExport(int? productId, int? productYear)
+        {
+            return await _productLineDAO.CountQuantityForExport(productId, productYear);
+        }
+
+        public async Task<bool> UpdateAsync(ProductLine productLine)
+        {
+            return await _productLineDAO.UpdateAsync(productLine);
+        }
     }
 }

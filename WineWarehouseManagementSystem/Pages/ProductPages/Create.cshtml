@@ -12,9 +12,9 @@
 }
 <h2 style="text-align: center;">Create Product</h2>
 
-@if (TempData["CreateProduct"] != null) 
-{     
-    <h3 style="color: green; text-align: center;">@TempData["CreateProduct"]</h3> 
+@if (TempData["Message"] != null)
+{
+    <h3 style="color: green; text-align: center;">@TempData["Message"]</h3>
 }
 
 <div style="display: flex; justify-content: center;">
