@@ -65,12 +65,10 @@ namespace DataAccessLayer
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.ProductYear).ToListAsync();
         }
-
         public async Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear)
         {
             return await _context.ProductLines.Where(x => x.ProductId == productId && x.ProductYear == productYear).ToListAsync();
         }
-
         public async Task<int> CountQuantityForExport(int? productId, int? productYear)
         {
             return await _context.ProductLines.Where(x => x.ProductId == productId && x.ProductYear == productYear).SumAsync(x => x.Quantity ?? 0);
@@ -80,7 +78,17 @@ namespace DataAccessLayer
             _context.ProductLines.Update(productLine);
             await _context.SaveChangesAsync();
             return true;
-
+        }
+        public async Task<bool> CheckValidForChecking(int? productId)
+        {
+            var list = await _context.ProductLines.Where(pl => pl.ProductId == productId).ToListAsync();
+            if (list == null || !list.Any()) return false;
+            else
+            {
+                int? sum = list.Sum(x => x.Quantity ?? 0);
+                if(sum == 0) return false;
+                return true;
+            }
         }
     }
 }

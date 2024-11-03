@@ -103,6 +103,7 @@ CREATE TABLE CheckingRequest (
     ProductID INT,
     CheckDateRequest DATETIME,
     Reason NVARCHAR(MAX),
+	CheckingStatus Bit,
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
@@ -111,14 +112,18 @@ CREATE TABLE CheckingRequest (
 CREATE TABLE Report (
     ReportID INT PRIMARY KEY IDENTITY(1,1),
     ProductLineID INT,
+    CheckingRequestID INT,
     StockQuantity INT,
     CheckedQuantity INT,
     CheckedDate DATE,
     Reason NVARCHAR(MAX),
     AccountID INT,
+    ReportStatus BIT,
     FOREIGN KEY (ProductLineID) REFERENCES ProductLine(ProductLineID),
+    FOREIGN KEY (CheckingRequestID) REFERENCES CheckingRequest(CheckingRequestID),
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 );
+
 
 
 INSERT INTO Account ( AccountName, Username, UserPassword, AccountRole)

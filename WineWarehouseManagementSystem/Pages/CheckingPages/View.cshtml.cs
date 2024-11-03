@@ -13,12 +13,24 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
         {
             _checkingRequestRepository = checkingRequestRepository;
         }
-
+        [BindProperty]
         public List<CheckingRequest> CheckingRequests { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGet()
         {
-            CheckingRequests = await _checkingRequestRepository.GetAllCheckingRequestsAsync();
+            await LoadData();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            await LoadData();
+            return Page();
+        }
+
+        public async Task LoadData()
+        {
+            CheckingRequests = await _checkingRequestRepository.GetAllChecking();
         }
     }
 }

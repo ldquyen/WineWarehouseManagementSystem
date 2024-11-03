@@ -24,5 +24,10 @@ namespace DataAccessLayer
         {
             return await _context.CheckingRequests.ToListAsync();
         }
+
+        public async Task<List<CheckingRequest>> GetAlls()
+        {
+            return _context.CheckingRequests.ToList();  
+        }
     }
 }

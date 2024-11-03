@@ -29,5 +29,10 @@ namespace Repositories.Repository
             return await _checkingRequestDAO.GetAllCheckingRequestsAsync();
         }
 
+        public async Task<List<CheckingRequest>> GetAllChecking()
+        {
+            return await _checkingRequestDAO.GetAlls();
+        }
+
     }
 }

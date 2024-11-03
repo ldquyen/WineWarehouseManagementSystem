@@ -48,5 +48,10 @@ namespace Repositories.Repository
         {
             return await _productLineDAO.GetProductLineListByProductId(productId);
         }
+
+        public async Task<bool> CheckValidForChecking(int? productId)
+        {
+            return await _productLineDAO.CheckValidForChecking(productId);
+        }
     }
 }

@@ -13,11 +13,16 @@ namespace WineWarehouseManagementSystem.Pages.ReportPages
         {
             _reportRepository = reportRepository;
         }
-
+        [BindProperty]
         public List<Report> Reports { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
-        {         
+        public async Task OnGet()
+        {
+            await LoadData();
+        }
+
+        private async Task<IActionResult> LoadData()
+        {
             Reports = await _reportRepository.GetAllReports();
             return Page();
         }

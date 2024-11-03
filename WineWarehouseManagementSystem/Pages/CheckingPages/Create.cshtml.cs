@@ -28,7 +28,8 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
             CheckingRequest = new CheckingRequest
             {
                 CheckDateRequest = DateTime.Now,
-                AccountId = HttpContext.Session.GetInt32("accountId")
+                AccountId = HttpContext.Session.GetInt32("accountId"),
+                CheckingStatus = false
             };
             await LoadData();
             return Page();
@@ -44,21 +45,36 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
                 };
                 return Page();
             }
-            var productLine = await _productLineRepository.GetProductLineListByProductId(CheckingRequest.ProductId);
-            if (productLine != null)
+            var validate = await _productLineRepository.CheckValidForChecking(CheckingRequest.ProductId);
+            if (validate)
+            {
+                await _checkingRequestRepository.AddChecking(CheckingRequest);
+                TempData["Message"] = "Create checking request successful";
+                await LoadData();
+                return RedirectToPage("/CheckingPages/View");
+            }
+            else
             {
                 TempData["Message"] = "The product dont have product line";
                 await LoadData();
                 return Page();
             }
-            else
-            {
-                await _checkingRequestRepository.AddChecking(CheckingRequest);
-                TempData["Message"] = "Ban da lam kho nhan vien cua ban thanh cong!";
-                await LoadData();
-                return RedirectToPage("/CheckingPages/View");
-            }
         }
+            //var productLine = await _productLineRepository.GetProductLineListByProductId(CheckingRequest.ProductId);
+            //if (productLine != null)
+            //{
+            //    TempData["Message"] = "The product dont have product line";
+            //    await LoadData();
+            //    return Page();
+            //}
+            //else
+            //{
+            //    await _checkingRequestRepository.AddChecking(CheckingRequest);
+            //    TempData["Message"] = "Create checking request successful";
+            //    await LoadData();
+            //    return RedirectToPage("/CheckingPages/View");
+            //}
+        
         private async Task LoadData()
         {
             var products = await _productRepository.GetAll();
