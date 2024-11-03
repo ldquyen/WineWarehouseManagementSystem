@@ -32,6 +32,7 @@ namespace Repositories.Repository
         {
             return await _productLineDAO.GetProductLineListByProductId(productId);
         }
+<<<<<<< HEAD
         public async Task<ProductLine> GetProductLineByProductLineId(int? productLineId) => await _productLineDAO.GetProductLineByProductLineId(productLineId);
 
 
@@ -47,6 +48,11 @@ namespace Repositories.Repository
         public async Task<bool> UpdateAsync(ProductLine productLine)
         {
             return await _productLineDAO.UpdateAsync(productLine);
+=======
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
+        {
+            return await _productLineDAO.GetProductLineListByProductId(productId);
+>>>>>>> dev-hoang
         }
     }
 }

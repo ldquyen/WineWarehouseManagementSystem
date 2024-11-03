@@ -16,10 +16,15 @@ namespace Repositories.Interface
         public Task<List<int?>> GetListManufacturingYearOfProduct(int? productId);
         public Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
         Task<List<ProductLine>> GetProductLineListByProductId(int productId);
+<<<<<<< HEAD
         public Task<ProductLine> GetProductLineByProductLineId(int? productLineId);
 
         Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear);
         Task<int> CountQuantityForExport(int? productId, int? productYear);
         Task<bool> UpdateAsync(ProductLine productLine);
+=======
+        Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
+
+>>>>>>> dev-hoang
     }
 }

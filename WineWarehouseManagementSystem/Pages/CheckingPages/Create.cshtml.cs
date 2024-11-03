@@ -11,10 +11,14 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
     {
         private readonly IProductRepository _productRepository;
         private readonly ICheckingRequestRepository _checkingRequestRepository;
-        public CreateModel(ICheckingRequestRepository checkingRequestRepository, IProductRepository productRepository)
+        private readonly IProductLineRepostiory _productLineRepository;
+
+        public CreateModel(ICheckingRequestRepository checkingRequestRepository, IProductRepository productRepository, IProductLineRepostiory productLineRepository)
         {
             _checkingRequestRepository = checkingRequestRepository;
             _productRepository = productRepository;
+            _productLineRepository = productLineRepository;
+
         }
         [BindProperty]
         public CheckingRequest CheckingRequest { get; set; }
@@ -24,8 +28,8 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
             CheckingRequest = new CheckingRequest
             {
                 CheckDateRequest = DateTime.Now,
-                AccountId = HttpContext.Session.GetInt32("accountId")                
-            }; 
+                AccountId = HttpContext.Session.GetInt32("accountId")
+            };
             await LoadData();
             return Page();
         }
@@ -39,11 +43,21 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
                     AccountId = HttpContext.Session.GetInt32("accountId"),
                 };
                 return Page();
-            }           
-            await _checkingRequestRepository.AddChecking(CheckingRequest);
-            TempData["Message"] = "Ban da lam kho nhan vien cua ban thanh cong!";
-            await LoadData();
-            return Page();
+            }
+            var productLine = await _productLineRepository.GetProductLineListByProductId(CheckingRequest.ProductId);
+            if (productLine != null)
+            {
+                TempData["Message"] = "The product dont have product line";
+                await LoadData();
+                return Page();
+            }
+            else
+            {
+                await _checkingRequestRepository.AddChecking(CheckingRequest);
+                TempData["Message"] = "Ban da lam kho nhan vien cua ban thanh cong!";
+                await LoadData();
+                return RedirectToPage("/CheckingPages/View");
+            }
         }
         private async Task LoadData()
         {

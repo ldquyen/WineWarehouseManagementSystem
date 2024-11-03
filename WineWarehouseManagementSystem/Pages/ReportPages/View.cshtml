@@ -9,4 +9,48 @@
         TempData["ErrorMessage"] = "This function is for admin only";
         Response.Redirect("/Error");
     }
+    ViewData["Title"] = "View Reports";
+}
+<h2>View Reports</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (Model.Reports != null && Model.Reports.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Report ID</th>
+                <th>Product Line ID</th>
+                <th>Stock Quantity</th>
+                <th>Checked Quantity</th>
+                <th>Checked Date</th>
+                <th>Reason</th>
+                <th>Account ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model.Reports)
+            {
+                <tr>
+                    <td>@report.ReportId</td>
+                    <td>@report.ProductLineId</td>
+                    <td>@report.StockQuantity</td>
+                    <td>@report.CheckedQuantity</td>
+                    <td>@report.CheckedDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@report.Reason</td>
+                    <td>@report.AccountId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No reports available.</p>
 }

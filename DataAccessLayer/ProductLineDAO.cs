@@ -61,7 +61,10 @@ namespace DataAccessLayer
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
         }
-
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
+        {
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
+        }
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId)
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.ProductYear).ToListAsync();

@@ -20,7 +20,7 @@ namespace DataAccessLayer
             _context.CheckingRequests.Update(checking);
             await _context.SaveChangesAsync();
         }
-        public async Task<List<CheckingRequest>> GetAllCheckingRequest()
+        public async Task<List<CheckingRequest>> GetAllCheckingRequestsAsync()
         {
             return await _context.CheckingRequests.ToListAsync();
         }
