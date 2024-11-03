@@ -1,4 +1,66 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.CheckingPages.ViewModel
 @{
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || (roleId != 3 && roleId != 1))
+    {
+        TempData["ErrorMessage"] = "This function is for admin and staff only";
+        Response.Redirect("/Error");
+    }
+    ViewData["Title"] = "View Checking Requests";
+}
+<h2>View Checking Requests</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (Model.CheckingRequests != null && Model.CheckingRequests.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>Account ID</th>
+                <th>Product ID</th>
+                <th>Check Date Request</th>
+                <th>Reason</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in Model.CheckingRequests)
+            {
+                <tr>
+                    <td>@request.CheckingRequestId</td>
+                    <td>@request.AccountId</td>
+                    <td>@request.ProductId</td>
+                    <td>@request.CheckDateRequest?.ToString("yyyy-MM-dd")</td>
+                    <td>@request.Reason</td>
+                    <td>
+                        @if (roleId == 1)
+                        {
+                            <a asp-page="/ReportPages/Create" asp-route-requestId="@request.CheckingRequestId" asp-route-productId="@request.ProductId" style="color: blue;">Report</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No checking requests available.</p>
+}
+@if (roleId == 1)
+{
+    <a asp-page="/StaffPage" class="btn btn-primary">Go to Staff Page</a>
+}
+else if (roleId == 3)
+{
+    <a asp-page="/AdminPage" class="btn btn-primary">Go to Admin Page</a>
 }

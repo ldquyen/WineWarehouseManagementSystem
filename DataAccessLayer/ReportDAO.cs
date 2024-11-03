@@ -10,19 +10,36 @@ namespace DataAccessLayer
 {
     public class ReportDAO : SingletonBase<ReportDAO>
     {
-        public async Task AddChecking(CheckingRequest checking)
+        public async Task AddReportAsync(Report report)
         {
-            await _context.CheckingRequests.AddAsync(checking);
+            await _context.Set<Report>().AddAsync(report);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateChecking(CheckingRequest checking)
+
+        public async Task UpdateReportAsync(Report report)
         {
-            _context.CheckingRequests.Update(checking);
+            _context.Set<Report>().Update(report);
             await _context.SaveChangesAsync();
         }
-        public async Task<List<CheckingRequest>> GetAllCheckingRequest()
+
+        public async Task DeleteReportAsync(int reportId)
         {
-            return await _context.CheckingRequests.ToListAsync();
+            var report = await _context.Set<Report>().FindAsync(reportId);
+            if (report != null)
+            {
+                _context.Set<Report>().Remove(report);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<Report>> GetAllReportsAsync()
+        {
+            return await _context.Set<Report>().ToListAsync();
+        }
+
+        public async Task<Report> GetReportByIdAsync(int reportId)
+        {
+            return await _context.Set<Report>().FindAsync(reportId);
         }
     }
 }

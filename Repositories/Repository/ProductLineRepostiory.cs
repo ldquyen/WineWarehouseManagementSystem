@@ -27,5 +27,9 @@ namespace Repositories.Repository
         {
             return await _productLineDAO.GetProductLineListByProductId(productId);
         }
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
+        {
+            return await _productLineDAO.GetProductLineListByProductId(productId);
+        }
     }
 }

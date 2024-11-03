@@ -16,6 +16,7 @@ builder.Services.AddScoped<IImportDetailRepository, ImportDetailRepository>();
 builder.Services.AddScoped<IProductLineRepostiory, ProductLineRepostiory>();
 builder.Services.AddScoped<IExportRepository, ExportRepository>();
 builder.Services.AddScoped<ICheckingRequestRepository, CheckingRequestRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
 //Session
 builder.Services.AddSession();
 

@@ -1,7 +1,6 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ReportPages.CreateModel
 @{
-
     int? accountId = HttpContext.Session.GetInt32("accountId");
     int? roleId = HttpContext.Session.GetInt32("roleId");
     if (accountId == null || roleId != 1)
@@ -9,4 +8,45 @@
         TempData["ErrorMessage"] = "This function is for staff only";
         Response.Redirect("/Error");
     }
+    ViewData["Title"] = "Create Report";
+}
+
+<h2>Create New Report</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Report.ProductLineId"></label>
+        <select asp-for="Report.ProductLineId" asp-items="Model.ProductLineList" class="form-control"></select>
+        
+    </div>
+    <div class="form-group">
+        <label asp-for="Report.StockQuantity"></label>
+        <input asp-for="Report.StockQuantity" class="form-control" />
+        <span asp-validation-for="Report.StockQuantity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Report.CheckedQuantity"></label>
+        <input asp-for="Report.CheckedQuantity" class="form-control" />
+        <span asp-validation-for="Report.CheckedQuantity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Report.CheckedDate"></label>
+        <input asp-for="Report.CheckedDate" class="form-control" readonly value="@Model.Report.CheckedDate" />
+        <span asp-validation-for="Report.CheckedDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Report.Reason"></label>
+        <input asp-for="Report.Reason" class="form-control" />
+        <span asp-validation-for="Report.Reason" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Report.AccountId"></label>
+        <input asp-for="Report.AccountId" class="form-control" readonly />
+        <span asp-validation-for="Report.AccountId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
