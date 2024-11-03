@@ -35,7 +35,8 @@ namespace WineWarehouseManagementSystem.Pages.AccountPages
             account.AccountRole = 1;
             await _accountRepository.CreateAccount(account);
             TempData["Message"] = "Create Staff account successful";
-            return Page();
+            return RedirectToPage("/AccountPages/ViewAllStaff");
+
         }
     }
 }

@@ -43,10 +43,7 @@ namespace WineWarehouseManagementSystem.Pages.ExportPages
             }
             await _export.CreateExportAsync(Export);
             int newExportId = Export.ExportId;
-            return RedirectToPage("/ProductPages/ExportProductLine", new
-            {
-                ExportId = newExportId,
-            });
+            return RedirectToPage("/ExportPages/View");
 
         }
 
