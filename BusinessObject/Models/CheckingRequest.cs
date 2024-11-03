@@ -15,7 +15,11 @@ public partial class CheckingRequest
 
     public string? Reason { get; set; }
 
+    public bool? CheckingStatus { get; set; }
+
     public virtual Account? Account { get; set; }
 
     public virtual Product? Product { get; set; }
+
+    public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
 }
