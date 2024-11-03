@@ -18,6 +18,7 @@ builder.Services.AddScoped<IExportRepository, ExportRepository>();
 builder.Services.AddScoped<IExportDetailRepository, ExportDetailRepository>();
 builder.Services.AddScoped<ICheckingRequestRepository, CheckingRequestRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<IBrewingRoomRepository, BrewingRoomRepository>();
 //Session
 builder.Services.AddSession();
 

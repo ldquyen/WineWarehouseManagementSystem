@@ -14,5 +14,11 @@ namespace Repositories.Interface
         Task<bool> ReduceShelfQuantity(int? shelfId, int? quantity);
         Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId);
         Task<Shelf> GetShelfByShelfId(int? shelfId);
+        public Task<List<Shelf>> GetShelfsByShelfName(string shelfName);
+        public Task<Shelf> GetShelfByShelfName(string shelfName);
+        public Task<List<Shelf>> GetShelfsOfBrewingRoomByRoomId(int? brewingRoomId);
+        public Task UpdateShelf(Shelf shelf);
+        public Task AddShelf(Shelf shelf);
+
     }
 }

@@ -1,12 +1,12 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.AccountPages.ViewAllStaffModel
 @{
-    Layout = "_AdminLayout";
+    Layout = "_ManagerLayout";
     int? accountId = HttpContext.Session.GetInt32("accountId");
     int? roleId = HttpContext.Session.GetInt32("roleId");
-    if (accountId == null || roleId != 3)
+    if (accountId == null || roleId != 2)
     {
-        TempData["ErrorMessage"] = "This function is for admin only";
+        TempData["ErrorMessage"] = "This function is for manager only";
         Response.Redirect("/Error");
     }
 }

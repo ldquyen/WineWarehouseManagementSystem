@@ -1,10 +1,10 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.AccountPages.UpdateStaffModel
 @{
-    Layout = "_AdminLayout";
+    Layout = "_ManagerLayout";
     int? accountId = HttpContext.Session.GetInt32("accountId");
     int? roleId = HttpContext.Session.GetInt32("roleId");
-    if (accountId == null || roleId != 3)
+    if (accountId == null || roleId != 2)
     {
         TempData["ErrorMessage"] = "This function is for admin only";
         Response.Redirect("/Error");
@@ -20,10 +20,11 @@
     <input asp-for="account.AccountId" type="hidden" />
 
     <label asp-for="account.AccountName" style="font-weight: bold; margin-bottom: 5px;"></label>
-    <input asp-for="account.AccountName" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+    <input asp-for="account.AccountName" readonly style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
 
     <label asp-for="account.Username" style="font-weight: bold; margin-bottom: 5px;"></label>
-    <input asp-for="account.Username" readonly style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+    <input asp-for="account.Username" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+           title="Password must be at least 8 characters long and contain both letters and digits." style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
 
     <label asp-for="account.UserPassword" style="font-weight: bold; margin-bottom: 5px;"></label>
     <input asp-for="account.UserPassword" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />

@@ -31,7 +31,6 @@ namespace WineWarehouseManagementSystem.Pages.AccountPages
                 TempData["Message"] = "Duplicate username";
                 return Page();
             }
-
             account.AccountRole = 1;
             await _accountRepository.CreateAccount(account);
             TempData["Message"] = "Create Staff account successful";

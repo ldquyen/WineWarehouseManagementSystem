@@ -1,5 +1,5 @@
 ﻿@page
-@model WineWarehouseManagementSystem.Pages.RoomPages.UpdateShelfModel
+@model WineWarehouseManagementSystem.Pages.RoomPages.UpdateBrewingRoomModel
 @{
     Layout = "_ManagerLayout";
     int? accountId = HttpContext.Session.GetInt32("accountId");
@@ -10,47 +10,53 @@
         Response.Redirect("/Error");
     }
 }
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; color: #4CAF50;">@TempData["Message"]</h2>
+}
 
 <h1 style="text-align: center; font-size: 24px; color: #333;">
-    Update shelf
+    Update BrewingRoom
 </h1>
 
 <form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="shelf.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf ID</label>
-        <input asp-for="shelf.ShelfId" value="@Model.shelf.ShelfId" readonly
+        <label asp-for="BrewingRoom.BrewingRoomId" style="margin-bottom: 5px; font-weight: bold;">Brewing Room ID</label>
+        <input asp-for="BrewingRoom.BrewingRoomId" value="@Model.BrewingRoom.BrewingRoomId" readonly
                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #e9ecef;" />
     </div>
+
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="shelf.ShelfName" style="margin-bottom: 5px; font-weight: bold;">Shelf Name</label>
-        <input asp-for="shelf.ShelfName" value="@Model.shelf.ShelfName" readonly
-               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #e9ecef;" />
-    </div>
-    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="shelf.BrewingRoomId" style="margin-bottom: 5px; font-weight: bold;">Brewing Room Id</label>
-        <input asp-for="shelf.BrewingRoomId" value="@Model.shelf.BrewingRoomId" readonly
+        <label asp-for="BrewingRoom.RoomName" style="margin-bottom: 5px; font-weight: bold;">Brewing Room Name</label>
+        <input asp-for="BrewingRoom.RoomName" value="@Model.BrewingRoom.RoomName" readonly
                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="shelf.MaxQuantity" style="margin-bottom: 5px; font-weight: bold;">Max Quantity</label>
-        <input asp-for="shelf.MaxQuantity" value="@Model.shelf.MaxQuantity" required
+        <label asp-for="BrewingRoom.Temperature" style="margin-bottom: 5px; font-weight: bold;">Temperature</label>
+        <input asp-for="BrewingRoom.Temperature" value="@Model.BrewingRoom.Temperature" required
                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-        <label asp-for="shelf.UseQuantity" style="margin-bottom: 5px; font-weight: bold;">Use Quantity</label>
-        <input asp-for="shelf.UseQuantity" value="@Model.shelf.UseQuantity" readonly
+        <label asp-for="BrewingRoom.Humidity" style="margin-bottom: 5px; font-weight: bold;">Humidity</label>
+        <input asp-for="BrewingRoom.Humidity" value="@Model.BrewingRoom.Humidity" required
+               style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+    <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
+        <label asp-for="BrewingRoom.Note" style="margin-bottom: 5px; font-weight: bold;">Note</label>
+        <input asp-for="BrewingRoom.Note" value="@Model.BrewingRoom.Note" required
                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
     <div style="text-align: center;">
         <button type="submit"
                 style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
-            Update shelf
+            Update BrewingRoom
         </button>
     </div>
 </form>
-<form method="get" asp-page="/RoomPages/Viewshelf" style="margin: 0;">
+<form method="get" asp-page="/RoomPages/ViewBrewingRoom" style="margin: 0;">
     <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
         Return Brewing Room Page
     </button>
 </form>
+

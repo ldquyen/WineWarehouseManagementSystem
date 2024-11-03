@@ -21,7 +21,7 @@ namespace Repositories.Repository
         {
             return await _shelfDAO.GetShelfList();
         }
-
+        public async Task AddShelf(Shelf shelf) => await _shelfDAO.AddShelf(shelf);
         public async Task<bool> AddShelfQuantity(int? shelfid, int? quantity)
         {
             return await _shelfDAO.AddShelfQuantity(shelfid, quantity);
@@ -30,5 +30,9 @@ namespace Repositories.Repository
         public async Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId) => await _shelfDAO.GetShelfsOfProductLineByProductId(productId);
 
         public async Task<Shelf> GetShelfByShelfId(int? shelfId) => await _shelfDAO.GetShelfByShelfId(shelfId);
+        public async Task<List<Shelf>> GetShelfsOfBrewingRoomByRoomId(int? brewingRoomId) => await _shelfDAO.GetShelfsOfBrewingRoomByRoomId(brewingRoomId);
+        public async Task<List<Shelf>> GetShelfsByShelfName(string shelfName) => await _shelfDAO.GetShelfsByShelfName(shelfName);
+        public async Task<Shelf> GetShelfByShelfName(string shelfName) => await _shelfDAO.GetShelfByShelfName(shelfName);
+        public async Task UpdateShelf(Shelf shelf) => await _shelfDAO.UpdateShelf(shelf);
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model WineWarehouseManagementSystem.Pages.RoomPages.ViewShelfModel
+@model WineWarehouseManagementSystem.Pages.RoomPages.ViewShelfOfBrewingRoomModel
 @{
     Layout = "_ManagerLayout";
     int? accountId = HttpContext.Session.GetInt32("accountId");
@@ -10,38 +10,30 @@
         Response.Redirect("/Error");
     }
 }
-<div style="max-width: 500px; margin: 20px auto;">
-    <form method="get" asp-page="" asp-page-handler="SearchByShelfName" style="display: flex; gap: 10px;">
-        <input type="text" name="name" placeholder="Please enter the name of shelf to search"
-               style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
-        <button type="submit" class="btnSearch"
-                style="padding: 8px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
-            Search
-        </button>
-        <a class="btnCreateExport" href="/RoomPages/CreateShelf"
-           style="padding: 8px 15px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
-            Create New Shelf
-        </a>
-    </form>
-</div>
+<h2 style="text-align: center; font-size: 24px; color: #333;">View Export Detail</h2>
 
-@if (Model.ShelfList != null && Model.ShelfList.Any())
+@if (Model.shelfList == null || !Model.shelfList.Any())
 {
-    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
+    <p style="text-align: center; font-size: 18px; color: #888;">No Export details available.</p>
+}
+else
+{
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;">
         <thead>
-            <tr style="background-color: #f2f2f2;">
+            <tr style="background-color: #4CAF50; color: white;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Shelf Id</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Brewing Room Id</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Shelf Name</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Max Quantity</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Use Quantity</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Operations</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var shelf in Model.ShelfList)
+            @foreach (var shelf in Model.shelfList)
             {
-                <tr style="border-bottom: 1px solid #ddd;">
+                <tr style="text-align: center;">
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.ShelfId</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.ShelfName</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.BrewingRoomId</td>
@@ -60,9 +52,11 @@
         </tbody>
     </table>
 }
-else
-{
-    <p style="text-align: center; color: gray;">No Export available.</p>
-}
 
+<form method="get" asp-page="/RoomPages/ViewShelf" style="text-align: center; margin-top: 20px;">
+    <button type="submit"
+            style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        View All Shelfs
+    </button>
+</form>
 
