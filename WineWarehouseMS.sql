@@ -127,9 +127,10 @@ CREATE TABLE Report (
 
 
 INSERT INTO Account ( AccountName, Username, UserPassword, AccountRole)
-VALUES  ('staff name', 'staff', 'wwms1234', 1),
-		('manager name', 'manager', 'wwms1234', 2),
-		('admin name', 'admin', 'wwms1234', 3);
+VALUES  ('Staff 1', 'staff1', 'wwms1234', 1),
+		('Staff 2', 'staff2', 'wwms1234', 1)
+		('Manager', 'manager', 'wwms1234', 2),
+		('Admin', 'admin', 'wwms1234', 3);
 
 INSERT INTO Category ( CategoryName)
 VALUES ('Red Wine'),
