@@ -54,5 +54,10 @@ namespace Repositories.Repository
         {
             return await _reportDAO.GetReportListByCheckingId(checkingId);
         }
+
+        public async Task<List<Report>> GetReportListToUpdateForAdmin()
+        {
+            return await _reportDAO.GetReportListToUpdateForAdmin();
+        }
     }
 }

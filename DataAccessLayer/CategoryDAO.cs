@@ -23,7 +23,7 @@ namespace DataAccessLayer
 
         public async Task<List<Category>> GetCategoryByName(string name)
         {
-            return await _context.Categories.Where(x => x.CategoryName.Contains(name)).ToListAsync();
+            return await _context.Categories.Where(x => x.CategoryName.Contains(name)).AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> CheckCategoryName(string categoryName)

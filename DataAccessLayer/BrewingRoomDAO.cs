@@ -43,12 +43,12 @@ namespace DataAccessLayer
         }
         public async Task<List<BrewingRoom>> GetAllRoomAsync()
         {
-            return await _context.BrewingRooms.ToListAsync();
+            return await _context.BrewingRooms.AsNoTracking().ToListAsync();
         }
 
         public async Task<List<BrewingRoom>> GetBrewingsByRoomNameAsync(string roomName)
         {
-            return await _context.BrewingRooms.Where(x => x.RoomName.Contains(roomName)).ToListAsync();
+            return await _context.BrewingRooms.Where(x => x.RoomName.Contains(roomName)).AsNoTracking().ToListAsync();
         }
         public async Task<BrewingRoom> GetBrewingByRoomNameAsync(string roomName)
         {

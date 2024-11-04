@@ -23,5 +23,6 @@ namespace Repositories.Interface
         Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
         Task<bool> CheckValidForChecking(int? productId);
         Task<List<ProductLine>> GetProductLineListForReportByProductId(int? productId);
+        Task<ProductLine> GetProductLineByProductLineId(int productLineId);
     }
 }

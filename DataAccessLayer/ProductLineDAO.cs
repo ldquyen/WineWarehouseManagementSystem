@@ -55,19 +55,19 @@ namespace DataAccessLayer
         }
         public async Task<List<ProductLine>> GetProductLineListByProductId(int productId)
         {
-            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).AsNoTracking().ToListAsync();
         }
         public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
         {
-            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).AsNoTracking().ToListAsync();
         }
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId)
         {
-            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.ProductYear).ToListAsync();
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).AsNoTracking().Select(pl => pl.ProductYear).ToListAsync();
         }
         public async Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear)
         {
-            return await _context.ProductLines.Where(x => x.ProductId == productId && x.ProductYear == productYear).ToListAsync();
+            return await _context.ProductLines.Where(x => x.ProductId == productId && x.ProductYear == productYear).AsNoTracking().ToListAsync();
         }
         public async Task<int> CountQuantityForExport(int? productId, int? productYear)
         {
@@ -81,7 +81,7 @@ namespace DataAccessLayer
         }
         public async Task<bool> CheckValidForChecking(int? productId)
         {
-            var list = await _context.ProductLines.Where(pl => pl.ProductId == productId).ToListAsync();
+            var list = await _context.ProductLines.Where(pl => pl.ProductId == productId).AsNoTracking().ToListAsync();
             if (list == null || !list.Any()) return false;
             else
             {
@@ -93,9 +93,13 @@ namespace DataAccessLayer
 
         public async Task<List<ProductLine>> GetProductLineListForReportByProductId(int? productId)
         {
-            return await _context.ProductLines.Where(x => x.ProductId == productId && x.Quantity != 0).ToListAsync();
+            return await _context.ProductLines.Where(x => x.ProductId == productId && x.Quantity != 0).AsNoTracking().ToListAsync();
         }
 
+        public async Task<ProductLine> GetProductLineByProductLineId(int productLineId)
+        {
+            return await _context.ProductLines.FirstOrDefaultAsync(x => x.ProductLineId == productLineId);
+        }
 
     }
 }

@@ -18,7 +18,7 @@ namespace DataAccessLayer
 
         public async Task<List<Shelf>> GetShelfList()
         {
-            return await _context.Shelves.ToListAsync();
+            return await _context.Shelves.AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> AddShelfQuantity(int? shelfid ,int? quantity)
@@ -54,7 +54,7 @@ namespace DataAccessLayer
         }
         public async Task<List<Shelf>> GetShelfsByShelfName(string shelfName)
         {
-            return await _context.Shelves.Where(x => x.ShelfName.Contains(shelfName)).ToListAsync();
+            return await _context.Shelves.Where(x => x.ShelfName.Contains(shelfName)).AsNoTracking().ToListAsync();
         }
         public async Task<Shelf> GetShelfByShelfName(string shelfName)
         {
@@ -62,12 +62,12 @@ namespace DataAccessLayer
         }
         public async Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId)
         {
-            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.Shelf).ToListAsync();
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.Shelf).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<Shelf>> GetShelfsOfBrewingRoomByRoomId(int? brewingRoomId)
         {
-            return await _context.Shelves.Where(s => s.BrewingRoomId == brewingRoomId).ToListAsync();
+            return await _context.Shelves.Where(s => s.BrewingRoomId == brewingRoomId).AsNoTracking().ToListAsync();
         }
 
         //public async Task UpdateShelf(Shelf shelf)

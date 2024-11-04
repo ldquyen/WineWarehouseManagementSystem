@@ -29,11 +29,11 @@ namespace DataAccessLayer
 
         public async Task<List<Account>> GetManagerList()
         {
-            return await _context.Accounts.Where(x => x.AccountRole == 2).ToListAsync();
+            return await _context.Accounts.Where(x => x.AccountRole == 2).AsNoTracking().ToListAsync();
         }
         public async Task<List<Account>> GetStaffList()
         {
-            return await _context.Accounts.Where(x => x.AccountRole == 1).ToListAsync();
+            return await _context.Accounts.Where(x => x.AccountRole == 1).AsNoTracking().ToListAsync();
         }
 
         public async Task CreateAccount(Account account)

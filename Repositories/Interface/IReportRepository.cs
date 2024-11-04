@@ -19,5 +19,6 @@ namespace Repositories.Interface
         Task<Report> GetReportByReportId(int reportId);
         Task<List<Report>> GetReportListById(int reportId);
         Task<List<Report>> GetReportListByCheckingId(int checkingId);
+        Task<List<Report>> GetReportListToUpdateForAdmin();
     }
 }
