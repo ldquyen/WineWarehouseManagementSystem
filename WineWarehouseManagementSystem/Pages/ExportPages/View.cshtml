@@ -21,7 +21,7 @@
             Search
         </button>
         <a class="btnCreateExport" href="/ExportPages/Create"
-           style="padding: 8px 15px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
+           style="padding: 8px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
             Create New Export
         </a>
     </form>
@@ -38,31 +38,30 @@
 
 @if (Model.ExportList != null && Model.ExportList.Any())
 {
-    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
+    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
         <thead>
             <tr style="background-color: #f2f2f2;">
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Export ID</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Export Date</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Account Name</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Note</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">View</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Export ID</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Export Date</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Account Name</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Note</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var export in Model.ExportList)
             {
                 <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="border: 1px solid black; padding: 10px;">@export.ExportId</td>
-                    <td style="border: 1px solid black; padding: 10px;">@export.ExportDate</td>
-                    <td style="border: 1px solid black; padding: 10px;">@export.AccountId</td>
-                    <td style="border: 1px solid black; padding: 10px;">@export.Note</td>
-                    <td style="border: 1px solid black; padding: 10px; text-align: center;">
+                    <td style="padding: 10px;">@export.ExportId</td>
+                    <td style="padding: 10px;">@export.ExportDate?.ToString("yyyy-MM-dd")</td>
+                    <td style="padding: 10px;">@export.Account?.AccountName</td>
+                    <td style="padding: 10px;">@export.Note</td>
+                    <td style="padding: 10px; text-align: center;">
                         <form asp-page="/ExportPages/ViewExportDetail" method="get">
                             <input type="hidden" name="id" value="@export.ExportId">
-                            <button type="submit" style="padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <button type="submit" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
                                 Detail
                             </button>
-                            <!--<a class="btnViewDetail" href="/ExportPages/ViewExportDetail">Detail</a>-->
                         </form>
                     </td>
                 </tr>

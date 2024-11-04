@@ -10,6 +10,11 @@
         Response.Redirect("/Error");
     }
 }
+
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; color: #4CAF50;">@TempData["Message"]</h2>
+}
 <form method="post" style="max-width: 500px; margin: 20px auto; font-family: Arial, sans-serif;">
     <div style="margin-bottom: 15px;">
         <label asp-for="Shelf.ShelfName" style="display: block; margin-bottom: 5px; font-weight: bold;">Shelf Name</label>

@@ -23,7 +23,7 @@
     <input asp-for="account.AccountName" readonly style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
 
     <label asp-for="account.Username" style="font-weight: bold; margin-bottom: 5px;"></label>
-    <input asp-for="account.Username" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+    <input asp-for="account.Username" readonly pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
            title="Password must be at least 8 characters long and contain both letters and digits." style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
 
     <label asp-for="account.UserPassword" style="font-weight: bold; margin-bottom: 5px;"></label>

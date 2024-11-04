@@ -9,48 +9,46 @@
         TempData["ErrorMessage"] = "This function is for admin only";
         Response.Redirect("/Error");
     }
-    ViewData["Title"] = "View Reports";
-}
-<h2>View Reports</h2>
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
 }
 
-@if (Model.Reports != null && Model.Reports.Count > 0)
+<h2 style="text-align: center; font-family: Arial, sans-serif; color: #333;">Report List</h2>
+
+@if (Model.reports == null || !Model.reports.Any())
 {
-    <table class="table table-bordered">
+    <h2 style="text-align: center; font-family: Arial, sans-serif; color: #666;">There is no valid report</h2>
+}
+else
+{
+    <table style="width: 90%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #ddd;">
         <thead>
-            <tr>
-                <th>Report ID</th>
-                <th>Product Line ID</th>
-                <th>Stock Quantity</th>
-                <th>Checked Quantity</th>
-                <th>Checked Date</th>
-                <th>Reason</th>
-                <th>Account ID</th>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Line ID</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Checking ID</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Stock Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Checked Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Check Date</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Note</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Staff Name</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var report in Model.Reports)
+            @foreach (var rp in Model.reports)
             {
                 <tr>
-                    <td>@report.ReportId</td>
-                    <td>@report.ProductLineId</td>
-                    <td>@report.StockQuantity</td>
-                    <td>@report.CheckedQuantity</td>
-                    <td>@report.CheckedDate?.ToString("yyyy-MM-dd")</td>
-                    <td>@report.Reason</td>
-                    <td>@report.AccountId</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.ProductLineId</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.CheckingRequestId</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.StockQuantity</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.CheckedQuantity</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.CheckedDate?.ToString("yyyy-MM-dd")</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@rp.Reason</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@rp.Account?.AccountName</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.ReportStatus</td>
                 </tr>
             }
         </tbody>
     </table>
 }
-else
-{
-    <p>No reports available.</p>
-}
+<form asp-page="/CheckingPages/View" method="get">
+    <button type="submit">View all checking</button>
+</form>

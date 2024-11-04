@@ -31,6 +31,11 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
                 TempData["Message"] = "Duplicate Room Name";
                 return Page();
             }
+            if(BrewingRoom.Temperature <= 0 || BrewingRoom.Humidity <= 0)
+            {
+                TempData["Message"] = "Invalid number";
+                return Page();
+            }
 
             if (!ModelState.IsValid)
             {

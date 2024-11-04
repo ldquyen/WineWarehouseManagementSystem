@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\**" />
+    <Compile Remove="Models\**" />
+    <Compile Remove="Pages\NewFolder\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="Models\**" />
+    <Content Remove="Pages\NewFolder\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Pages\NewFolder\**" />
+    <None Remove="Data\**" />
+    <None Remove="Models\**" />
+    <None Remove="Pages\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
   </ItemGroup>
 
@@ -17,9 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Pages\NewFolder\" />
     <Folder Include="Pages\Shared\Components\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\Images\" />

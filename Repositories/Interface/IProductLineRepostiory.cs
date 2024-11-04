@@ -20,12 +20,8 @@ namespace Repositories.Interface
         Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear);
         Task<int> CountQuantityForExport(int? productId, int? productYear);
         Task<bool> UpdateAsync(ProductLine productLine);
-        //Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
-
-        Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear);
-        Task<int> CountQuantityForExport(int? productId, int? productYear);
-        Task<bool> UpdateAsync(ProductLine productLine);
         Task<List<ProductLine>> GetProductLineListByProductId(int? productId);
         Task<bool> CheckValidForChecking(int? productId);
+        Task<List<ProductLine>> GetProductLineListForReportByProductId(int? productId);
     }
 }

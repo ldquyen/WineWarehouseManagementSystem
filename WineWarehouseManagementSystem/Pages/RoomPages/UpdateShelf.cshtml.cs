@@ -34,9 +34,17 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
 
         public async Task OnPost()
         {
-            await _repository.UpdateShelf(shelf);
-            TempData["Message"] = "Update Shelf Successful";
-            await LoadData(shelf.ShelfId);
+            if(shelf.MaxQuantity <= 0 || shelf.MaxQuantity < shelf.UseQuantity)
+            {
+                TempData["Message"] = "Update Shelf fail because quantity is invalid";
+                await LoadData(shelf.ShelfId);
+            }
+            else
+            {
+                await _repository.UpdateShelf(shelf);
+                TempData["Message"] = "Update Shelf Successful";
+                await LoadData(shelf.ShelfId);
+            }
         }
     }
 }

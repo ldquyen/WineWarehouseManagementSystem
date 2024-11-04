@@ -37,7 +37,26 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
 
         public async Task<IActionResult> OnPost()
         {
-            if(await _shelfRepository.AddShelfQuantity(productLine.ShelfId, productLine.Quantity))
+            if(productLine.ProductYear < 0 || productLine.ProductYear > DateTime.Now.Year)
+            {
+                TempData["Message"] = "Create import fail because year is invalid";
+                await LoadData();
+                return Page();
+            }
+            if (productLine.ProductAlcohol <= 0 || productLine.Price <= 0 || productLine.Capacity <= 0 || productLine.Quantity <= 0)
+            {
+                TempData["Message"] = "Create import fail because invalid number";
+                await LoadData();
+                return Page();
+            }
+            if (!decimal.TryParse(productLine.Price.ToString(), out decimal priceValue) || priceValue < 0)
+            {
+                TempData["Message"] = "Create import fail because price must be a valid number";
+                await LoadData();
+                return Page();
+            }
+
+            if (await _shelfRepository.AddShelfQuantity(productLine.ShelfId, productLine.Quantity))
             {
                 await _productLineRepostiory.CreateProductLine(productLine);
                 ImportDetail importDetail = new ImportDetail()

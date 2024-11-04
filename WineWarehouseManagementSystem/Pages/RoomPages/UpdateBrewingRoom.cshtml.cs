@@ -34,8 +34,12 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
 
         public async Task OnPost()
         {
+            if (BrewingRoom.Temperature <= 0 || BrewingRoom.Humidity <= 0)
+            {
+                TempData["Message"] = "Invalid number";
+                await LoadData(BrewingRoom.BrewingRoomId);
+            }
             await _roomRepository.UpdateBrewingRoomAsync(BrewingRoom);
-            TempData["Message"] = "Update Brewing Room Successful";
             TempData["Message"] = "Update Brewing Room Successful";
             await LoadData(BrewingRoom.BrewingRoomId);
         }

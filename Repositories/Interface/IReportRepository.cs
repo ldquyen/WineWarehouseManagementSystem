@@ -9,10 +9,15 @@ namespace Repositories.Interface
 {
     public interface IReportRepository
     {
-        Task AddReport(Report report);
+        
         Task UpdateReport(Report report);
-        Task DeleteReport(int reportId);
-        Task<List<Report>> GetAllReports();
-        Task<Report> GetReportById(int reportId);
+
+        Task<bool> AddReports(List<Report> reportList);
+        Task<List<Report>> GetReportNotComplete(int checkingReqId);
+        Task<List<Report>> GetReportNotCompleteByAccountID(int? accountId);
+
+        Task<Report> GetReportByReportId(int reportId);
+        Task<List<Report>> GetReportListById(int reportId);
+        Task<List<Report>> GetReportListByCheckingId(int checkingId);
     }
 }

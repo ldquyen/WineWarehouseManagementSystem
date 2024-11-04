@@ -48,18 +48,17 @@ namespace Repositories.Repository
         {
             return await _productLineDAO.UpdateAsync(productLine);
         }
-        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
-        {
-            return await _productLineDAO.GetProductLineListByProductId(productId);
-        }
 
         public async Task<bool> CheckValidForChecking(int? productId)
         {
             return await _productLineDAO.CheckValidForChecking(productId);
         }
-        //public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
-        //{
-        //    return await _productLineDAO.GetProductLineListByProductId(productId);
-        //}
+        
+        public async Task<List<ProductLine>> GetProductLineListForReportByProductId(int? productId)
+        {
+            return await _productLineDAO.GetProductLineListForReportByProductId(productId);
+        }
+
+
     }
 }

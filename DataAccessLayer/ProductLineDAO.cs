@@ -57,10 +57,10 @@ namespace DataAccessLayer
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
         }
-        //public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
-        //{
-        //    return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
-        //}
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId)
+        {
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Include(x => x.Shelf).ToListAsync();
+        }
         public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId)
         {
             return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.ProductYear).ToListAsync();
@@ -90,6 +90,13 @@ namespace DataAccessLayer
                 return true;
             }
         }
+
+        public async Task<List<ProductLine>> GetProductLineListForReportByProductId(int? productId)
+        {
+            return await _context.ProductLines.Where(x => x.ProductId == productId && x.Quantity != 0).ToListAsync();
+        }
+
+
     }
 }
 

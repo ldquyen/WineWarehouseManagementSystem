@@ -13,5 +13,8 @@ namespace Repositories.Interface
         Task UpdateChecking(CheckingRequest checking);
         Task<List<CheckingRequest>> GetAllCheckingRequestsAsync();
         Task<List<CheckingRequest>> GetAllChecking();
+
+        Task<List<CheckingRequest>> GetCheckingForStaff();
+        Task<CheckingRequest> GetRequestByRequestId(int checkingRequestId);
     }
 }

@@ -34,5 +34,15 @@ namespace Repositories.Repository
             return await _checkingRequestDAO.GetAlls();
         }
 
+        public async Task<List<CheckingRequest>> GetCheckingForStaff()
+        {
+            return await _checkingRequestDAO.GetCheckingForStaff();
+        }
+
+        public async Task<CheckingRequest> GetRequestByRequestId(int checkingRequestId)
+        {
+            return await _checkingRequestDAO.GetRequestByRequestId(checkingRequestId);
+        }
+
     }
 }

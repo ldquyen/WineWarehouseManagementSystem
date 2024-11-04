@@ -32,13 +32,28 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         {
             if (!ModelState.IsValid)
             {
-                var categories = await _categoryRepository.GetAlls();
-                CategoryList = new SelectList(categories, "CategoryId", "CategoryName");
+                var categorie = await _categoryRepository.GetAlls();
+                CategoryList = new SelectList(categorie, "CategoryId", "CategoryName");
                 TempData["Message"] = "Create product fail";
                 return Page();
             }
-                
+            if(string.IsNullOrEmpty(Product.ProductName) || string.IsNullOrEmpty(Product.ProductDescription) || string.IsNullOrEmpty(Product.Origin))
+            {
+                var categorie = await _categoryRepository.GetAlls();
+                CategoryList = new SelectList(categorie, "CategoryId", "CategoryName");
+                TempData["Message"] = "Create product fail, please input all fields";
+                return Page();
+            }
+            if (await _productRepository.CheckProductName(Product.ProductName))
+            {
+                var categorie = await _categoryRepository.GetAlls();
+                CategoryList = new SelectList(categorie, "CategoryId", "CategoryName");
+                TempData["Message"] = "Create product fail, duplicate product name";
+                return Page();
+            }
             await _productRepository.CreateProduct(Product);
+            var categories = await _categoryRepository.GetAlls();
+            CategoryList = new SelectList(categories, "CategoryId", "CategoryName");
             TempData["Message"] = "Create product successful";
             return Page();
         }

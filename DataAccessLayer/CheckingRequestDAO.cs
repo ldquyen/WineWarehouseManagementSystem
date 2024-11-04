@@ -27,7 +27,16 @@ namespace DataAccessLayer
 
         public async Task<List<CheckingRequest>> GetAlls()
         {
-            return _context.CheckingRequests.ToList();  
+            return _context.CheckingRequests.Include(x => x.Product).OrderByDescending(x => x.CheckDateRequest).ToList();  
+        }
+
+        public async Task<List<CheckingRequest>> GetCheckingForStaff()
+        {
+            return await _context.CheckingRequests.Where(x => x.CheckingStatus == false).Include(x => x.Product).AsNoTracking().ToListAsync();
+        }
+        public async Task<CheckingRequest> GetRequestByRequestId(int checkingRequestId)
+        {
+            return await _context.CheckingRequests.Where(x => x.CheckingRequestId == checkingRequestId).FirstOrDefaultAsync();
         }
     }
 }

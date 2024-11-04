@@ -10,36 +10,55 @@ namespace DataAccessLayer
 {
     public class ReportDAO : SingletonBase<ReportDAO>
     {
-        public async Task AddReportAsync(Report report)
-        {
-            await _context.Set<Report>().AddAsync(report);
-            await _context.SaveChangesAsync();
-        }
+       
 
-        public async Task UpdateReportAsync(Report report)
-        {
-            _context.Set<Report>().Update(report);
-            await _context.SaveChangesAsync();
-        }
+        
 
-        public async Task DeleteReportAsync(int reportId)
+     
+
+        public async Task<bool> AddReports(List<Report> reportList)
         {
-            var report = await _context.Set<Report>().FindAsync(reportId);
-            if (report != null)
+            try
             {
-                _context.Set<Report>().Remove(report);
+                await _context.Reports.AddRangeAsync(reportList);
                 await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public async Task<List<Report>> GetAllReportsAsync()
+        public async Task<List<Report>> GetReportNotComplete(int checkingReqId)
         {
-            return await _context.Set<Report>().ToListAsync();
+            return await _context.Reports.Where(x => x.CheckingRequestId == checkingReqId && x.ReportStatus == false).ToListAsync();
         }
 
-        public async Task<Report> GetReportByIdAsync(int reportId)
+        public async Task<List<Report>> GetReportNotComplete(int? accountId)
         {
-            return await _context.Set<Report>().FindAsync(reportId);
+            return await _context.Reports.Where(x => x.AccountId == accountId && x.ReportStatus == false).ToListAsync();
+        }
+
+        public async Task<Report> GetReportById(int reportId)
+        {
+            return await _context.Reports.FirstOrDefaultAsync(x => x.ReportId == reportId);
+        }
+
+        public async Task UpdateReportForCheck(Report report)
+        {
+            _context.Reports.Update(report);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Report>> GetReportListById(int reportId)
+        {
+            return await _context.Reports.AsNoTracking().Where(x => x.ReportId==reportId).ToListAsync();
+        }
+
+        public async Task<List<Report>> GetReportListByCheckingId(int checkingId)
+        {
+            return await _context.Reports.Where(x => x.CheckingRequestId == checkingId).Include(x => x.Account).ToListAsync();
         }
     }
 }

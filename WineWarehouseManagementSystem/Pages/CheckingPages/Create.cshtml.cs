@@ -49,7 +49,6 @@ namespace WineWarehouseManagementSystem.Pages.CheckingPages
             if (validate)
             {
                 await _checkingRequestRepository.AddChecking(CheckingRequest);
-                TempData["Message"] = "Create checking request successful";
                 await LoadData();
                 return RedirectToPage("/CheckingPages/View");
             }

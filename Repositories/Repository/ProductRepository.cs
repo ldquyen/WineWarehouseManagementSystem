@@ -35,5 +35,10 @@ namespace Repositories.Repository
         public async Task<Product> GetProductById(int? id) => await _productDAO.GetProductById(id);
         public async Task<List<Product>> GetListOfProduct() => await _productDAO.GetListOfProduct();
 
+        public async Task<bool> CheckProductName(string productName)
+        {
+            return await _productDAO.CheckProductName(productName);
+        }
+
     }
 }

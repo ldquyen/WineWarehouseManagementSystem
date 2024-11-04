@@ -22,9 +22,11 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
         [BindProperty]
         public BrewingRoom BrewingRoom { get; set; }
         public SelectList BrewingRoomList { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            LoadData();
+             await LoadData();
+            return Page();
+            
         }
 
         public async Task<IActionResult> OnPost()
@@ -32,7 +34,14 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
             var existShelf = await _shelf.GetShelfByShelfName(Shelf.ShelfName);
             if (existShelf != null)
             {
+                await LoadData();
                 TempData["Message"] = "Duplicate Shelf Name";
+                return Page();
+            }
+            if(Shelf.MaxQuantity <= 0)
+            {
+                 await LoadData();
+                TempData["Message"] = "Max quantity is invalid";
                 return Page();
             }
 
@@ -45,6 +54,7 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
                     UseQuantity = Shelf.UseQuantity,
                     MaxQuantity = Shelf.MaxQuantity,
                 };
+                await LoadData();
                 return Page();
             }
             Shelf.UseQuantity = 0;

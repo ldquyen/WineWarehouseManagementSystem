@@ -42,10 +42,30 @@
                 color: white;
                 text-decoration: none;
             }
+
+        /* CSS cho nút Logout */
+        .logout-button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #d9534f; /* Màu đỏ cho nút logout */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            display: block; /* Để nút chiếm toàn bộ chiều rộng */
+        }
+
+            .logout-button a {
+                color: white; /* Đảm bảo chữ màu trắng */
+                text-decoration: none; /* Không có gạch chân */
+                display: block; /* Để a chiếm toàn bộ nút */
+                height: 100%; /* Để a chiếm toàn bộ chiều cao nút */
+                width: 100%; /* Để a chiếm toàn bộ chiều rộng nút */
+            }
+
     </style>
     <link rel="stylesheet" href="./css/ExportPageStyle.css">
-
-
 </head>
 <body>
 
@@ -93,7 +113,6 @@
                     <li><a href="/CategoryPages/Create">Create</a></li>
                 </ul>
             </li>
-
             <li class="menu-item">
                 <a href="#" onclick="toggleSubmenu('staff-submenu')">Staff</a>
                 <ul id="staff-submenu" class="submenu">
@@ -102,8 +121,12 @@
                 </ul>
             </li>
         </ul>
-    </div>
 
+        <!-- Nút Logout -->
+        <button class="logout-button">
+            <a href="/Logout">Logout</a>
+        </button>
+    </div>
 
     <div style="margin-left: 220px; padding: 20px;">
         @RenderBody()
@@ -115,7 +138,6 @@
             if (submenu.style.display === "block") {
                 submenu.style.display = "none";
             } else {
-
                 var submenus = document.getElementsByClassName("submenu");
                 for (var i = 0; i < submenus.length; i++) {
                     submenus[i].style.display = "none";
