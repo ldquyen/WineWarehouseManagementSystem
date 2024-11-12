@@ -1,0 +1,49 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.ReportPages.UpdateModel
+@{
+    Layout = "_StaffLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 1)
+    {
+        TempData["ErrorMessage"] = "This function is for staff only";
+        Response.Redirect("/Error");
+    }
+    ViewData["Title"] = "Create Report";
+}
+
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; font-family: Arial, sans-serif; color: #4CAF50; margin-bottom: 20px;">
+        @TempData["Message"]
+    </h2>
+}
+
+<form method="post" style="width: 60%; margin: 0 auto; font-family: Arial, sans-serif;">
+    <label asp-for="report.ReportId" style="display: block; font-weight: bold; margin-top: 15px; color: #333;"></label>
+    <input asp-for="report.ReportId" value="@Model.report.ReportId" readonly style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;" />
+
+    <label asp-for="report.ProductLineId" style="display: block; font-weight: bold; margin-top: 15px; color: #333;"></label>
+    <input asp-for="report.ProductLineId" value="@Model.report.ProductLineId" readonly style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;" />
+
+    <input asp-for="report.CheckingRequestId" value="@Model.report.CheckingRequestId" readonly type="hidden" />
+
+    <label asp-for="report.StockQuantity" style="display: block; font-weight: bold; margin-top: 15px; color: #333;"></label>
+    <input asp-for="report.StockQuantity" value="@Model.report.StockQuantity" readonly style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;" />
+
+    <label asp-for="report.CheckedQuantity" style="display: block; font-weight: bold; margin-top: 15px; color: #333;"></label>
+    <input asp-for="report.CheckedQuantity" value="@Model.report.CheckedQuantity" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;" />
+
+    <input asp-for="report.CheckedDate" value="@Model.report.CheckedDate" readonly type="hidden" />
+
+    <label asp-for="report.Reason" style="display: block; font-weight: bold; margin-top: 15px; color: #333;"></label>
+    <input asp-for="report.Reason" value="@Model.report.Reason" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;" />
+
+    <input asp-for="report.AccountId" value="@Model.report.AccountId" readonly type="hidden" />
+    <input asp-for="report.ReportStatus" value="@Model.report.ReportStatus" readonly type="hidden" />
+
+    <button type="submit" style="width: 100%; padding: 10px; margin-top: 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background-color 0.3s ease;">
+        Update check
+    </button>
+</form>
+

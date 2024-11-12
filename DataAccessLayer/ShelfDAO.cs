@@ -18,7 +18,7 @@ namespace DataAccessLayer
 
         public async Task<List<Shelf>> GetShelfList()
         {
-            return await _context.Shelves.ToListAsync();
+            return await _context.Shelves.AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> AddShelfQuantity(int? shelfid ,int? quantity)
@@ -32,6 +32,60 @@ namespace DataAccessLayer
                 await _context.SaveChangesAsync();
                 return true;
             }else return false;
+        }
+
+        public async Task<bool> ReduceShelfQuantity(int? shelfId, int? quantity)
+        {
+            var shelf = await _context.Shelves.FirstOrDefaultAsync(x => x.ShelfId == shelfId);
+
+            int? ex = shelf.UseQuantity - quantity;
+            if (quantity <= shelf.UseQuantity)
+            {
+                shelf.UseQuantity = ex;
+                _context.Shelves.Update(shelf);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else return false;
+        }
+        public async Task<Shelf> GetShelfByShelfId(int? shelfId)
+        {
+            return await _context.Shelves.FirstOrDefaultAsync(s => s.ShelfId == shelfId);
+        }
+        public async Task<List<Shelf>> GetShelfsByShelfName(string shelfName)
+        {
+            return await _context.Shelves.Where(x => x.ShelfName.Contains(shelfName)).AsNoTracking().ToListAsync();
+        }
+        public async Task<Shelf> GetShelfByShelfName(string shelfName)
+        {
+            return await _context.Shelves.FirstOrDefaultAsync(x => x.ShelfName == shelfName);
+        }
+        public async Task<List<Shelf>> GetShelfsOfProductLineByProductId(int? productId)
+        {
+            return await _context.ProductLines.Where(pl => pl.ProductId == productId).Select(pl => pl.Shelf).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<Shelf>> GetShelfsOfBrewingRoomByRoomId(int? brewingRoomId)
+        {
+            return await _context.Shelves.Where(s => s.BrewingRoomId == brewingRoomId).AsNoTracking().ToListAsync();
+        }
+
+        //public async Task UpdateShelf(Shelf shelf)
+        //{
+        //    _context.Shelves.Update(shelf);
+        //    await _context.SaveChangesAsync();
+        //}
+        public async Task UpdateShelf(Shelf shelf)
+        {
+            var existShelf = await _context.Shelves.FindAsync(shelf.ShelfId);
+            if (existShelf != null)
+            {
+                existShelf.UseQuantity = shelf.UseQuantity;
+                existShelf.MaxQuantity = shelf.MaxQuantity;
+                
+                // _context.Update(existShelf);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

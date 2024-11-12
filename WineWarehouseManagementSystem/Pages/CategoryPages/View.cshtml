@@ -2,6 +2,13 @@
 @model WineWarehouseManagementSystem.Pages.CategoryPages.ViewCategoryModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
 
 <h2>View category</h2>
@@ -31,7 +38,7 @@
                 <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryName</td>
                 <td style="border: 1px solid #ddd; padding: 10px;">
                     <form method="get" asp-page="/CategoryPages/Update" style="margin: 0;">
-                        <input type="hidden" name="cateid" value="@cate.CategoryId" />
+                        <input type="hidden" name="id" value="@cate.CategoryId" />
                         <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
                             Update
                         </button>

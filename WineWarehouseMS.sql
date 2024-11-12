@@ -103,6 +103,7 @@ CREATE TABLE CheckingRequest (
     ProductID INT,
     CheckDateRequest DATETIME,
     Reason NVARCHAR(MAX),
+	CheckingStatus Bit,
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
@@ -111,20 +112,25 @@ CREATE TABLE CheckingRequest (
 CREATE TABLE Report (
     ReportID INT PRIMARY KEY IDENTITY(1,1),
     ProductLineID INT,
+    CheckingRequestID INT,
     StockQuantity INT,
     CheckedQuantity INT,
     CheckedDate DATE,
     Reason NVARCHAR(MAX),
     AccountID INT,
+    ReportStatus BIT,
     FOREIGN KEY (ProductLineID) REFERENCES ProductLine(ProductLineID),
+    FOREIGN KEY (CheckingRequestID) REFERENCES CheckingRequest(CheckingRequestID),
     FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 );
 
 
+
 INSERT INTO Account ( AccountName, Username, UserPassword, AccountRole)
-VALUES  ('staff name', 'staff', 'wwms1234', 1),
-		('manager name', 'manager', 'wwms1234', 2),
-		('admin name', 'admin', 'wwms1234', 3);
+VALUES  ('Staff 1', 'staff1', 'wwms1234', 1),
+		('Staff 2', 'staff2', 'wwms1234', 1)
+		('Manager', 'manager', 'wwms1234', 2),
+		('Admin', 'admin', 'wwms1234', 3);
 
 INSERT INTO Category ( CategoryName)
 VALUES ('Red Wine'),

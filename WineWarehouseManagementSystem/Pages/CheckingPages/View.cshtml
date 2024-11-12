@@ -1,4 +1,63 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.CheckingPages.ViewModel
 @{
+    Layout = "_AdminLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 3)
+    {
+        TempData["ErrorMessage"] = "This function is for admin only";
+        Response.Redirect("/Error");
+    }
+   
+    ViewData["Title"] = "View Checking Requests";
 }
+<h2 style="text-align: center; font-family: Arial, sans-serif; color: #333;">View Checking Requests</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div style="color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: 10px; border-radius: 4px; margin: 20px; font-family: Arial, sans-serif;">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (Model.CheckingRequests != null && Model.CheckingRequests.Count > 0)
+{
+    <table style="width: 90%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #ddd;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Request ID</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Name</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Date Request</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Reason</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in Model.CheckingRequests)
+            {
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@request.CheckingRequestId</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@request.Product?.ProductName</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@request.CheckDateRequest?.ToString("yyyy-MM-dd")</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@request.Reason</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@request.CheckingStatus</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        <form method="get" asp-page="/ReportPages/View" style="margin: 0;">
+                            <input type="hidden" name="id" value="@request.CheckingRequestId" />
+                            <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                View report
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p style="text-align: center; font-family: Arial, sans-serif; color: #666;">No checking requests available.</p>
+}   
+

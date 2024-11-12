@@ -17,9 +17,52 @@ namespace Repositories.Repository
         {
             _productLineDAO = ProductLineDAO.instance;
         }
+
+        public async Task<ProductLine> GetProductIdByInfor(int? productId, int? year, int? shelfId) => await _productLineDAO.GetProductIdByInfor(productId, year, shelfId);
+
         public async Task CreateProductLine(ProductLine productLine)
         {
             await _productLineDAO.CreateProductLine(productLine);
         }
+        public async Task<bool> ReduceProductLine(int productLineId, int? quantity) => await _productLineDAO.ReduceProductLine(productLineId, quantity);
+        public async Task<List<int?>> GetListManufacturingYearOfProduct(int? productId) => await _productLineDAO.GetListManufacturingYearOfProduct(productId);
+
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int? productId) => await _productLineDAO.GetProductLineListByProductId(productId);
+        public async Task<List<ProductLine>> GetProductLineListByProductId(int productId)
+        {
+            return await _productLineDAO.GetProductLineListByProductId(productId);
+        }
+        //public async Task<ProductLine> GetProductLineByProductLineId(int? productLineId) => await _productLineDAO.GetProductLineByProductLineId(productLineId);
+
+
+        public async Task<List<ProductLine>> GetProductLineForExport(int? productId, int? productYear)
+        {
+            return await _productLineDAO.GetProductLineForExport(productId, productYear);
+        }
+        public async Task<int> CountQuantityForExport(int? productId, int? productYear)
+        {
+            return await _productLineDAO.CountQuantityForExport(productId, productYear);
+        }
+
+        public async Task<bool> UpdateAsync(ProductLine productLine)
+        {
+            return await _productLineDAO.UpdateAsync(productLine);
+        }
+
+        public async Task<bool> CheckValidForChecking(int? productId)
+        {
+            return await _productLineDAO.CheckValidForChecking(productId);
+        }
+        
+        public async Task<List<ProductLine>> GetProductLineListForReportByProductId(int? productId)
+        {
+            return await _productLineDAO.GetProductLineListForReportByProductId(productId);
+        }
+
+        public async Task<ProductLine> GetProductLineByProductLineId(int productLineId)
+        {
+            return await _productLineDAO.GetProductLineByProductLineId(productLineId);
+        }
+
     }
 }

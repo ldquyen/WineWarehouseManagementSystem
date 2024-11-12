@@ -2,4 +2,52 @@
 @model WineWarehouseManagementSystem.Pages.ProductPages.ViewProductLineModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
+
+@if (Model.productLines != null && Model.productLines.Any())
+{
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;">
+        <thead>
+            <tr style="background-color: #4CAF50; color: white;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Year</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Alcohol</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Capacity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Shelf Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var pl in Model.productLines)
+            {
+                <tr style="text-align: center;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">@pl.ProductYear</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@pl.ProductAlcohol</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@pl.Capacity</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@pl.Price</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@pl.Quantity</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@pl.Shelf?.ShelfName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2 style="text-align: center; color: #888;">There is no valid product line here!</h2>
+}
+
+<form method="get" asp-page="/ProductPages/View" style="text-align: center; margin-top: 20px;">
+    <button type="submit"
+            style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        Back to Product List
+    </button>
+</form>

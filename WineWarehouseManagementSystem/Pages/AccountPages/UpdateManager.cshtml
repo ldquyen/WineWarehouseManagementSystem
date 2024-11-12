@@ -1,0 +1,36 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.AccountPages.UpdateManagerModel
+@{
+    Layout = "_AdminLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 3)
+    {
+        TempData["ErrorMessage"] = "This function is for admin only";
+        Response.Redirect("/Error");
+    }
+}
+
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; color: #333;">@TempData["Message"]</h2>
+}
+
+<form method="post" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <input asp-for="account.AccountId" type="hidden" />
+
+    <label asp-for="account.AccountName" style="font-weight: bold; margin-bottom: 5px;"></label>
+    <input asp-for="account.AccountName" readonly style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+
+    <label asp-for="account.Username" style="font-weight: bold; margin-bottom: 5px;"></label>
+    <input asp-for="account.Username" readonly style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+
+    <label asp-for="account.UserPassword" style="font-weight: bold; margin-bottom: 5px;"></label>
+    <input asp-for="account.UserPassword" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+
+    <button type="submit" style="padding: 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Update manager account</button>
+</form>
+
+<form method="get" asp-page="/AccountPages/ViewAllManager" style="text-align: center; margin-top: 20px;">
+    <button type="submit" style="padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">View all managers</button>
+</form>

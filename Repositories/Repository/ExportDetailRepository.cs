@@ -13,16 +13,19 @@ namespace Repositories.Repository
     {
         private readonly ExportDetailDAO _detailDAO;
 
-        public ExportDetailRepository(ExportDetailDAO detailDAO)
+        public ExportDetailRepository()
         {
             _detailDAO = ExportDetailDAO.instance;
         }
 
-        public async Task CreateExportDetailsAsync(List<ExportDetail> exportDetails)
+        public async Task<dynamic> CreateExportDetailsAsync(ExportDetail exportDetails)
         {
-            await _detailDAO.AddExportDetail(exportDetails);
+            return await _detailDAO.AddExportDetail(exportDetails);
         }
-
+        public async Task<ExportDetail> GetExportDetailsById(int exportDetailsId)
+        {
+            return await _detailDAO.GetExportDetailsById(exportDetailsId);
+        }
         public async Task<dynamic> UpdateExportDetailsAsync(int exportDetailId) 
         {
             ExportDetail detail = await _detailDAO.GetExportDetailsById(exportDetailId);
@@ -38,5 +41,12 @@ namespace Repositories.Repository
         {
             await _detailDAO.DeleteExportDetails(exportDetailId);
         }
+
+        public async Task<List<ExportDetail>> GetExportDetailsByExportId(int exportId)
+        {
+            return await _detailDAO.GetExportDetailsByExportId(exportId);
+        }
+
+
     }
 }

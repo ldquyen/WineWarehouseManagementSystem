@@ -1,0 +1,62 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.RoomPages.ViewShelfOfBrewingRoomModel
+@{
+    Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
+}
+<h2 style="text-align: center; font-size: 24px; color: #333;">View Export Detail</h2>
+
+@if (Model.shelfList == null || !Model.shelfList.Any())
+{
+    <p style="text-align: center; font-size: 18px; color: #888;">No Export details available.</p>
+}
+else
+{
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;">
+        <thead>
+            <tr style="background-color: #4CAF50; color: white;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Shelf Id</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Brewing Room Id</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Shelf Name</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Max Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Use Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Operations</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shelf in Model.shelfList)
+            {
+                <tr style="text-align: center;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">@shelf.ShelfId</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@shelf.ShelfName</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@shelf.BrewingRoomId</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@shelf.MaxQuantity</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@shelf.UseQuantity</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <form method="get" asp-page="/RoomPages/UpdateShelf" style="margin: 0;">
+                            <input type="hidden" name="id" value="@shelf.ShelfId" />
+                            <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                Update
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<form method="get" asp-page="/RoomPages/ViewShelf" style="text-align: center; margin-top: 20px;">
+    <button type="submit"
+            style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        View All Shelfs
+    </button>
+</form>
+

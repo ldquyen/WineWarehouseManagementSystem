@@ -2,4 +2,62 @@
 @model WineWarehouseManagementSystem.Pages.RoomPages.ViewBrewingRoomModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
+}
+
+
+
+
+@if (Model.BrewingRoomList != null && Model.BrewingRoomList.Any())
+{
+    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Brewing Room ID</th>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Room Name</th>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Temperature</th>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Humidity</th>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Note</th>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var brewingRoom in Model.BrewingRoomList)
+            {
+                <tr>
+                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.BrewingRoomId</td>
+                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.RoomName</td>
+                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.Temperature</td>
+                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.Humidity</td>
+                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.Note</td>
+                    <td style="border: 1px solid black; padding: 10px; text-align: center;">
+                        <form method="get" asp-page="/RoomPages/UpdateBrewingRoom" style="margin: 0;">
+                            <input type="hidden" name="id" value="@brewingRoom.BrewingRoomId" />
+                            <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                Update
+                            </button>
+                        </form>
+                    </td>
+                    <td style="border: 1px solid black; padding: 10px; text-align: center;">
+                        <form method="get" asp-page="/RoomPages/ViewShelfOfBrewingRoom" style="margin: 0;">
+                            <input type="hidden" name="id" value="@brewingRoom.BrewingRoomId" />
+                            <button type="submit" style="padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                View Shelf
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p style="text-align: center; font-size: 18px; color: #333;">No Brewing Room available.</p>
 }

@@ -10,5 +10,13 @@ namespace Repositories.Interface
     public interface IAccountRepository
     {
         Task<Account?> Login(string username, string password);
+        Task<List<Account>> GetManagerAccount();
+        public Task<List<Account>> GetStaffList();
+        Task CreateAccount(Account account);
+        Task UpdateAccount(Account account);
+        Task<Account> GetAccountById(int accountID);
+        Task<bool> CheckName(string accountName);
+        Task<bool> CheckUsername(string username);
     }
 }
+

@@ -1,4 +1,51 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.ReportPages.ViewModel
 @{
+    Layout = "_AdminLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 3)
+    {
+        TempData["ErrorMessage"] = "This function is for admin only";
+        Response.Redirect("/Error");
+    }
+}
+
+<h2 style="text-align: center; font-family: Arial, sans-serif; color: #333;">Report List</h2>
+
+@if (Model.reports == null || !Model.reports.Any())
+{
+    <h2 style="text-align: center; font-family: Arial, sans-serif; color: #666;">There is no valid report</h2>
+}
+else
+{
+    <table style="width: 90%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #ddd;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Product Line ID</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Checking ID</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Stock Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Checked Quantity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Check Date</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Note</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Staff Name</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rp in Model.reports)
+            {
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.ProductLineId</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.CheckingRequestId</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.StockQuantity</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.CheckedQuantity</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.CheckedDate?.ToString("yyyy-MM-dd")</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@rp.Reason</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">@rp.Account?.AccountName</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">@rp.ReportStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

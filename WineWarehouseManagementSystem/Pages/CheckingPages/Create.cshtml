@@ -1,7 +1,14 @@
 ﻿@page
 @model WineWarehouseManagementSystem.Pages.CheckingPages.CreateModel
 @{
-
+    Layout = "_AdminLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 3)
+    {
+        TempData["ErrorMessage"] = "This function is for admin only";
+        Response.Redirect("/Error");
+    }
 }
 @if (TempData["Message"] != null)
 {
@@ -30,7 +37,7 @@
         <label asp-for="CheckingRequest.Reason" style="display: block; margin-bottom: 5px; font-weight: bold;"></label>
         <input asp-for="CheckingRequest.Reason" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
-
+    <input asp-for="CheckingRequest.CheckingStatus" type="hidden"  />
     <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer;">
         Create Checking Request
     </button>

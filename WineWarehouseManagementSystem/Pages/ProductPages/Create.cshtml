@@ -2,12 +2,19 @@
 @model WineWarehouseManagementSystem.Pages.ProductPages.CreateModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
 }
 <h2 style="text-align: center;">Create Product</h2>
 
-@if (TempData["CreateProduct"] != null) 
-{     
-    <h3 style="color: green; text-align: center;">@TempData["CreateProduct"]</h3> 
+@if (TempData["Message"] != null)
+{
+    <h3 style="color: green; text-align: center;">@TempData["Message"]</h3>
 }
 
 <div style="display: flex; justify-content: center;">

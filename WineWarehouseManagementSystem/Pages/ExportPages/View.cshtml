@@ -2,52 +2,76 @@
 @model WineWarehouseManagementSystem.Pages.ExportPages.ViewModel
 @{
     Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
     <link rel="stylesheet" href="/css/ExportPageStyle.css">
 }
 
-<div class="search-box">
-    <form method="get" asp-page="" asp-page-handler="SearchByExportDate">
-        <input type="text" name="exportDate" placeholder="Please enter export date to search" />
-        <button type="submit" class="btnSearch">Search</button>
-        <a class="btnCreateExport " href="/ExportPages/Create">Create New Export</a>
+<div style="max-width: 500px; margin: 20px auto;">
+    <form method="get" asp-page="" asp-page-handler="SearchByExportDate" style="display: flex; gap: 10px;">
+        <input type="date" id="exportDate" name="exportDate" placeholder="Please enter export date to search"
+               style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <button type="submit" class="btnSearch"
+                style="padding: 8px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Search
+        </button>
+        <a class="btnCreateExport" href="/ExportPages/Create"
+           style="padding: 8px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
+            Create New Export
+        </a>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const dateInput = document.getElementById('exportDate');
+        const today = new Date();
+        const formattedDate = today.toISOString().slice(0, 10).replace(/-/g, '/');
+        dateInput.value = formattedDate;
+    });
+</script>
+
 @if (Model.ExportList != null && Model.ExportList.Any())
 {
-    <table style="border: 1px solid black ">
+    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
         <thead>
-            <tr>
-                <th style="border: 1px solid black ">Export ID</th>
-                <th style="border: 1px solid black ">Export Date</th>
-                <th style="border: 1px solid black ">AccountName</th>
-                <th style="border: 1px solid black ">Note</th>
-                <th style="border: 1px solid black">Operations</th>
-        </tr>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Export ID</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Export Date</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Account Name</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Note</th>
+                <th style="padding: 10px; text-align: left; font-weight: bold;">Actions</th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var export in Model.ExportList)
             {
-                <tr>
-                    <td style="border: 1px solid black ">@export.ExportId</td>
-                    <td style="border: 1px solid black ">@export.ExportDate</td>
-                    <td style="border: 1px solid black ">@export.AccountId</td>
-                    <td style="border: 1px solid black ">@export.Note</td>
-                    <td style="border: 1px solid black ">
-                        <ul id="nav" style="list-style:none">
-                            <li>
-                                <a href="/ExportPages/Edit">Edit</a>
-                            </li>
-                            <li>
-                                <a href="/ExportPages/Delete">Delete</a>
-                            </li>
-                        </ul>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 10px;">@export.ExportId</td>
+                    <td style="padding: 10px;">@export.ExportDate?.ToString("yyyy-MM-dd")</td>
+                    <td style="padding: 10px;">@export.Account?.AccountName</td>
+                    <td style="padding: 10px;">@export.Note</td>
+                    <td style="padding: 10px; text-align: center;">
+                        <form asp-page="/ExportPages/ViewExportDetail" method="get">
+                            <input type="hidden" name="id" value="@export.ExportId">
+                            <button type="submit" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                Detail
+                            </button>
+                        </form>
                     </td>
-        </tr>
+                </tr>
             }
         </tbody>
     </table>
 }
 else
 {
-    <p>No Export available.</p>
+    <p style="text-align: center; color: gray;">No Export available.</p>
 }
+
+

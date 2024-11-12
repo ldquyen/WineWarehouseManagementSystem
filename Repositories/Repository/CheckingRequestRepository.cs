@@ -24,9 +24,24 @@ namespace Repositories.Repository
         {
             await _checkingRequestDAO.UpdateChecking(checking);
         }
-        public async Task<List<CheckingRequest>> GetAllCheckingRequest()
+        public async Task<List<CheckingRequest>> GetAllCheckingRequestsAsync()
         {
-            return await _checkingRequestDAO.GetAllCheckingRequest();
+            return await _checkingRequestDAO.GetAllCheckingRequestsAsync();
+        }
+
+        public async Task<List<CheckingRequest>> GetAllChecking()
+        {
+            return await _checkingRequestDAO.GetAlls();
+        }
+
+        public async Task<List<CheckingRequest>> GetCheckingForStaff()
+        {
+            return await _checkingRequestDAO.GetCheckingForStaff();
+        }
+
+        public async Task<CheckingRequest> GetRequestByRequestId(int checkingRequestId)
+        {
+            return await _checkingRequestDAO.GetRequestByRequestId(checkingRequestId);
         }
 
     }

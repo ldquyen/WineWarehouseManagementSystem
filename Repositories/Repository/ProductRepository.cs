@@ -12,10 +12,11 @@ namespace Repositories.Repository
     public class ProductRepository : IProductRepository
     {
         private readonly ProductDAO _productDAO;
-
+        private readonly ProductLineDAO _lineDAO;
         public ProductRepository()
         {
             _productDAO = ProductDAO.instance;
+            _lineDAO = ProductLineDAO.instance;
         }
         public async Task CreateProduct(Product product)
         {
@@ -31,5 +32,13 @@ namespace Repositories.Repository
         {
             return await _productDAO.GetProductByName(name);
         }
+        public async Task<Product> GetProductById(int? id) => await _productDAO.GetProductById(id);
+        public async Task<List<Product>> GetListOfProduct() => await _productDAO.GetListOfProduct();
+
+        public async Task<bool> CheckProductName(string productName)
+        {
+            return await _productDAO.CheckProductName(productName);
+        }
+
     }
 }

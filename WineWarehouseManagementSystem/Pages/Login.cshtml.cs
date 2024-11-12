@@ -33,6 +33,7 @@ namespace WineWarehouseManagementSystem.Pages
                 {
                     TempData["Message"] = "";
                     HttpContext.Session.SetInt32("accountId", account.AccountId);
+                    HttpContext.Session.SetInt32("roleId", (int)account.AccountRole);
                     if (account.AccountRole == 1) return RedirectToPage("/StaffPage");
                     if (account.AccountRole == 2) return RedirectToPage("/ManagerPage");
                     if (account.AccountRole == 3) return RedirectToPage("/AdminPage");

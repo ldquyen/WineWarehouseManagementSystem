@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
-using BusinessObject.Models;
-using Microsoft.Extensions.Configuration;
 
-namespace DataAccessLayer;
+namespace BusinessObject.Models;
 
 public partial class WineWarehouseMsContext : DbContext
 {
@@ -43,19 +40,14 @@ public partial class WineWarehouseMsContext : DbContext
     public virtual DbSet<Shelf> Shelves { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var builder = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", true, true);
-        IConfigurationRoot configuration = builder.Build();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("server=DESKTOP-BF8E3QB\\SQLEXPRESS;database=WineWarehouseMS;uid=sa;pwd=12345;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA58667C3BD02");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5869D3BB4FA");
 
             entity.ToTable("Account");
 
@@ -71,7 +63,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<BrewingRoom>(entity =>
         {
-            entity.HasKey(e => e.BrewingRoomId).HasName("PK__BrewingR__61F5FD42E8195AB5");
+            entity.HasKey(e => e.BrewingRoomId).HasName("PK__BrewingR__61F5FD42B6E0C3ED");
 
             entity.ToTable("BrewingRoom");
 
@@ -82,7 +74,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Category__19093A2B8409F681");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Category__19093A2B3E6D100E");
 
             entity.ToTable("Category");
 
@@ -92,7 +84,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<CheckingRequest>(entity =>
         {
-            entity.HasKey(e => e.CheckingRequestId).HasName("PK__Checking__F1BC9810ECABA137");
+            entity.HasKey(e => e.CheckingRequestId).HasName("PK__Checking__F1BC981005B46AA2");
 
             entity.ToTable("CheckingRequest");
 
@@ -112,7 +104,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<Export>(entity =>
         {
-            entity.HasKey(e => e.ExportId).HasName("PK__Export__E5C997A43AED36E5");
+            entity.HasKey(e => e.ExportId).HasName("PK__Export__E5C997A44ED68B82");
 
             entity.ToTable("Export");
 
@@ -126,7 +118,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<ExportDetail>(entity =>
         {
-            entity.HasKey(e => e.ExportDetailId).HasName("PK__ExportDe__07C90359E9D4DA32");
+            entity.HasKey(e => e.ExportDetailId).HasName("PK__ExportDe__07C90359A172FE27");
 
             entity.ToTable("ExportDetail");
 
@@ -145,7 +137,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<Import>(entity =>
         {
-            entity.HasKey(e => e.ImportId).HasName("PK__Import__8697678A21582647");
+            entity.HasKey(e => e.ImportId).HasName("PK__Import__8697678A51E1D972");
 
             entity.ToTable("Import");
 
@@ -159,7 +151,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<ImportDetail>(entity =>
         {
-            entity.HasKey(e => e.ImportDetailId).HasName("PK__ImportDe__CDFBBA5140BAC50C");
+            entity.HasKey(e => e.ImportDetailId).HasName("PK__ImportDe__CDFBBA513EC08661");
 
             entity.ToTable("ImportDetail");
 
@@ -178,7 +170,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6EDFD976499");
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6EDE9F713AD");
 
             entity.ToTable("Product");
 
@@ -196,7 +188,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<ProductLine>(entity =>
         {
-            entity.HasKey(e => e.ProductLineId).HasName("PK__ProductL__404A74091C44EC0B");
+            entity.HasKey(e => e.ProductLineId).HasName("PK__ProductL__404A740944719303");
 
             entity.ToTable("ProductLine");
 
@@ -216,17 +208,22 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
-            entity.HasKey(e => e.ReportId).HasName("PK__Report__D5BD48E545E14D98");
+            entity.HasKey(e => e.ReportId).HasName("PK__Report__D5BD48E5A004152A");
 
             entity.ToTable("Report");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
+            entity.Property(e => e.CheckingRequestId).HasColumnName("CheckingRequestID");
             entity.Property(e => e.ProductLineId).HasColumnName("ProductLineID");
 
             entity.HasOne(d => d.Account).WithMany(p => p.Reports)
                 .HasForeignKey(d => d.AccountId)
-                .HasConstraintName("FK__Report__AccountI__6B24EA82");
+                .HasConstraintName("FK__Report__AccountI__6C190EBB");
+
+            entity.HasOne(d => d.CheckingRequest).WithMany(p => p.Reports)
+                .HasForeignKey(d => d.CheckingRequestId)
+                .HasConstraintName("FK__Report__Checking__6B24EA82");
 
             entity.HasOne(d => d.ProductLine).WithMany(p => p.Reports)
                 .HasForeignKey(d => d.ProductLineId)
@@ -235,7 +232,7 @@ public partial class WineWarehouseMsContext : DbContext
 
         modelBuilder.Entity<Shelf>(entity =>
         {
-            entity.HasKey(e => e.ShelfId).HasName("PK__Shelf__DBD04F27D004C2DD");
+            entity.HasKey(e => e.ShelfId).HasName("PK__Shelf__DBD04F277D2ED9E2");
 
             entity.ToTable("Shelf");
 
