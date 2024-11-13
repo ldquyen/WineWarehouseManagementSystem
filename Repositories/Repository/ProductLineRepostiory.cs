@@ -64,5 +64,9 @@ namespace Repositories.Repository
             return await _productLineDAO.GetProductLineByProductLineId(productLineId);
         }
 
+        public async Task<bool> CheckProductLineWithProductId(int productId)
+        {
+            return await _productLineDAO.CheckProductLineWithProductId(productId);
+        }
     }
 }

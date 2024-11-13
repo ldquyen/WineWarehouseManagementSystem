@@ -44,6 +44,14 @@
                         </button>
                     </form>
                 </td>
+                <td style="border: 1px solid #ddd; padding: 10px;">
+                    <form method="get" asp-page="/CategoryPages/Delete" style="margin: 0;">
+                        <input type="hidden" name="id" value="@cate.CategoryId" />
+                        <button type="submit" style="padding: 6px 12px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            Delete
+                        </button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

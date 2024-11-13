@@ -46,5 +46,19 @@ namespace DataAccessLayer
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<bool> DeleteCategory(int categoryId)
+        {
+            var cate = await _context.Categories.FirstOrDefaultAsync(x => x.CategoryId == categoryId);
+            if (cate != null)
+            {
+                _context.Categories.Remove(cate);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+                return false;
+            
+        }
     }
 }

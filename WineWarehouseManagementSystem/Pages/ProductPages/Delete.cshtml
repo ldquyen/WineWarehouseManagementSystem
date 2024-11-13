@@ -1,0 +1,35 @@
+﻿@page
+@model WineWarehouseManagementSystem.Pages.ProductPages.DeleteModel
+@{
+    Layout = "_ManagerLayout";
+    int? accountId = HttpContext.Session.GetInt32("accountId");
+    int? roleId = HttpContext.Session.GetInt32("roleId");
+    if (accountId == null || roleId != 2)
+    {
+        TempData["ErrorMessage"] = "This function is for manager only";
+        Response.Redirect("/Error");
+    }
+}
+
+<h1 style="text-align: center; color: #D9534F; font-family: Arial, sans-serif;">Delete Product</h1>
+
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; color: #4CAF50; font-family: Arial, sans-serif;">@TempData["Message"]</h2>
+}
+
+<div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: Arial, sans-serif;">
+    <div style="margin-bottom: 15px;">
+        <p><strong>Product Name:</strong> @Model.product.ProductName</p>
+        <p><strong>Description:</strong> @Model.product.ProductDescription</p>
+        <p><strong>Origin:</strong> @Model.product.Origin</p>
+        <p><strong>Category:</strong> @Model.product.Category?.CategoryName</p>
+    </div>
+
+    <form method="post" style="text-align: center;">
+        <input type="hidden" asp-for="product.ProductId" />
+        <button type="submit" style="padding: 10px 20px; background-color: #D9534F; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 4px;">
+            Delete
+        </button>
+    </form>
+</div>

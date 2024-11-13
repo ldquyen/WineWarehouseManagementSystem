@@ -45,5 +45,24 @@ namespace DataAccessLayer
         {
             return await _context.Products.AnyAsync(x => x.ProductName == productName);
         }
+
+        public async Task<bool> CheckCategoryInProduct(int categoryId)
+        {
+            return await _context.Products.AnyAsync(x => x.CategoryId == categoryId);
+        }
+
+        public async Task<bool> DeleteProduct(int productId)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+                return false;
+            
+        }
     }
 }

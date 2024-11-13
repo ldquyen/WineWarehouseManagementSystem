@@ -45,5 +45,10 @@ namespace Repositories.Repository
         {
             await _categoryDAO.UpdateCategory(category);
         }
+
+        public async Task<bool> DeleteCategory(int categoryId)
+        {
+            return await _categoryDAO.DeleteCategory(categoryId);
+        }
     }
 }

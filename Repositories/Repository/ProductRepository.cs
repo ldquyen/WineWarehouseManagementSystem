@@ -40,5 +40,14 @@ namespace Repositories.Repository
             return await _productDAO.CheckProductName(productName);
         }
 
+        public async Task<bool> CheckCategoryInProduct(int categoryId)
+        {
+            return await _productDAO.CheckCategoryInProduct(categoryId);
+        }
+
+        public async Task<bool> DeleteProduct(int productId)
+        {
+            return await _productDAO.DeleteProduct(productId);
+        }
     }
 }
