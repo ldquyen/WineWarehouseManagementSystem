@@ -14,7 +14,8 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         private readonly IProductLineRepostiory _productLineRepostiory;
         private readonly IImportDetailRepository _importDetailRepository;
 
-        public CreateProductLineModel(IProductRepository productRepository, IShelfRepository shelfRepository, IProductLineRepostiory productLineRepostiory, IImportDetailRepository importDetailRepository)
+        public CreateProductLineModel(IProductRepository productRepository, IShelfRepository shelfRepository, 
+            IProductLineRepostiory productLineRepostiory, IImportDetailRepository importDetailRepository)
         {
             _productRepository = productRepository;
             _shelfRepository = shelfRepository;
@@ -56,19 +57,53 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
                 return Page();
             }
 
+            /*
+            1. check xem th? là n?u ch?n sheld ðó th? sl có ð? ð? thêm vào shelf ko
+            2. check xem th? n?u add ðc vào shelf th? check xem PL ð? t?n t?i ch
+            3. n?u cùng PL th? add vào PL và Shelf
+            4. n?u khác PL th? thêm m?i PL và add vào shelf
+             */
+
             if (await _shelfRepository.AddShelfQuantity(productLine.ShelfId, productLine.Quantity))
             {
-                await _productLineRepostiory.CreateProductLine(productLine);
-                ImportDetail importDetail = new ImportDetail()
+                var productLineExist = await _productLineRepostiory.GetProductIdByInfor(productLine.ProductId, productLine.ProductYear, productLine.ShelfId);
+                if(productLineExist == null)            //n?u khác PL th? thêm m?i PL và add vào shelf
                 {
-                    ImportId = ImportId,
-                    ProductLineId = productLine.ProductLineId,
-                    Quantity = productLine.Quantity,
-                };
-                await _importDetailRepository.CreateImportDetail(importDetail);
-                TempData["Message"] = "Create import successfull";
-                await LoadData();
-                return Page();
+                    await _productLineRepostiory.CreateProductLine(productLine);
+                    ImportDetail importDetail = new ImportDetail()
+                    {
+                        ImportId = ImportId,
+                        ProductLineId = productLine.ProductLineId,
+                        Quantity = productLine.Quantity,
+                    };
+                    await _importDetailRepository.CreateImportDetail(importDetail);
+                    TempData["Message"] = "Create import successfull, create new product line";
+                    await LoadData();
+                    return Page();
+                }
+                else                //n?u cùng PL th? add vào PL và Shelf
+                {
+                    var add = await _productLineRepostiory.AddQuantityToProductLine((int)productLineExist.ProductId, (int)productLine.Quantity);
+                    if (add)
+                    {
+                        ImportDetail importDetail = new ImportDetail()
+                        {
+                            ImportId = ImportId,
+                            ProductLineId = productLineExist.ProductLineId,
+                            Quantity = productLine.Quantity,
+                        };
+                        await _importDetailRepository.CreateImportDetail(importDetail);
+                        TempData["Message"] = "Create import successfull, update quantity to product line";
+                        await LoadData();
+                        return Page();
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Create import unsuccessfull";
+                        await LoadData();
+                        return Page();
+                    }
+                }
             }
             else
             {
@@ -76,7 +111,6 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
                 await LoadData();
                 return Page();
             }
-            
         }
 
         private async Task LoadData()

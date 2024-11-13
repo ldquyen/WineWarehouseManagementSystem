@@ -18,7 +18,10 @@ namespace Repositories.Repository
             _productLineDAO = ProductLineDAO.instance;
         }
 
-        public async Task<ProductLine> GetProductIdByInfor(int? productId, int? year, int? shelfId) => await _productLineDAO.GetProductIdByInfor(productId, year, shelfId);
+        public async Task<ProductLine> GetProductIdByInfor(int? productId, int? year, int? shelfId)
+        {
+            return await _productLineDAO.GetProductIdByInfor(productId, year, shelfId);
+        }
 
         public async Task CreateProductLine(ProductLine productLine)
         {
@@ -67,6 +70,11 @@ namespace Repositories.Repository
         public async Task<bool> CheckProductLineWithProductId(int productId)
         {
             return await _productLineDAO.CheckProductLineWithProductId(productId);
+        }
+
+        public async Task<bool> AddQuantityToProductLine(int productLineId, int quantity)
+        {
+            return await _productLineDAO.AddQuantityToProductLine(productLineId, quantity);
         }
     }
 }

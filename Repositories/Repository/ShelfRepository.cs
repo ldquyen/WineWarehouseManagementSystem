@@ -34,5 +34,9 @@ namespace Repositories.Repository
         public async Task<List<Shelf>> GetShelfsByShelfName(string shelfName) => await _shelfDAO.GetShelfsByShelfName(shelfName);
         public async Task<Shelf> GetShelfByShelfName(string shelfName) => await _shelfDAO.GetShelfByShelfName(shelfName);
         public async Task UpdateShelf(Shelf shelf) => await _shelfDAO.UpdateShelf(shelf);
+        public async Task<bool> CheckShelfIsAnyProduct(int shelfId)
+        {
+            return await _shelfDAO.CheckShelfIsAnyProduct(shelfId);
+        }
     }
 }

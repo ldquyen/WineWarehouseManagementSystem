@@ -105,6 +105,20 @@ namespace DataAccessLayer
         {
             return await _context.ProductLines.AnyAsync(x => x.ProductId == productId);
         }
+
+        public async Task<bool> AddQuantityToProductLine(int productLineId, int quantity)  
+        {
+            var productLine = await _context.ProductLines.FirstOrDefaultAsync(x => x.ProductLineId == productLineId);
+            if (productLine == null) return false;
+            else
+            {
+                productLine.Quantity += quantity;
+                _context.ProductLines.Update(productLine);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+        }
+
     }
 }
 

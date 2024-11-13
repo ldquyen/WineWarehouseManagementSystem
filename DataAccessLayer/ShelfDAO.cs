@@ -83,5 +83,17 @@ namespace DataAccessLayer
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<bool> CheckShelfIsAnyProduct(int shelfId)
+        {
+            var existShelf = await _context.Shelves.FindAsync(shelfId);
+            if (existShelf != null)
+            {
+                return existShelf.UseQuantity == 0;
+            }
+            else
+                return false;
+            
+        }
     }
 }

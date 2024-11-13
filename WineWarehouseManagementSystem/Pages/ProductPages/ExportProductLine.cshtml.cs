@@ -31,7 +31,8 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         [BindProperty]
         public int Quantity { get; set; }
 
-
+        [BindProperty]
+        public List<ProductLine> pls { get; set; }
 
 
         public async Task<IActionResult> OnGet()
@@ -112,66 +113,9 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
             ProductList = new SelectList(products, "ProductId", "ProductName");
         }
 
-        private async Task<IActionResult> Export()
+        private async Task LoadDataForShelf()
         {
-            var productLines = await _productLineRepostiory.GetProductLineForExport(ProductLine.ProductId, ProductLine.ProductYear); // lấy ra được danh sách 
-            if (productLines != null)
-            {
-                int productQuantity = await _productLineRepostiory.CountQuantityForExport(ProductLine.ProductId, ProductLine.ProductYear); // lấy ra được quantity tổng trong productLine
-                if (productQuantity >= Quantity)
-                {
-                    int quantityNow = Quantity;
-                    foreach (var pl in productLines)
-                    {
-                        if (quantityNow <= 0) break;
-                        if (pl.Quantity >= quantityNow)
-                        {
-                            pl.Quantity -= quantityNow;
-                            quantityNow = 0;
-                        }
-                        else
-                        {
-                            quantityNow -= pl.Quantity.Value;
-                            pl.Quantity = 0;
-                        }
-                        await _productLineRepostiory.UpdateAsync(pl);
-                    }
-                    if (quantityNow == 0)
-                        TempData["Message"] = "Export successful";
-                    else
-                        TempData["Message"] = "Some product could not be exported";
-                }
-                else
-                    TempData["Message"] = "Can not export more than quantity available";
-            }
-            else
-                TempData["Message"] = "Can not find product line available";
-            
-            return Page();
+            pls = await _productLineRepostiory.GetPLByIdYear(ProductLine.ProductId, ProductLine.ProductYear);
         }
     }
 }
-/*
- var productLine = await _productLineRepostiory.GetProductIdByInfor(ProductLine.ProductId, ProductLine.ProductYear, ProductLine.ShelfId);
-            // Remove duplicates and assign to ManufacturingYearListOfProduct
-            if (await _shelfRepository.ReduceShelfQuantity(ProductLine.ShelfId, ProductLine.Quantity))
-            {
-                await _productLineRepostiory.ReduceProductLine(productLine.ProductLineId, ProductLine.Quantity);
-                ExportDetail exportDetail = new ExportDetail
-                {
-                    ExportId = ExportId,
-                    ProductLineId = productLine.ProductLineId,
-                    Quantity = ProductLine.Quantity,
-                };
-                await _exportDetailRepository.CreateExportDetailsAsync(exportDetail);
-                TempData["Create"] = "Create export successfull";
-                await LoadData();
-                return RedirectToPage("/ProductPages/ExportPages/View");
-            }
-            else
-            {
-                TempData["Create"] = "Create export fail because quantiy is larger than available quantity";
-                await LoadData();
-                return Page();
-            }
- */

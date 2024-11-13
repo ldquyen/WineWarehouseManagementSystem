@@ -19,6 +19,7 @@ namespace Repositories.Interface
         public Task<List<Shelf>> GetShelfsOfBrewingRoomByRoomId(int? brewingRoomId);
         public Task UpdateShelf(Shelf shelf);
         public Task AddShelf(Shelf shelf);
+        Task<bool> CheckShelfIsAnyProduct(int shelfId);
 
     }
 }
