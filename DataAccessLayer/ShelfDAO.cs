@@ -67,14 +67,10 @@ namespace DataAccessLayer
 
         public async Task<List<Shelf>> GetShelfsOfBrewingRoomByRoomId(int? brewingRoomId)
         {
-            return await _context.Shelves.Where(s => s.BrewingRoomId == brewingRoomId).AsNoTracking().ToListAsync();
+            return await _context.Shelves.Where(s => s.BrewingRoomId == brewingRoomId).Include(x => x.BrewingRoom).AsNoTracking().ToListAsync();
         }
 
-        //public async Task UpdateShelf(Shelf shelf)
-        //{
-        //    _context.Shelves.Update(shelf);
-        //    await _context.SaveChangesAsync();
-        //}
+       
         public async Task UpdateShelf(Shelf shelf)
         {
             var existShelf = await _context.Shelves.FindAsync(shelf.ShelfId);

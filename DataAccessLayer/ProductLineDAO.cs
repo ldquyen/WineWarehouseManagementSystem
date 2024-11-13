@@ -101,6 +101,10 @@ namespace DataAccessLayer
             return await _context.ProductLines.FirstOrDefaultAsync(x => x.ProductLineId == productLineId);
         }
 
+        public async Task<bool> CheckProductLineWithProductId(int productId)
+        {
+            return await _context.ProductLines.AnyAsync(x => x.ProductId == productId);
+        }
     }
 }
 

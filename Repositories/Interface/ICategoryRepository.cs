@@ -15,6 +15,7 @@ namespace Repositories.Interface
         Task<List<Category>> GetCategoryByName(string name);
         Task<Category> GetCategoryById(int categoryId);
         Task<bool> CheckCategoryName(string categoryName);
-        Task UpdateCategory(Category category); 
+        Task UpdateCategory(Category category);
+        Task<bool> DeleteCategory(int categoryId);
     }
 }

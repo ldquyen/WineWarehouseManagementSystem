@@ -12,10 +12,11 @@
 }
 
 <h2 style="text-align: center; font-size: 24px; color: #333;">View Shelf of @Model.BrewingRoom.RoomName</h2>
+<h2 style="text-align: center; font-size: 24px; color: #333;">View shelves</h2>
 
 @if (Model.shelfList == null || !Model.shelfList.Any())
 {
-    <p style="text-align: center; font-size: 18px; color: #888;">No Export details available.</p>
+    <p style="text-align: center; font-size: 18px; color: #888;">No shelf available.</p>
 }
 else
 {
@@ -24,6 +25,7 @@ else
             <tr style="background-color: #4CAF50; color: white;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Shelf Id</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Brewing Room Id</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Brewing Room</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Shelf Name</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Max Quantity</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Use Quantity</th>
@@ -38,6 +40,7 @@ else
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.ShelfId</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.ShelfName</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.BrewingRoomId</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">@shelf.BrewingRoom?.RoomName</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.MaxQuantity</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">@shelf.UseQuantity</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">

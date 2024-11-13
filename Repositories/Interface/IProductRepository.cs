@@ -15,5 +15,7 @@ namespace Repositories.Interface
         public Task<Product> GetProductById(int? id);
         public Task<List<Product>> GetListOfProduct();
         Task<bool> CheckProductName(string productName);
+        Task<bool> CheckCategoryInProduct(int categoryId);
+        Task<bool> DeleteProduct(int productId);
     }
 }

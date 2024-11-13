@@ -2,6 +2,7 @@ using BusinessObject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.Interface;
+using Repositories.Repository;
 
 namespace WineWarehouseManagementSystem.Pages.RoomPages
 {
@@ -14,6 +15,11 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
         {
             _repository = repository;
             _brewingRoomRepository = brewingRoomRepository;
+        private readonly IShelfRepository _shelfRepository;
+
+        public ViewShelfOfBrewingRoomModel(IShelfRepository shelfRepository)
+        {
+            _shelfRepository = shelfRepository;
         }
 
         [BindProperty]
@@ -29,6 +35,7 @@ namespace WineWarehouseManagementSystem.Pages.RoomPages
             //exportDetails = new List<ExportDetail>();
             shelfList = await _repository.GetShelfsOfBrewingRoomByRoomId(brewingRoomId);
             BrewingRoom = await _brewingRoomRepository.GetBrewingRoomById((int)brewingRoomId);
+            shelfList = await _shelfRepository.GetShelfsOfBrewingRoomByRoomId(brewingRoomId);
             return Page();
         }
 
