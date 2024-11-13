@@ -128,7 +128,7 @@ CREATE TABLE Report (
 
 INSERT INTO Account ( AccountName, Username, UserPassword, AccountRole)
 VALUES  ('Staff 1', 'staff1', 'wwms1234', 1),
-		('Staff 2', 'staff2', 'wwms1234', 1)
+		('Staff 2', 'staff2', 'wwms1234', 1),
 		('Manager', 'manager', 'wwms1234', 2),
 		('Admin', 'admin', 'wwms1234', 3);
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@* <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -147,4 +147,46 @@
         }
     </script>
 </body>
+</html>
+ *@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="view-transition" content="same-origin">
+    <meta charset="UTF-8">
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="main.js" defer></script>
+    <title>@ViewData["Title"] - WineWarehouseManagementSystem</title>
+    <link rel="stylesheet" href="./css/managerLayout.css">
+</head>
+
+<body>
+    <nav>
+        <ul class="nav-list">
+            <li class="active">
+                <a href="/ProductPages/View" aria-current="page"><span>Product</span></a>
+            </li>
+
+            <li>
+                <a href="/ImportPages/View">Import</a>
+            </li>
+            <li>
+                <a href="/ExportPages/View">Export</a>
+            </li>
+            <li><a href="/RoomPages/ViewBrewingRoom">BrewingRoom</a></li>
+            <li><a href="/RoomPages/ViewShelf">Shelf</a></li>
+            <li><a href="/CategoryPages/View">Category</a></li>
+            <li><a href="/AccountPages/ViewAllStaff">Staff</a></li>
+
+        </ul>
+    </nav>
+    <main>
+    <div style="margin-left: 150px; padding: 20px;">
+        @RenderBody()
+    </div>
+    </main>
+</body>
+
 </html>
