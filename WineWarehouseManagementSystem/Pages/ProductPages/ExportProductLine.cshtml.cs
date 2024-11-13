@@ -113,9 +113,6 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
             ProductList = new SelectList(products, "ProductId", "ProductName");
         }
 
-        private async Task LoadDataForShelf()
-        {
-            pls = await _productLineRepostiory.GetPLByIdYear(ProductLine.ProductId, ProductLine.ProductYear);
-        }
+       
     }
 }
