@@ -13,7 +13,7 @@
 
 @if (Model.productLines != null && Model.productLines.Any())
 {
-    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;">
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;background-color: white">
         <thead>
             <tr style="background-color: #4CAF50; color: white;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Product Year</th>
@@ -42,7 +42,7 @@
 }
 else
 {
-    <h2 style="text-align: center; color: #888;">There is no valid product line here!</h2>
+    <h2 style="text-align: center; color: #fff;">There is no valid product line here!</h2>
 }
 
 <form method="get" asp-page="/ProductPages/View" style="text-align: center; margin-top: 20px;">

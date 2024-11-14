@@ -11,14 +11,14 @@
     }
 }
 
-<h1 style="text-align: center; font-size: 24px; color: #333;">
+<h1 style="text-align: center; font-size: 24px; color: #fff;">
     Update shelf
 </h1>
 @if (TempData["Message"] != null)
 {
     <h2 style="text-align: center; color: #4CAF50;">@TempData["Message"]</h2>
 }
-<form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+<form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
         <label asp-for="shelf.ShelfId" style="margin-bottom: 5px; font-weight: bold;">Shelf ID</label>
         <input asp-for="shelf.ShelfId" value="@Model.shelf.ShelfId" readonly

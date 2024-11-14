@@ -11,15 +11,15 @@
     }
 }
 
-<h2 style="text-align: center; font-size: 24px; color: #333;">View Export Detail</h2>
+<h2 style="text-align: center; font-size: 24px; color: #fff;">View Export Detail</h2>
 
 @if (Model.exportDetails == null || !Model.exportDetails.Any())
 {
-    <p style="text-align: center; font-size: 18px; color: #888;">No Export details available.</p>
+    <p style="text-align: center; font-size: 18px; color: #ccc;">No Export details available.</p>
 }
 else
 {
-    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;">
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;background-color: white">
         <thead>
             <tr style="background-color: #4CAF50; color: white;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Product Line Id</th>

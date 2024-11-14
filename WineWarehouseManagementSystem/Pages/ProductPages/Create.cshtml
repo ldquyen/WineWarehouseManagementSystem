@@ -11,6 +11,7 @@
     }
 }
 <style>
+
     select {
         width: 100%;
         margin-top: 6px;
@@ -22,20 +23,31 @@
     }
 
     input {
+        margin-top: 8px;
+        height: 40px;
         width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 18px;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        transition: all 0.3s ease;
     }
-    <!-- HTML ! -->
-    /* CSS */
+
+        input:focus, input:valid {
+            border-color: #1e0d52;
+        }
+
+        input:hover {
+            box-shadow: rgba(61, 87, 113, 0.197) 0px 8px 24px;
+        }
+
     button {
-        background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+        background: #3fee3f;
         border: 0;
-        border-radius: 8px;
+        border-radius: 12px;
         background-color: #4CAF50;
         color: #FFFFFF;
         cursor: pointer;
@@ -55,20 +67,24 @@
         white-space: nowrap;
     }
 
-    button:not([disabled]):focus {
-        box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
-    }
+        button:not([disabled]):focus {
+            box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+        }
 
-    button:not([disabled]):hover {
-        box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgb(139 239 71 / 50%), .125rem .125rem 1rem rgb(139 249 69 / 60%);
-    }
+        button:not([disabled]):hover {
+            box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(31, 255, 68, 0.5), .125rem .125rem 1rem rgba(73, 243, 124, 0.6);
+        }
 
     form {
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    }
+    .form-label {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 19px;
     }
 </style>
 
-<h2 style="text-align: center; font-family: Comic San MS; font-size:50px; color:#141e30; font:400">Create Product</h2>
+<h2 style="text-align: center; font-family: Comic San MS; font-size:50px; color:white; font:400; margin-bottom:4px">Create Product</h2>
 
 @if (TempData["Message"] != null)
 {
@@ -76,7 +92,7 @@
 }
 
 <div style="display: flex; justify-content: center;">
-    <form method="post" style="width: 50%; max-width: 600px; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+    <form method="post" style="width: 50%; background-color: white;max-width: 600px; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
         <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
             <label asp-for="Product.ProductName" class="form-label">Product Name</label>
             <input asp-for="Product.ProductName" class="form-control" />

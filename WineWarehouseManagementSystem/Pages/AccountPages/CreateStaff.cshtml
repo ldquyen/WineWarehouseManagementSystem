@@ -12,7 +12,7 @@
 }
 
 
-<form method="post" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+<form method="post" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: white">
     <label asp-for="account.AccountName" style="font-weight: bold; margin-bottom: 5px;"></label>
     <input asp-for="account.AccountName" required oninput="this.value = this.value.replace(/\d/g, '')" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
 

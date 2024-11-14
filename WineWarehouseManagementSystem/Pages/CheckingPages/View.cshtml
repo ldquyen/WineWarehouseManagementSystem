@@ -12,7 +12,7 @@
    
     ViewData["Title"] = "View Checking Requests";
 }
-<h2 style="text-align: center; font-family: Arial, sans-serif; color: #333;">View Checking Requests</h2>
+<h2 style="text-align: center; font-family: Arial, sans-serif; color: #fff;">View Checking Requests</h2>
 
 @if (TempData["ErrorMessage"] != null)
 {
@@ -23,7 +23,7 @@
 
 @if (Model.CheckingRequests != null && Model.CheckingRequests.Count > 0)
 {
-    <table style="width: 90%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #ddd;">
+    <table style="width: 90%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #ddd;background-color: white">
         <thead>
             <tr style="background-color: #f2f2f2;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Request ID</th>

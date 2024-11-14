@@ -11,7 +11,7 @@
     }
 }
 
-<h2>View category</h2>
+<h2 style="color:white; text-align:center">View category</h2>
 <div style="max-width: 500px; margin: 20px auto;">
     <form method="get" asp-page="" asp-page-handler="SearchByName" style="display: flex; gap: 10px;">
         <input type="text" name="name" placeholder="Enter name to search"
@@ -22,11 +22,13 @@
     </form>
 </div>
 
-<table style="width: 80%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
+<table style="width: 80%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif;background-color: white">
     <thead>
         <tr style="background-color: #f2f2f2;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Category ID</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Category Name</th>
+            <th style="border: 1px solid #ddd; padding: 10px 533px 10px 10px; text-align: left;">Category Name</th>
+            <th style="border: 1px solid;border-color:rgb(221, 221, 221) #f2f2f2 rgb(221, 221, 221) rgb(221, 221, 221); padding: 10px; text-align: left;">Operations</th>
+            <th style="border: 1px solid; border-color:rgb(221, 221, 221) rgb(221, 221, 221) rgb(221, 221, 221) #f2f2f2;padding: 10px; text-align: left;color:#f2f2f2">__________</th>
         </tr>
     </thead>
     <tbody>

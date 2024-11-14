@@ -11,14 +11,15 @@
     }
 }
 
-<h1 style="text-align: center; color: #D9534F; font-family: Arial, sans-serif;">Delete Product</h1>
+<h1 style="text-align: center; font-family: Arial, sans-serif; color: white">Delete Product</h1>
 
 @if (TempData["Message"] != null)
 {
     <h2 style="text-align: center; color: #4CAF50; font-family: Arial, sans-serif;">@TempData["Message"]</h2>
 }
 
-<div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: Arial, sans-serif;">
+<div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: Arial, sans-serif; background-color:white; box-shadow: rgba(106, 104, 138, 0.19) 0px 10px 20px,
+rgba(255, 255, 255, 0.23) 0px 6px 6px;">
     <div style="margin-bottom: 15px;">
         <p><strong>Product Name:</strong> @Model.product.ProductName</p>
         <p><strong>Description:</strong> @Model.product.ProductDescription</p>

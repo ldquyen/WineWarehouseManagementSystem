@@ -11,7 +11,7 @@
     }
 }
 
-<form method="post" style="max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+<form method="post" style="max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif; background-color: white">
     <label style="display: block; font-size: 1.2em; font-weight: bold; text-align: center; margin-bottom: 15px;">Enter date to find import</label>
 
     <div style="margin-bottom: 15px;">
@@ -29,8 +29,14 @@
             Submit
         </button>
     </div>
-</form>
 
+</form>
+<div style="text-align: center;">
+    <a class="btnCreateExport" href="/ImportPages/Create"
+       style="padding: 8px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
+        Create New Import
+    </a>
+</div>
 <div style="max-width: 800px; margin: 30px auto; font-family: Arial, sans-serif;">
     @if (Model.Imports != null && Model.Imports.Any())
     {

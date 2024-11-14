@@ -11,12 +11,12 @@
     }
 }
 
-<h1>Delete category</h1>
+<h1 style="color:white; text-align:center">Delete category</h1>
 @if (TempData["Message"] != null)
 {
     <h2 style="text-align: center; color: #4CAF50;">@TempData["Message"]</h2>
 }
-<form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+<form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
         <label asp-for="category.CategoryId" style="margin-bottom: 5px; font-weight: bold;">Category ID</label>
         <input asp-for="category.CategoryId" value="@Model.category.CategoryId" readonly
