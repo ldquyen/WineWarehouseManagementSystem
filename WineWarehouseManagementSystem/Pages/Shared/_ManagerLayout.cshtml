@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@* <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,13 +10,13 @@
         }
 
         .sidebar {
-            background-color: lightgray;
+            background-color: rgb(44, 45, 76);
             color: black;
             padding: 15px;
             width: 200px;
             height: 100vh;
             position: fixed;
-            top: 0;
+            top: -8px;
             left: 0;
             border-right: 2px solid black;
         }
@@ -70,7 +70,7 @@
 <body>
 
     <div class="sidebar">
-        <ul style="list-style-type: none; padding: 0;">
+        <ul style="list-style-type: none; padding-top: 30px;">
             <li class="menu-item">
                 <a href="#" onclick="toggleSubmenu('product-submenu')">Product</a>
                 <ul id="product-submenu" class="submenu">
@@ -146,5 +146,113 @@
             }
         }
     </script>
+</body>
+</html>
+ *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>@ViewData["Title"] - WineWarehouseManagementSystem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .menu {
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            padding-top: 15px;
+            background-color: #141e30;
+            transform: translateX(0); /* Keep the menu always visible */
+        }
+
+        .logo a {
+            padding: 15px 25px;
+            font-size: 40px;
+            text-transform: uppercase;
+            color: white;
+        }
+
+            .logo a img {
+                max-width: 140px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+        ul li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            padding-left: 25px;
+            transition: 0.3s;
+        }
+
+            ul li:hover {
+                padding-left: 35px;
+                background-color: #445665;
+            }
+
+            ul li a {
+                display: block;
+                color: #fff;
+                padding: 20px 11px 20px 15px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+        /* Content area style */
+        .content {
+            margin-left: 210px; /* Adjust based on the width of the menu */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="#">
+                    <img src="/Images/1.png" alt="Logo">
+                </a>
+            </div>
+            <ul>
+                <li><a href="/ManagerPage"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/ProductPages/View"><i class="fas fa-solid fa-wine-bottle"></i> Product</a></li>
+                <li><a href="/ImportPages/View"><i class="fas fa-solid fa-upload"></i> Import</a></li>
+                <li><a href="/ExportPages/View"><i class="fas fa-solid fa-file-export"></i> Export</a></li>
+                <li><a href="/RoomPages/ViewBrewingRoom"><i class="fa-solid fa-person-shelter"></i> Brewing Room</a></li>
+                <li><a href="/RoomPages/ViewShelf"><i class="fa-brands fa-flipboard"></i> Shelf</a></li>
+                <li><a href="/AccountPages/ViewAllStaff"><i class="fa-solid fa-person"></i> Staff</a></li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        @RenderBody()
+    </div>
 </body>
 </html>
