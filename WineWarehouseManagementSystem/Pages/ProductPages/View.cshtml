@@ -15,22 +15,53 @@
         max-height: 100%;
         overflow-y: auto;
     }
-    button:hover {
-        opacity: 80%;
+    .btnDelete:hover,.btnView:hover {
+        opacity: 80%
     }
+
+    .btnSearch, .btnCreate {
+        margin: 10px;
+        padding: 15px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        .btnSearch:hover, .btnCreate:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btnSearch:active, .btnCreate:active {
+            transform: scale(0.95);
+        }
 
 </style>
 <div style="display: flex; justify-content: center; margin-bottom: 20px;">
     <form method="get" asp-page="" asp-page-handler="SearchByName" style="display: flex; align-items: center; gap: 10px;">
         <input type="text" name="name" placeholder="Please input product name to search"
-               style="padding: 8px; background-color: white; width: 250px; border: 1px solid #ccc; border-radius: 4px;" />
-        <button type="submit" style="padding: 8px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+               style="padding: 8px; background-color: white; width: 250px; border: 1px solid #ccc; border-radius: 4px; box-shadow: #979797 0px 2px 8px 0px;font-size: 19px;" />
+        <button type="submit" class="btnSearch" style="padding: 8px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
             Search
         </button>
         <a href="#"></a>
     </form>
     <form method="get" asp-page="/ProductPages/Create">
-        <button type="submit"
+        <button type="submit" class="btnCreate"
                 style="padding: 8px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
             Create New Product
         </button>
@@ -64,14 +95,14 @@
                         <form method="get" asp-page="/ProductPages/ViewProductLine">
                             <input type="hidden" name="id" value="@product.ProductId" />
                             <button type="submit" class="btnView"
-                                    style="padding: 8px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                                    style="padding: 8px 12px;margin:4px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
                                 View Product Line
                             </button>
                         </form>
                         <form method="get" asp-page="/ProductPages/Delete" style="margin-right:0px">
                             <input type="hidden" name="id" value="@product.ProductId" />
                             <button type="submit" class="btnDelete"
-                                    style="padding: 7px 22px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                                    style="padding: 7px 22px; margin:4px;  background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
                                 Delete Product
                             </button>
                         </form>

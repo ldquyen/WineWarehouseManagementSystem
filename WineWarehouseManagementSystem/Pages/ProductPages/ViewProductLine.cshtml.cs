@@ -12,6 +12,7 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
         {
             _productLineRepository = productLineRepostiory;
         }
+
         [BindProperty]
         public List<ProductLine> productLines { get; set; }
         public async Task OnGet(int id)

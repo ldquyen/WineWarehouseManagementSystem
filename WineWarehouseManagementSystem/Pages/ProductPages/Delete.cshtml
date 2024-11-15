@@ -10,8 +10,39 @@
         Response.Redirect("/Error");
     }
 }
+<style>
+    button {
+        margin: 4px 233px;
+        padding: 15px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #ff5959;
+        background-image: linear-gradient(45deg, #ff0000 0%, #ff5959 51%, #ff0000 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
 
-<h1 style="text-align: center; font-family: Arial, sans-serif; color: white">Delete Product</h1>
+        button:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+</style>
+<h1 style="font-family: Comic San MS; font-size:50px; color:white; font:400; text-align:center;">DELETE PRODUCT</h1>
 
 @if (TempData["Message"] != null)
 {
@@ -29,7 +60,7 @@ rgba(255, 255, 255, 0.23) 0px 6px 6px;">
 
     <form method="post" style="text-align: center;">
         <input type="hidden" asp-for="product.ProductId" />
-        <button type="submit" style="padding: 10px 20px; background-color: #D9534F; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 4px;">
+        <button type="submit" style="padding: 10px 20px;">
             Delete
         </button>
     </form>

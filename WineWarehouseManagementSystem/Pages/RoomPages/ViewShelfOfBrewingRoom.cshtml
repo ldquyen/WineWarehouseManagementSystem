@@ -10,7 +10,39 @@
         Response.Redirect("/Error");
     }
 }
-<h2 style="text-align: center; font-size: 24px; color: #333;">View shelves</h2>
+
+<style>
+    button {
+        /* margin: 10px; */
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        button:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+</style>
+<h2 style="text-align: center; font-size: 24px; color: #333;">View shelves - Brewing Room: @Model.BrewingRoom.RoomName</h2>
 
 @if (Model.shelfList == null || !Model.shelfList.Any())
 {
@@ -18,7 +50,7 @@
 }
 else
 {
-    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;background-color: white">
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto; max-width: 800px;background-color: white;box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
         <thead>
             <tr style="background-color: #4CAF50; color: white;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Shelf Id</th>
@@ -42,7 +74,7 @@ else
                     <td style="padding: 8px; border: 1px solid #ddd;">
                         <form method="get" asp-page="/RoomPages/UpdateShelf" style="margin: 0;">
                             <input type="hidden" name="id" value="@shelf.ShelfId" />
-                            <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <button type="submit" style="margin: 10px 10px 10px 19%;padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
                                 Update
                             </button>
                         </form>
@@ -55,7 +87,7 @@ else
 
 <form method="get" asp-page="/RoomPages/ViewShelf" style="text-align: center; margin-top: 20px;">
     <button type="submit"
-            style="padding: 10px 20px; background-color: #4CAF50;border:1px solid white; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+            style="margin: 10px 10px 10px 44%;padding: 10px 20px; background-color: #4CAF50;border:1px solid white; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
         View All Shelfs
     </button>
 </form>

@@ -10,37 +10,93 @@
         Response.Redirect("/Error");
     }
 }
+<style>
+    body {
+        overflow-y: auto;
+    }
+    button, .btnCreateExport {
+        /* margin: 10px; */
 
-<form method="post" style="max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif; background-color: white">
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        button:hover, .btnCreateExport:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:active, .btnCreateExport:active {
+            transform: scale(0.95);
+        }
+
+</style>
+<form method="post" style="max-width: 600px;
+    margin: 20px 264px 20px 303px;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background-color: white; box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
     <label style="display: block; font-size: 1.2em; font-weight: bold; text-align: center; margin-bottom: 15px;">Enter date to find import</label>
 
     <div style="margin-bottom: 15px;">
-        <label asp-for="StartDate" style="display: block; font-weight: bold; margin-bottom: 5px;"></label>
-        <input asp-for="StartDate" type="date" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <label asp-for="StartDate" style="display: block;
+    font-weight: bold;
+    margin: 4px 10px 10px 10px;
+    margin-bottom: 5px;"></label>
+        <input asp-for="StartDate" type="date" style="width: 96%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0px 10px 10px 10px;" />
     </div>
 
     <div style="margin-bottom: 15px;">
-        <label asp-for="EndDate" style="display: block; font-weight: bold; margin-bottom: 5px;"></label>
-        <input asp-for="EndDate" type="date" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <label asp-for="EndDate" style="display: block;
+    font-weight: bold;
+    margin: 4px 10px 10px 10px;
+    margin-bottom: 5px;"></label>
+        <input asp-for="EndDate" type="date" style="width: 96%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0px 10px 10px 10px;" />
     </div>
 
     <div style="text-align: center;">
-        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer;">
+        <button type="submit" style="margin: 10px 10px 10px 237px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer;">
             Submit
         </button>
     </div>
 
 </form>
-<div style="text-align: center;">
+<div style="text-align: center;
+    margin: 10px;
+    padding: 10px 31% 10px 25%;
+    height: 58px;">
     <a class="btnCreateExport" href="/ImportPages/Create"
-       style="padding: 8px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
+       style="margin: 10px 130px 10px 151px; padding: 8px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
         Create New Import
     </a>
 </div>
-<div style="max-width: 800px; margin: 30px auto; font-family: Arial, sans-serif;">
+<div style="max-width: 800px; margin: 30px 190px; font-family: Arial, sans-serif;box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
     @if (Model.Imports != null && Model.Imports.Any())
     {
-        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; background-color:white">
             <thead>
                 <tr style="background-color: #f2f2f2;">
                     <th style="padding: 10px; border-bottom: 1px solid #ddd;">Date</th>
@@ -59,7 +115,7 @@
                         <td style="padding: 8px; border-bottom: 1px solid #ddd;">
                             <form method="get" asp-page="/ImportPages/ViewImportDetail" style="display: inline;">
                                 <input type="hidden" name="id" value="@imp.ImportId" />
-                                <button type="submit" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 0.9em; cursor: pointer;">
+                                <button type="submit" style="padding: 5px 30px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 0.9em; cursor: pointer;">
                                     View detail
                                 </button>
                             </form>

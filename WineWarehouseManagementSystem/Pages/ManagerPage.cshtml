@@ -10,5 +10,42 @@
         Response.Redirect("/Error");
     }
 }
+<style>
+    .btnLogout {
+        margin-top: -33px;
+        margin-left: 282px;
+        padding: 15px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #ff5959;
+        background-image: linear-gradient(45deg, #ff0000 0%, #ff5959 51%, #ff0000 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
 
-<h1 style="color:white">Manager page </h1>
+        .btnLogout:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btnLogout:active {
+            transform: scale(0.95);
+        }
+</style>
+<div>
+    <h1 style="color:white">Manager page </h1>
+    <button class="btnLogout">
+        <a href="/Logout" style="color:white;">Logout</a>
+    </button>
+</div>

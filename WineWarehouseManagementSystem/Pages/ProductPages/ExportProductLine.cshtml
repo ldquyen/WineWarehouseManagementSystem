@@ -10,12 +10,68 @@
         Response.Redirect("/Error");
     }
 }
-<h1>Export ProductLine for Export Id :@Model.ExportId</h1>
-@if (TempData["Message"] != null)
-{
-    <h2 style="text-align: center; color: green;">@TempData["Message"]</h2>
-}
-<form method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+<style>
+    button, .btnCreateExport {
+        /* margin: 10px; */
+        margin: 10px 10px 10px 17%;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        button:hover, .btnCreateExport:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:active, .btnCreateExport:active {
+            transform: scale(0.95);
+        }
+
+    input {
+        margin-top: 8px;
+        height: 40px;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        transition: all 0.3s ease;
+    }
+
+        input:focus, input:valid {
+            border-color: #1e0d52;
+        }
+
+        input:hover {
+            box-shadow: rgba(61, 87, 113, 0.197) 0px 8px 24px;
+        }
+
+    label {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 19px;
+    }
+</style>
+<h1 style="font-family: Comic San MS; font-size:50px; color:white; font:400; text-align:center;">Export ProductLine for Export Id :@Model.ExportId</h1>
+
+<form method="post" style="max-width: 600px; margin: 15px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
         <label asp-for="ProductLine.ProductId" style="margin-bottom: 5px; font-weight: bold;">Product</label>
         <select asp-for="ProductLine.ProductId" asp-items="Model.ProductList"
@@ -45,3 +101,7 @@
     </div>
 </form>
 
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; color: green;">@TempData["Message"]</h2>
+}

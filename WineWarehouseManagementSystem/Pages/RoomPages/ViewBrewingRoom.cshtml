@@ -11,22 +11,121 @@
     }
 }
 
+<style>
+    .button-24 {
+        background: #4CAF50;
+        border: 1px solid #4CAF50;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #4CAF50;
+        }
+
+        .button-24:active, .btnUpdate:active {
+            opacity: .5;
+        }
 
 
+
+    .btnUpdate {
+        background: #007BFF;
+        border: 1px solid #007BFF;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        border-radius: 6px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+        .btnUpdate:hover,
+        .btnUpdate:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #007BFF;
+        }
+
+    .btnCreate {
+        /* margin: 10px; */
+        margin: 10px 10px 10px 30%;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        .btnCreate:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btnCreate:active {
+            transform: scale(0.95);
+        }
+</style>
 
 @if (Model.BrewingRoomList != null && Model.BrewingRoomList.Any())
 {
-    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif;background-color: white">
+    <table style="width: 80%; margin: 15px auto; border-collapse: collapse; font-family: Arial, sans-serif;background-color: white; box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
         <thead>
             <tr style="background-color: #f2f2f2;">
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Brewing Room ID</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Room Name</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Temperature</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Humidity</th>
-                <th style="border: 1px solid black; padding: 10px; text-align: left;">Note</th>
-                <th style="border: 1px solid;border-color:#000 #f2f2f2 #000 #000; padding: 10px; text-align: left;">Operations</th>
-                <th style="border: 1px solid; border-color:#000 #000 #000 #f2f2f2;padding: 10px; text-align: left;color:#f2f2f2">__________</th>
-
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Brewing Room ID</th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Room Name</th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Temperature</th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Humidity</th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Note</th>
+                <th style="border: 1px solid;border-color:#ddd #f2f2f2 #ddd #ddd; padding: 10px; text-align: left;">Operations</th>
+                <th style="border: 1px solid; border-color:#ddd #ddd #ddd #f2f2f2;padding: 10px; text-align: left;color:#f2f2f2">__________</th>
 
             </tr>
         </thead>
@@ -34,23 +133,23 @@
             @foreach (var brewingRoom in Model.BrewingRoomList)
             {
                 <tr>
-                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.BrewingRoomId</td>
-                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.RoomName</td>
-                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.Temperature</td>
-                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.Humidity</td>
-                    <td style="border: 1px solid black; padding: 10px;">@brewingRoom.Note</td>
-                    <td style="border: 1px solid black; padding: 10px; text-align: center;">
+                    <td style="border: 1px solid #ddd; padding: 10px;">@brewingRoom.BrewingRoomId</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">@brewingRoom.RoomName</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">@brewingRoom.Temperature</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">@brewingRoom.Humidity</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">@brewingRoom.Note</td>
+                    <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
                         <form method="get" asp-page="/RoomPages/UpdateBrewingRoom" style="margin: 0;">
                             <input type="hidden" name="id" value="@brewingRoom.BrewingRoomId" />
-                            <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <button type="submit" class="btnUpdate">
                                 Update
                             </button>
                         </form>
                     </td>
-                    <td style="border: 1px solid black; padding: 10px; text-align: center;">
+                    <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
                         <form method="get" asp-page="/RoomPages/ViewShelfOfBrewingRoom" style="margin: 0;">
                             <input type="hidden" name="id" value="@brewingRoom.BrewingRoomId" />
-                            <button type="submit" style="padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <button type="submit" class="button-24">
                                 View Shelf
                             </button>
                         </form>
@@ -64,3 +163,9 @@ else
 {
     <p style="text-align: center; font-size: 18px; color: #fff;">No Brewing Room available.</p>
 }
+<form method="get" asp-page="/RoomPages/CreateBrewingRoom" style="text-align: center; margin-top: 20px;">
+    <button type="submit" class="btnCreate"
+            style="margin: 10px 10px 10px 40%;padding: 10px 20px; background-color: #4CAF50;border:1px solid white; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        Create Brewing Room
+    </button>
+</form>

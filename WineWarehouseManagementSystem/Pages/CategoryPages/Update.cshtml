@@ -11,16 +11,72 @@
     }
 }
 
-@if (TempData["Message"] != null)
-{
-    <h2 style="text-align: center; color: #4CAF50;">@TempData["Message"]</h2>
-}
+<style>
+    button {
+        margin: 10px 10px 10px 140px;
+        padding: 15px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #79b3fa;
+        background-image: linear-gradient(45deg, #007BFF 0%, #79b3fa 51%, #007BFF 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
 
-<h1 style="text-align: center; font-size: 24px; color: #fff;">
-    Update Category
+        button:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+    input {
+        margin-top: 8px;
+        height: 40px;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        transition: all 0.3s ease;
+    }
+
+        input:focus, input:valid {
+            border-color: #1e0d52;
+        }
+
+        input:hover {
+            box-shadow: rgba(61, 87, 113, 0.197) 0px 8px 24px;
+        }
+
+    label {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 19px;
+    }
+</style>
+
+
+<h1 style="font-family: Comic San MS; font-size:45px; color:white; font:400; text-align:center;">
+    UPDATE CATEGORY
 </h1>
 
-<form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white">
+<form method="post" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white;  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
     <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
         <label asp-for="Category.CategoryId" style="margin-bottom: 5px; font-weight: bold;">Category ID</label>
         <input asp-for="Category.CategoryId" value="@Model.Category.CategoryId" readonly
@@ -34,9 +90,13 @@
     </div>
 
     <div style="text-align: center;">
-        <button type="submit"
-                style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        <button type="submit">
             Update Category
         </button>
     </div>
 </form>
+<br/>
+@if (TempData["Message"] != null)
+{
+    <h2 style="text-align: center; color: #4CAF50;">@TempData["Message"]</h2>
+}

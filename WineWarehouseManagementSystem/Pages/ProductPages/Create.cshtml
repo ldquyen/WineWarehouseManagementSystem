@@ -45,39 +45,42 @@
         }
 
     button {
-        background: #3fee3f;
-        border: 0;
-        border-radius: 12px;
-        background-color: #4CAF50;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 2.5;
-        outline: transparent;
-        padding: 0 1rem;
+        margin: 10px 10px 10px 200px;
+        padding: 15px 30px;
         text-align: center;
-        text-decoration: none;
-        transition: box-shadow .2s ease-in-out;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
-        white-space: nowrap;
     }
 
-        button:not([disabled]):focus {
-            box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+        button:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
         }
 
-        button:not([disabled]):hover {
-            box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(31, 255, 68, 0.5), .125rem .125rem 1rem rgba(73, 243, 124, 0.6);
+        button:active {
+            transform: scale(0.95);
         }
+
 
     form {
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     }
+
     .form-label {
         font-family: 'Roboto Mono', monospace;
         font-size: 19px;
@@ -94,12 +97,12 @@
 <div style="display: flex; justify-content: center;">
     <form method="post" style="width: 50%; background-color: white;max-width: 600px; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
         <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-            <label asp-for="Product.ProductName" class="form-label">Product Name</label>
+            <label asp-for="Product.ProductName" class="form-label"></label>
             <input asp-for="Product.ProductName" class="form-control" />
         </div>
 
         <div style="margin-bottom: 15px; display: flex; flex-direction: column;">
-            <label asp-for="Product.ProductDescription" class="form-label">Product Description</label>
+            <label asp-for="Product.ProductDescription" class="form-label"></label>
             <input asp-for="Product.ProductDescription" class="form-control" />
         </div>
 
@@ -109,7 +112,7 @@
         </div>
 
         <div style="margin-bottom: 14px; display: flex; flex-direction: column; cursor: pointer;">
-            <label asp-for="Product.CategoryId" class="form-label">Category</label>
+            <label asp-for="Product.CategoryId" class="form-label"></label>
             <select asp-for="Product.CategoryId" asp-items="Model.CategoryList" class="form-select"></select>
         </div>
 

@@ -10,50 +10,168 @@
         Response.Redirect("/Error");
     }
 }
+<style>
+    .btnSearch, .btnCreateExport {
+        margin: 10px;
+        padding: 15px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #93f686;
+        background-image: linear-gradient(45deg, #14ae00 0%, #93f686 51%, #14ae00 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
 
-<h2 style="color:white; text-align:center">View category</h2>
-<div style="max-width: 500px; margin: 20px auto;">
+        .btnSearch:hover, .btnCreateExport:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btnSearch:active .btnCreateExport:active {
+            transform: scale(0.95);
+        }
+
+    .button-24 {
+        background: #FF4742;
+        border: 1px solid #FF4742;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+
+        .button-24:active, .btnUpdate:active {
+            opacity: .5;
+        }
+
+
+    
+    .btnUpdate {
+        background: #007BFF;
+        border: 1px solid #007BFF;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        border-radius: 6px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+        .btnUpdate:hover,
+        .btnUpdate:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #007BFF;
+        }
+
+</style>
+<h2 style="font-family: Comic San MS; font-size:50px; color:white; font:400; text-align:center;">VIEW CATEGORY</h2>
+
+<div style="max-width: 600px; margin: 20px auto;">
     <form method="get" asp-page="" asp-page-handler="SearchByName" style="display: flex; gap: 10px;">
         <input type="text" name="name" placeholder="Enter name to search"
-               style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
-        <button type="submit" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+               style="flex: 1; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; box-shadow: #979797 0px 2px 8px 0px;font-size: 19px;" />
+        <button class="btnSearch" type="submit" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
             Search
         </button>
+        <a class="btnCreateExport" href="/CategoryPages/Create"
+           style="padding: 9px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; cursor: pointer;">
+            Create Category
+        </a>
     </form>
-</div>
 
-<table style="width: 80%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif;background-color: white">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Category ID</th>
-            <th style="border: 1px solid #ddd; padding: 10px 533px 10px 10px; text-align: left;">Category Name</th>
-            <th style="border: 1px solid;border-color:rgb(221, 221, 221) #f2f2f2 rgb(221, 221, 221) rgb(221, 221, 221); padding: 10px; text-align: left;">Operations</th>
-            <th style="border: 1px solid; border-color:rgb(221, 221, 221) rgb(221, 221, 221) rgb(221, 221, 221) #f2f2f2;padding: 10px; text-align: left;color:#f2f2f2">__________</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cate in Model.CategoriesList)
-        {
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryId</td>
-                <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryName</td>
-                <td style="border: 1px solid #ddd; padding: 10px;">
-                    <form method="get" asp-page="/CategoryPages/Update" style="margin: 0;">
-                        <input type="hidden" name="id" value="@cate.CategoryId" />
-                        <button type="submit" style="padding: 6px 12px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                            Update
-                        </button>
-                    </form>
-                </td>
-                <td style="border: 1px solid #ddd; padding: 10px;">
-                    <form method="get" asp-page="/CategoryPages/Delete" style="margin: 0;">
-                        <input type="hidden" name="id" value="@cate.CategoryId" />
-                        <button type="submit" style="padding: 6px 12px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                            Delete
-                        </button>
-                    </form>
-                </td>
+</div>
+<div style="
+    width: 1026px;
+    max-height: 1000px;
+    margin-left: 10%;">
+    <table style="margin: 20px 20px 20px 21px;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    position: fixed;
+    box-shadow: rgb(14 0 71) 0px 8px 12px, rgb(0 0 0) 0px 5px 12px;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Category ID</th>
+                <th style="border: 1px solid #ddd; padding: 10px 533px 10px 10px; text-align: left;">Category Name</th>
+                <th style="border: 1px solid;border-color:rgb(221, 221, 221) #f2f2f2 rgb(221, 221, 221) rgb(221, 221, 221); padding: 10px; text-align: left;">Operations</th>
+                <th style="border: 1px solid; border-color:rgb(221, 221, 221) rgb(221, 221, 221) rgb(221, 221, 221) #f2f2f2;padding: 10px; text-align: left;color:#f2f2f2">__________</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var cate in Model.CategoriesList)
+            {
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryId</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">@cate.CategoryName</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">
+                        <form method="get" asp-page="/CategoryPages/Update" style="margin: 0;">
+                            <input type="hidden" name="id" value="@cate.CategoryId" />
+                            <button class="btnUpdate" type="submit" >
+                                Update
+                            </button>
+                        </form>
+                    </td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">
+                        <form method="get" asp-page="/CategoryPages/Delete" style="margin: 0;">
+                            <input type="hidden" name="id" value="@cate.CategoryId" />
+                            <button class="button-24" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
