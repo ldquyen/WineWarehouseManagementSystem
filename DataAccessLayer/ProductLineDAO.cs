@@ -109,7 +109,8 @@ namespace DataAccessLayer
         public async Task<bool> AddQuantityToProductLine(int productLineId, int quantity)  
         {
             var productLine = await _context.ProductLines.FirstOrDefaultAsync(x => x.ProductLineId == productLineId);
-            if (productLine == null) return false;
+            if (productLine == null) 
+                return false;
             else
             {
                 productLine.Quantity += quantity;
