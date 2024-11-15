@@ -83,7 +83,7 @@ namespace WineWarehouseManagementSystem.Pages.ProductPages
                 }
                 else                //n?u cùng PL th? add vào PL và Shelf
                 {
-                    var add = await _productLineRepostiory.AddQuantityToProductLine((int)productLineExist.ProductId, (int)productLine.Quantity);
+                    var add = await _productLineRepostiory.AddQuantityToProductLine((int)productLineExist.ProductLineId, (int)productLine.Quantity);
                     if (add)
                     {
                         ImportDetail importDetail = new ImportDetail()
